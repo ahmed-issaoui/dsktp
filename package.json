@@ -2,20 +2,43 @@
   "name": "easyjob",
   "version": "0.1.0",
   "private": true,
+  "main": "public/electron.js",
+  "homepage": "./",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmed-issaoui/easyjob"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "concurrently": "^7.5.0",
+    "cross-env": "^7.0.3",
+    "electron-is-dev": "^2.0.0",
+    "electron-updater": "^5.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "wait-on": "^6.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "concurrently \"cross-env BROWSER=none react-scripts start\" \"wait-on http://localhost:3000 && electron .\"",
+    "build:prod": "react-scripts build && electron-builder --win",
+    "build:publish": "set GH_TOKEN=<personal_access_token> && react-scripts build && electron-builder --win --publish always"
+  },
+  "build": {
+    "appId": "com.easyjob.app",
+    "productName": "Easyjob",
+    "directories": {
+      "output": "electron-build",
+      "buildResources": "build-assets"
+    },
+    "win": {
+      "publish": [
+        "github"
+      ]
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +57,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "electron": "^21.2.2",
+    "electron-builder": "^23.6.0"
   }
 }

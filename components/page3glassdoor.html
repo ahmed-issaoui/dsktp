@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Easyjob | Candidacy Details</title>
+    <link rel="stylesheet" href="page3glassdoor.css" />
+  </head>
+  <body>
+    <div class="primaryCircle"></div>
+
+    <div class="main">
+      
+      <div class="textPart">
+        <h1>Candidacy Details</h1>
+        <form id="form1">
+          <input type="text" placeholder="Name" />
+          <input type="text" placeholder="Phone" />
+          <input type="text" placeholder="Email" />
+          <input type="file" placeholder="Add Resume" />
+
+          
+          <div class="buttonPart" }>
+            <button form="form1" type="button" id="secondaryButton">Back</button>
+            <button form="form1" type="button" id="primaryButton">Next</button>
+          </div>
+          
+        </form>
+      </div>
+
+      <div class="imgPart">
+        <img src="../assets/images/img-page3.png" alt="page2img" />
+      </div>
+      
+    </div>
+    
+    <div class="secondaryCircle"></div>
+  </body>
+
+  <script type="text/javascript">
+    let nextButton = document.getElementById("primaryButton");
+    let goToNextPage = () => {
+      window.location.href = "./page4.html";
+    };
+    nextButton.addEventListener("click", () => {
+      goToNextPage();
+    });
+
+    let previousButton = document.getElementById("secondaryButton");
+    let goToPreviousPage = () => {
+      window.location.href = "./page2glassdoor.html";
+    };
+    previousButton.addEventListener("click", () => {
+      goToPreviousPage();
+    });
+    
+  </script>
+</html>
