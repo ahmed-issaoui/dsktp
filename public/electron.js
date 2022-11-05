@@ -7,8 +7,12 @@ const isDev = require("electron-is-dev");
 const createWindow = () => {
 	// Create the browser window.
 	const win = new BrowserWindow({
-		width: 1200,
-		height: 800,
+		width: 900,
+		height: 600,
+		maxWidth: 1000,
+		minWidth: 700,
+		minHeight: 450,
+		maxHeight: 700,
 		webPreferences: {
 			preload: path.join(__dirname, 'preload.js'),
 		},
@@ -20,6 +24,7 @@ const createWindow = () => {
 			: `file://${path.join(__dirname, "../build/index.html")}`
 	);
 
+
 	// Open the DevTools.
 	if (isDev) {
 		win.webContents.openDevTools({ mode: "detach" });
@@ -29,6 +34,9 @@ const createWindow = () => {
 	if (!isDev) {
 		autoUpdater.checkForUpdates();
 	};
+
+	win.setMenu(null)
+
 };
 
 // This method will be called when Electron has finished

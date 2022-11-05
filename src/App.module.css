@@ -1,0 +1,61 @@
+.main {
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation-name: fadeIn;
+    animation-duration: 2s;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+
+.primaryCircle {
+  position: fixed;
+  left: -100px;
+  top: -250px;
+  animation-name: circleChange1;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-delay: 2s;
+  z-index: 0;
+}
+
+.secondaryCircle {
+  position: fixed;
+  right: -100px;
+  bottom: -250px;
+  animation-name: circleChange2;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-delay: 2s;
+  z-index: 0;
+}
+/* 
+@keyframes circleChange1 {
+  from {
+    left: -5vw;
+  }
+  to {
+    left: 95vw;
+  }
+}
+
+@keyframes circleChange2 {
+  from {
+    right: -5vw;
+  }
+  to {
+    right: 95vw;
+  }
+} */
