@@ -1,10 +1,16 @@
 // import "./App.css";
 
-import styles from './App.module.css'
 import { Routes, Route } from "react-router-dom";
-import WelcomePage from './components/pages/WelcomePage';
+import styles from './App.module.css'
 import BackgroundCircle from "./components/ui/backgroundCircle";
+import WelcomePage from './components/pages/WelcomePage';
 import ChooseJobBoard from './components/pages/ChooseJobBoard';
+import SearchDetails from './components/pages/SearchDetails';
+import CandidacyDetails from './components/pages/CandidacyDetails';
+import NotFound from "./components/pages/NotFound";
+import PotentialQuestions from "./components/pages/PotentialQuestions";
+import LaunchCampaign from "./components/pages/LaunchCampaign";
+
 
 function App() {
   return (
@@ -15,7 +21,12 @@ function App() {
 
       <Routes>
         <Route path="/" element={<WelcomePage />} />
-		<Route path="jobboard" element={ <ChooseJobBoard/>} />
+		    <Route path="/ChooseJobBoard" element={ <ChooseJobBoard/>} />
+        <Route path="/SearchDetails" element={ <SearchDetails/>} />
+        <Route path="/CandidacyDetails" element={ <CandidacyDetails/>} />
+        <Route path="/PotentialQuestions" element={ <PotentialQuestions/>} />
+        <Route path="/LaunchCampaign" element={ <LaunchCampaign/>} />
+        <Route path="*" element={ <NotFound/>} />
       </Routes>
 
       <div className={styles.secondaryCircle}>

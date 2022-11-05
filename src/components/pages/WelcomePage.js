@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom"
+import styles from './WelcomePage.module.css'
+
 
 const WelcomePage = () => {
   return (
-    <div>
+    <div className={styles.section}>
        <img src="./assets/images/logo-easyjob.svg" alt="logo-easyjob"/>
-       <Link to='/jobboard'>Next</Link>
+       <Link to='/ChooseJobBoard'>Next</Link>
     </div>
   )
 }
