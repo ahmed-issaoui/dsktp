@@ -1,6 +1,7 @@
 {
   "name": "easyjob",
   "version": "0.1.0",
+  "productName": "Easyjob",
   "private": true,
   "main": "public/electron.js",
   "homepage": "./",

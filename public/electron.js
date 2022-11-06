@@ -13,7 +13,15 @@ const createWindow = () => {
 		minWidth: 700,
 		minHeight: 450,
 		maxHeight: 700,
-		frame: false,
+		icon: (path.join(__dirname, './assets/images/icon-easyjob.ico')),
+		titleBarStyle: 'hidden',
+		titleBarOverlay: {
+			color: '#000000',
+			symbolColor: '#785df5',
+			height: 35
+
+ 		},
+		// frame: false,
 		webPreferences: {
 			preload: path.join(__dirname, 'preload.js'),
 		},
