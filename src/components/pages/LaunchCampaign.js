@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import styles from "./LaunchCampaign.module.css";
 
+
 const NotFound = () => {
+  async function pptrrr() {window.api.pptr()};
+
   return (
     <div className={styles.section}>
 
@@ -14,7 +17,12 @@ const NotFound = () => {
             </Link>
 
             <Link to='/'>
-              <button form="form1" type="button" className={styles.primaryButton}>Confirm</button>
+              <button 
+                form="form1" 
+                type="button" 
+                className={styles.primaryButton}
+                onClick={pptrrr}
+                >Confirm</button>
             </Link>
         </div>
       </div>

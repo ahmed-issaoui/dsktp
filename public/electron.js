@@ -1,8 +1,12 @@
 
 const path = require("path");
-const { app, dialog, BrowserWindow } = require("electron");
+const { app, dialog, BrowserWindow, ipcMain} = require("electron");
 const { autoUpdater } = require("electron-updater");
 const isDev = require("electron-is-dev");
+const stealth = require('./stealth')
+
+
+
 
 const createWindow = () => {
 	// Create the browser window.
@@ -96,3 +100,8 @@ autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) => {
 	})
 });
 
+
+ipcMain.handle("get/puppeteer", async (event, args)=>{
+	console.log('listening to renderer from main');
+	stealth()
+  });
