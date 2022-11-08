@@ -52,10 +52,14 @@ const createWindow = () => {
 
 };
 
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(createWindow);
+
+
+
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
@@ -101,7 +105,22 @@ autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) => {
 });
 
 
+// Handling message to launch puppeteer from renderer)
+
+
+// notifications 
+
+const plat = 'linkedin'
+
+// const NOTIFICATION_TITLE = `We're launching a campaign on ${plat}`
+// const NOTIFICATION_BODY = 'Please open the browser for login'
+
+// const showNotification = () => {
+//   new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY }).show()
+// }
+
+
 ipcMain.handle("get/puppeteer", async (event, args)=>{
-	console.log('listening to renderer from main');
+	console.log('get/puppeteer');
 	stealth()
   });
