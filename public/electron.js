@@ -3,10 +3,13 @@ const path = require("path");
 const { app, dialog, BrowserWindow, ipcMain} = require("electron");
 const { autoUpdater } = require("electron-updater");
 const isDev = require("electron-is-dev");
-const stealth = require('./stealth')
+const fs = require("fs");
+
+const linkedinApply = require("./pptr/linkedinApply");
+const linkedinSignIn = require("./pptr/linkedinSignIn");
 
 
-
+app.setAppUserModelId('Easyjob');
 
 const createWindow = () => {
 	// Create the browser window.
@@ -30,6 +33,8 @@ const createWindow = () => {
 			preload: path.join(__dirname, 'preload.js'),
 		},
 	});
+
+	win.setBackgroundColor('#000000');
 
 	win.loadURL(
 		isDev
@@ -108,19 +113,15 @@ autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) => {
 // Handling message to launch puppeteer from renderer)
 
 
-// notifications 
-
-const plat = 'linkedin'
-
-// const NOTIFICATION_TITLE = `We're launching a campaign on ${plat}`
-// const NOTIFICATION_BODY = 'Please open the browser for login'
-
-// const showNotification = () => {
-//   new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY }).show()
-// }
-
-
 ipcMain.handle("get/puppeteer", async (event, args)=>{
-	console.log('get/puppeteer');
-	stealth()
+	if (fs.existsSync('./public/pptr/linkedinCookies.js')) {
+
+		console.log('Launching Linkedin Apply');
+		linkedinApply()
+
+	} else {
+		console.log('Launching Linkedin Sign in ');
+		linkedinSignIn()
+		
+	}
   });

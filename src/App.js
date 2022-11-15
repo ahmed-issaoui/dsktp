@@ -19,12 +19,12 @@ function App() {
       </div>
 
       <Routes>
-        <Route path="/" element={<WelcomePage />} />
+        <Route path="/Hello" element={<WelcomePage />} />
 		    <Route path="/ChooseJobBoard" element={ <ChooseJobBoard/>} />
         <Route path="/SearchDetails" element={ <SearchDetails/>} />
         <Route path="/CandidacyDetails" element={ <CandidacyDetails/>} />
         <Route path="/PotentialQuestions" element={ <PotentialQuestions/>} />
-        <Route path="/LaunchCampaign" element={ <LaunchCampaign/>} />
+        <Route path="/" element={ <LaunchCampaign/>} />
         <Route path="*" element={ <NotFound/>} />
       </Routes>
 
