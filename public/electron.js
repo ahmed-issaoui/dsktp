@@ -28,10 +28,11 @@ const createWindow = () => {
 			height: 35
 
  		},
-		// frame: false,
 		webPreferences: {
 			preload: path.join(__dirname, 'preload.js'),
+			devTools: true,
 		},
+		
 	});
 
 	win.setBackgroundColor('#000000');
@@ -45,8 +46,9 @@ const createWindow = () => {
 
 	// Open the DevTools.
 	if (isDev) {
-		win.webContents.openDevTools({ mode: "detach" });
+		// win.webContents.openDevTools({ mode: "detach" });
 		// require('react-devtools-electron');
+		console.log('Is dev true')
 	};
 
 	if (!isDev) {
@@ -110,18 +112,44 @@ autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) => {
 });
 
 
+
+// Saving Speed
+
+var speed;
+
+ipcMain.on("get/speedParams", (event, data) => {
+	speed = data;
+	console.log('inside function ' + speed)
+});
+
+
+
 // Handling message to launch puppeteer from renderer)
 
 
 ipcMain.handle("get/puppeteer", async (event, args)=>{
 	if (fs.existsSync('./public/pptr/linkedinCookies.js')) {
 
-		console.log('Launching Linkedin Apply');
-		linkedinApply()
+		console.log('Cookies exist, Launching Linkedin Apply');
+		try {
+			linkedinApply(speed);
+		}
+
+		catch(error) {
+			console.error(error);
+		}
 
 	} else {
-		console.log('Launching Linkedin Sign in ');
-		linkedinSignIn()
-		
+		console.log('Cookies doesnt exist, Launching Linkedin Sign in then Apply ');
+		(async () => {
+			try {
+				await linkedinSignIn();
+				await linkedinApply(speed)
+			}
+			catch (error) {
+				console.error(error)
+			}
+			
+		})();
 	}
   });

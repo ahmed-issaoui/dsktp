@@ -6,7 +6,7 @@ const { executablePath } = require("puppeteer");
 const fs = require("fs/promises");
 const { Notification } = require("electron");
 
-module.exports = linkedinApply = () =>
+module.exports = linkedinApply = (speed) =>
   (async () => {
     // Using plugins
     puppeteer.use(hidden());
@@ -17,9 +17,17 @@ module.exports = linkedinApply = () =>
       new Notification({ title: title, body: body }).show();
     };
 
+
+    const getRandom = (min, max) => {
+      return Math.random() * (max - min) + min;
+    }
+    
+
+
     const sleep = (milliseconds) => {
-        return new Promise((resolve) => setTimeout(resolve, milliseconds));
+        return new Promise((resolve) => setTimeout(resolve, milliseconds*(1/speed)*getRandom(1,1.5)));
     };
+
 
     // Sequence: Launching a browser and a blank page
 
@@ -34,10 +42,13 @@ module.exports = linkedinApply = () =>
     const pages = await browser.pages();
     const page = pages[0];
 
+
+
     // Setting up cookies & logging in
+
     try {
-      await sleep(2000);
-      await showNotification("Please wait for a moment", "We are logging you in with your account");
+      await sleep(800);
+      await showNotification("Entering your account", "We are logging you in with your account");
       const cookiesString = await fs.readFile("./public/pptr/linkedinCookies.js");
       const cookiez = JSON.parse(cookiesString);
       await page.setCookie(...cookiez);

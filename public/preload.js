@@ -5,7 +5,8 @@ const {ipcRenderer, contextBridge} = require('electron');
 
 const WINDOW_API = {
     // pptr: (message) => ipcRenderer.send("pptr", message)
-    pptr: () => ipcRenderer.invoke("get/puppeteer")
+    pptr: () => ipcRenderer.invoke("get/puppeteer"),
+    speedParams: (speed) => ipcRenderer.send("get/speedParams", speed),
 
 }
 

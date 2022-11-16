@@ -58,8 +58,9 @@ module.exports = linkedinSignIn = () =>
         await fs.writeFile("./public/pptr/linkedinCookies.js", JSON.stringify(cookies, null, 2));
         
         await sleep(4000);
-    }
+        await showNotification("Logged in Sucessfully, Restarting the App", "Please wait for a moment");
 
+    }
     catch {
       await showNotification("Oops.. Something happend", "Error happened during the process");
       throw new Error('Error in cookies');
@@ -67,7 +68,7 @@ module.exports = linkedinSignIn = () =>
     
 
     // Closing the browser
-    await sleep(3000);
+    await sleep(2000);
     await browser.close()
 
 

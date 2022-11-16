@@ -9,6 +9,7 @@ import CandidacyDetails from './components/pages/CandidacyDetails';
 import NotFound from "./components/pages/NotFound";
 import PotentialQuestions from "./components/pages/PotentialQuestions";
 import LaunchCampaign from "./components/pages/LaunchCampaign";
+import SpeedParams from "./components/pages/SpeedParams";
 
 
 function App() {
@@ -24,7 +25,9 @@ function App() {
         <Route path="/SearchDetails" element={ <SearchDetails/>} />
         <Route path="/CandidacyDetails" element={ <CandidacyDetails/>} />
         <Route path="/PotentialQuestions" element={ <PotentialQuestions/>} />
-        <Route path="/" element={ <LaunchCampaign/>} />
+        <Route path="/" element={ <SpeedParams/>} />
+
+        <Route path="/2" element={ <LaunchCampaign/>} />
         <Route path="*" element={ <NotFound/>} />
       </Routes>
 
