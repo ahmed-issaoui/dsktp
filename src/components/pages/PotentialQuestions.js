@@ -21,7 +21,7 @@ const PotentialQuestions = () => {
               <button form="form1" type="button" className={styles.secondaryButton}>Back </button>
             </Link>
 
-            <Link to='/LaunchCampaign'>
+            <Link to='/SpeedParams'>
               <button form="form1" type="button" className={styles.primaryButton}>Next</button>
             </Link>
         </div>

@@ -26,11 +26,11 @@ const SpeedParams = () => {
           </select> */}
           
           <div className={styles.buttonPart}>
-            <Link to='/'>
+            <Link to='/PotentialQuestions'>
               <button form="form1" type="button" className={styles.secondaryButton}>Back </button>
             </Link>
 
-            <Link to='/2'>
+            <Link to='/Summary'>
               <button form="form1" type="button" className={styles.primaryButton}>Next</button>
             </Link>
           </div>

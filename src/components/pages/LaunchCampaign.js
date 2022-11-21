@@ -12,7 +12,7 @@ const NotFound = () => {
         <h1>Launch Campaign?</h1>
 
         <div className={styles.buttonPart}>
-            <Link to='/PotentialQuestions'>
+            <Link to='/SpeedParams'>
               <button form="form1" type="button" className={styles.secondaryButton}>Back </button>
             </Link>
 

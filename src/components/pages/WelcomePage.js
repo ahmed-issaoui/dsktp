@@ -7,6 +7,8 @@ const WelcomePage = () => {
     <div className={styles.section}>
        <img src="./assets/images/logo-easyjob.svg" alt="logo-easyjob"/>
        <Link to='/ChooseJobBoard'>Next</Link>
+       <Link to='/Parameters'>Parameters</Link>
+
     </div>
   )
 }
