@@ -32,7 +32,7 @@ module.exports = glassdoorApply = (speed) =>
     };
 
 
-    const autoRandomScroll = async (selector, times=2, distance= 400, delay=2000) => {
+    const autoRandomScroll = async (selector, times=2, distance= 400, delay=800) => {
       for (let i = 1; i <= times; i++) {
           let randomDistance = distance * getRandom(0.8,1.3) 
           await sleep(delay);
@@ -82,7 +82,7 @@ module.exports = glassdoorApply = (speed) =>
     // Going to URL
     try {
         await page.goto("https://www.glassdoor.com/Job/united-states-web-developer-jobs-SRCH_IL.0,13_IN1_KO14,27.htm?applicationType=1&remoteWorkType=1");
-        await sleep(10000);
+        await sleep(5000);
         await page.waitForSelector("button");
         await showNotification("Logged in successfully", "We're logged in");
     } 
@@ -106,8 +106,12 @@ module.exports = glassdoorApply = (speed) =>
       let lastPage = paginationText.replace("Page 1 of ", "");
       await console.log(lastPage)
 
-      for (let i = 1; i <= lastPage; i++) {
+      for (let i = 1; 30 <= lastPage; i++) {
         await sleep(5000);
+
+        await page.click('#MainCol');
+        await sleep(1000);
+
         await autoRandomScroll('#MainCol', getRandomInt(3,6))
         await sleep(3000);
   
@@ -120,13 +124,18 @@ module.exports = glassdoorApply = (speed) =>
 
     const loopNextJob = async () => {
 
-      for (let i = 1; i <= 30; i++) {
-        await sleep(5000);
+      for (let i = 1; i <= 1; i++) {
+        await sleep(4000);
+        await page.click(`.react-job-listing:nth-of-type(${i})`);
+
+        await sleep(3000);
         await page.click(`.react-job-listing:nth-of-type(${i})`);
         await console.log("clicking on job item " + i);
-        await autoRandomScroll('#JDCol', getRandomInt(2,4))
 
-        try { await startApplying();} catch(error) {console.log(error)}
+        await sleep(1500);
+        await autoRandomScroll('#JDCol', getRandomInt(2,3))
+
+        try { await startApplying()} catch(error) {console.error(error)};
 
       }
     }
@@ -135,31 +144,56 @@ module.exports = glassdoorApply = (speed) =>
           await sleep(3000);
           await page.click(`button[data-test="applyButton"]`);
 
-              await insideApplication()
-
+          try {await insideApplication()} catch (error) {console.error(error)};
     }
 
     const insideApplication = async () => {
       await sleep(3000);
-         await inputtingData() 
-      await sleep(3000);
-      await page.click('button[aria-label="Submit application"]');
+      await inputtingData()
 
+      // await sleep(2000);
+      // await page.click('#form-action-continue');
+
+      // await sleep(4000);
+      // await respondToQuestions()
     };
-
+    
     const inputtingData = async () => {  
-      await sleep(3000);
-      await page.type('#input-applicant.name', 'Ahmed Issaoui');
-      await sleep(2500);
-      await page.type('#input-applicant.email', 'pro.ahmed.issaoui@gmail.com');
-      await sleep(2500);
-      await page.type('#input-applicant.phoneNumber', '+21629809010');
+      await sleep(5000);
 
-      await sleep(2000);
-      await uploadResume();
+      const text = await page.evaluate(() => Array.from(document.querySelectorAll('label'), element => element.textContent));
 
-      await sleep(2000);
-      await page.click('#form-action-continue');
+      for (let i = 0; i <= text.length; i++) {
+        console.log(text[i]);
+      }
+      // const elements = await page.$x('/html/body/div/div/div[1]/div[2]/form/div[2]/div[1]/div/div/div[2]/div[1]/div[2]/div/div/div[2]/div/div/div[2]/input')
+      // await elements[0].click() 
+      // await console.log(elements)
+      // await sleep(1000);
+      // await elements[0].type('hello') 
+
+      // await page.click('#input-applicant\.email');
+      // await sleep(5000);
+      // await page.type('#input-applicant\.email', 'Ahmed Issaoui');
+      // await sleep(100000);
+
+      
+      // const inputs = await page.$$('.input-applicant');
+      // await console.log(inputs);
+
+
+
+      // await sleep(1000);
+      // await sleep(2500);
+      // await page.click('.UserField-Email input');
+      // await page.type(`input[name="applicant.name"]`,'Ahmed Issaoui');
+      // await sleep(2500);
+      // await page.type('#input-applicant.email', 'pro.ahmed.issaoui@gmail.com');
+      // await sleep(2500);
+      // await page.type('#input-applicant.phoneNumber', '+21629809010');
+
+      // await sleep(2000);
+      // await uploadResume();
 
     };
 
@@ -171,7 +205,9 @@ module.exports = glassdoorApply = (speed) =>
     }
 
     const respondToQuestions = async () => {
-      // answering questions
+      // AnsweringRadio
+      // Answering Input
+      // Answering Select
     }
 
 
@@ -190,8 +226,8 @@ module.exports = glassdoorApply = (speed) =>
 
 
     // Ending Browser
-    await sleep(3000);
-    await browser.close()
+    // await sleep(3000);
+    // await browser.close()
 
 
 

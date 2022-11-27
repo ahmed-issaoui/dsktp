@@ -26,12 +26,12 @@ function App() {
         <img src="../assets/images/logo-easyjob.svg" alt="logo easyjob" className={styles.imgLogo}/>
 
         <Routes>
-          <Route path="/" element={<WelcomePage />} />
+          <Route path="/hello" element={<WelcomePage />} />
           <Route path="/ChooseJobBoard" element={ <ChooseJobBoard/>} />
           <Route path="/SearchDetails" element={ <SearchDetails/>} />
           <Route path="/CandidacyDetails" element={ <CandidacyDetails/>} />
           <Route path="/PotentialQuestions" element={ <PotentialQuestions/>} />
-          <Route path="/SpeedParams" element={ <SpeedParams/>} />
+          <Route path="/" element={ <SpeedParams/>} />
           <Route path="/Summary" element={ <Summary/>} />
           <Route path="/LaunchCampaign" element={ <LaunchCampaign/>} />
 
