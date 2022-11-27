@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#ignore cookies files
+linkedinCookies.js
+glassdoorCookies.js
+indeedCookies.js
