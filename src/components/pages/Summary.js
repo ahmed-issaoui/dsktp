@@ -2,6 +2,12 @@ import { Link } from "react-router-dom";
 import styles from "./Summary.module.css";
 
 const Summary = () => {
+
+  const handleInputChange = (e) => {
+    var platform = e.target.value;
+    window.api.platformParams(platform);
+  }
+
   return (
     <div className={styles.section}>
 
@@ -12,7 +18,7 @@ const Summary = () => {
           <input type="text" placeholder="Location" />
           <input type="text" placeholder="Remote"/>
           <input type="text" placeholder="Speed" />
-          <input type="text" placeholder="Platform" />
+          <input type="text" placeholder="Platform" onChange={(e)=> {handleInputChange(e)}} />
         </form>
 
         <div className={styles.buttonPart}>

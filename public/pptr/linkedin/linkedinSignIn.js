@@ -55,7 +55,7 @@ module.exports = linkedinSignIn = () =>
         await sleep(2000);
         
         const cookies = await page.cookies();
-        await fs.writeFile("./public/pptr/linkedinCookies.js", JSON.stringify(cookies, null, 2));
+        await fs.writeFile("./public/pptr/linkedin/linkedinCookies.js", JSON.stringify(cookies, null, 2));
         
         await sleep(4000);
         await showNotification("Logged in Sucessfully, Restarting the App", "Please wait for a moment");

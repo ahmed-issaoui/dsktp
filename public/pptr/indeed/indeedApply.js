@@ -6,7 +6,7 @@ const { executablePath } = require("puppeteer");
 const fs = require("fs/promises");
 const { Notification } = require("electron");
 
-module.exports = linkedinApply = (speed) =>
+module.exports = indeedApply = (speed) =>
   (async () => {
     // Using plugins
     puppeteer.use(hidden());
@@ -22,6 +22,9 @@ module.exports = linkedinApply = (speed) =>
       return Math.random() * (max - min) + min;
     }
     
+    const getRandomInt = (min, max) => {
+      return Math.floor(Math.random() * (max - min + 1) ) + min;
+    }
 
 
     const sleep = (milliseconds) => {
@@ -29,9 +32,23 @@ module.exports = linkedinApply = (speed) =>
     };
 
 
+    const autoRandomScroll = async (selector, times=2, distance= 400, delay=2000) => {
+      for (let i = 1; i <= times; i++) {
+          let randomDistance = distance * getRandom(0.8,1.3) 
+          await sleep(delay);
+          await page.$eval(selector, (el, randomDistance) => el.scrollBy(0, randomDistance), randomDistance);
+      }
+
+      for (let i = 1; i <= times; i++) {
+          let randomDistance = -distance * getRandom(0.8,1.3) 
+          await sleep(delay);
+          await page.$eval(selector, (el, randomDistance) => el.scrollBy(0, randomDistance), randomDistance);
+      }
+    }
+    
     // Sequence: Launching a browser and a blank page
 
-    await showNotification("Launching a New Campaign","We are launching a new Campaign on Linkedin");
+    await showNotification("Launching a new campaign","We are launching a new Campaign on Indeed");
     const browser = await puppeteer.launch({
       args: ["--no-sandbox", "--start-maximized"],
       headless: false,
@@ -49,7 +66,7 @@ module.exports = linkedinApply = (speed) =>
     try {
       await sleep(800);
       await showNotification("Entering your account", "We are logging you in with your account");
-      const cookiesString = await fs.readFile("./public/pptr/linkedinCookies.js");
+      const cookiesString = await fs.readFile("./public/pptr/indeed/indeedCookies.js");
       const cookiez = JSON.parse(cookiesString);
       await page.setCookie(...cookiez);
       await sleep(4000);
@@ -64,7 +81,7 @@ module.exports = linkedinApply = (speed) =>
 
     // Going to URL
     try {
-        await page.goto("https://www.linkedin.com/jobs/search/?currentJobId=3353469753&f_AL=true&geoId=100876405&keywords=react&location=Colombia&refresh=true");
+        await page.goto("https://www.indeed.com/?vjk=b40f4447c5cc20cc");
         await sleep(5000);
         await page.waitForSelector("button");
         await showNotification("Logged in successfully", "We're logged in");
@@ -82,8 +99,9 @@ module.exports = linkedinApply = (speed) =>
       for (let i = 1; i <= 11; i++) {
         await sleep(5000);
         await page.waitForSelector(`button[aria-label="Page ${i}"]`);
+        await autoRandomScroll('.jobs-search-results-list', getRandomInt(1,3))
     
-        await loopNextJob()
+           await loopNextJob()
     
         await page.click(`button[aria-label="Page ${i + 1}"]`);
         await console.log(`clicking on page button ${i + 1}`);
@@ -96,110 +114,141 @@ module.exports = linkedinApply = (speed) =>
         await sleep(5000);
         await page.click(`.jobs-search-results__list-item:nth-of-type(${i})`);
         await console.log("clicking on job item " + i);
+        await autoRandomScroll('.jobs-search__job-details--container', getRandomInt(1,3))
 
-        await startApplying()
+            await startApplying();
 
       }
     }
 
     const startApplying = async () => {
+      try {
           await sleep(3000);
           await page.click(".jobs-apply-button");
+  
+              await insideApplication()
+
+              try {await getOut()} catch(error) {await console.error(error)}
+              await sleep(2000);
+              try {await getOut()} catch(error) {await console.error(error)}
       
-          await insideApplication()
+              
+      } catch (error) {
+          await console.error(error)
+
+      }
 
     }
 
     const insideApplication = async () => {
       try { 
-        scenarioOne()
+        await console.log('Trying Scenario 1')
+        await scenarioOne()
         
       } catch {
-
-        scenarioTwo()
-      }
+        await console.log('Trying Scenario 2')
+        await scenarioTwo()
+      } 
     };
 
-    const scenarioOne = async () => {  // Scenario One: Direct Submission
 
-        await inputTelephone()
-        await uploadResume()
+    const scenarioOne = async () => {  
 
-        // Submit Application
-        await sleep(5000);
-        await page.click('button[aria-label="Submit application"]');
+      // Is there input?
+      try {await inputTelephone()} catch (error) {console.error(error)};
+      try {await uploadResume()} catch (error) {console.error(error)};
+      
+      // Submit Application
+      await sleep(3000);
+      await page.click('button[aria-label="Submit application"]');
+
     };
 
-    const scenarioTwo = async () => {
-        try { // Scenario Two: Continue to Applcation 
+
+    const scenarioTwo = async () => { 
           await sleep(2000);
-          await page.waitForSelector('button[aria-label="Continue to next step"]');
+          await page.waitForSelector('button[aria-label="Continue to next step"]', {timeout: 6000});
+
+          // Is there input?
+          try {await inputTelephone()} catch (error) {console.error(error)};
+          try {await uploadResume()} catch (error) {console.error(error)};
+
           await sleep(1500);
           await page.click('button[aria-label="Continue to next step"]');
           await sleep(2200);
-          await page.waitForSelector('button[aria-label="Continue to next step"]');
+
+          // Is there input?
+          try {await inputTelephone()} catch (error) {console.error(error)};
+          try {await uploadResume()} catch (error) {console.error(error)};
+          
+          await page.waitForSelector('button[aria-label="Continue to next step"]', {timeout: 5000});
           await sleep(1000);
           await page.click('button[aria-label="Continue to next step"]');
 
-          respondToQuestions()
+              await respondToQuestions()
 
-          await sleep(2200);
-          await page.waitForSelector('button[aria-label="Review your application"]');
-          await sleep(1000);
+          try {
+            await sleep(1000);
+            await page.click('button[aria-label="Continue to next step"]');
+          } catch (error) {console.error(error)};
+
+          await sleep(1500);
+          await page.waitForSelector('button[aria-label="Review your application"]', {timeout: 3000});
           await page.click('button[aria-label="Review your application"]');
+
           await sleep(4000);
-          await page.waitForSelector('button[aria-label="Submit application"]');
+          await page.waitForSelector('button[aria-label="Submit application"]', {timeout: 3000});
           await page.click('button[aria-label="Submit application"]');
 
-        } catch {
-          console.log("Its not this scenario");
-        }
     };
 
     const respondToQuestions = async () => {
-      try { // Respond to Questions
+
         await sleep(1000);
         await page.waitForSelector('.jobs-easy-apply-form-element');
         await sleep(1500);
         const textInputs = await page.$$('.jobs-easy-apply-form-element .fb-single-line-text__input');
+
         for (let i = 0; index < textInputs.length; i++) {
           const textInput = textInputs[i]
           await console.log(textInput)
           await sleep(2330);
           await page.click(textInput);
-          await sleep(3020);
           await page.type(textInput, '2');
         }
-
-      } catch {
-        console.log('No question elements or error')
-      }
-
-    };
+      };
+      
+      const getOut = async () => {
+        await sleep(1020);
+        await page.click('button[aria-label="Dismiss"]');
+        await sleep(2020);
+        await page.click('button[data-control-name="discard_application_confirm_btn"]');
+    }
 
     const uploadResume = async () => {
-        await sleep(3020);
-        await page.waitForSelector("input[type=file]");
-        const input = await page.$("input[type=file]");
-        await sleep(1000);
-        await input.uploadFile(
+        // Check if there's a resume
+        await sleep(1520);
+        await page.waitForSelector("input[type=file]", {timeout: 2000}); 
+        const input = await page.$("input[type=file]"); 
+        await input.uploadFile( 
           "C:/Users/priva/OneDrive/Bureau/Ahmed-Issaoui-Resume.pdf"
         );
-        await sleep(12000);
+        await sleep(8000);
     }
 
     const inputTelephone = async () => {
-        await sleep(2330);
+        // Check if input is the same
+        await sleep(1330);
         await page.click('.fb-single-line-text__input');
 
-        await sleep(3020);
+        await sleep(1020);
         await page.type('.fb-single-line-text__input', '');
 
     };
 
 
 
-    // Main Loop
+    // Main Entry
     try {
       await loopNextPage()
       await showNotification("We're done here", "We have finished our loop");
@@ -209,21 +258,11 @@ module.exports = linkedinApply = (speed) =>
       await showNotification("Something went wrong", "Error happened during the process");
       console.error(error)
     }
-    
-
-    // Closing the browser
-    await sleep(3000);
-    await browser.close()
+    finally {
+      await sleep(3000);
+      await browser.close()
+    }
 
 
   })();
 
-
-
-// let holdProgress = true;
-//       while (holdProgress) {
-//           await page.waitFor(300);
-//           if (page.url().includes('/env-selector')) {
-//               holdProgress = false;
-//           }
-//       }

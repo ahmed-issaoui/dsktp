@@ -4,7 +4,6 @@ import styles from "./SpeedParams.module.css";
 const SpeedParams = () => {
 
   const handleInputChange = (e) => {
-    // var inputData = e.target.value
     var speed = e.target.value;
     window.api.speedParams(speed);
   }
