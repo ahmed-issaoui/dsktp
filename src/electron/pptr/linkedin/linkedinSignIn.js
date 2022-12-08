@@ -6,7 +6,7 @@ const { executablePath } = require("puppeteer");
 const fs = require("fs/promises");
 const { Notification } = require("electron");
 
-module.exports = indeedSignIn = () =>
+module.exports = linkedinSignIn = () =>
   (async () => {
     // Using plugins
     puppeteer.use(hidden());
@@ -23,7 +23,7 @@ module.exports = indeedSignIn = () =>
 
     // Launching a browser and a blank page
 
-    await showNotification("Opening Indeed for Sign in","We are launching a new campaign on Indeed");
+    await showNotification("Opening Linkedin for Sign in","We are launching a new Campaign on Linkedin");
     const browser = await puppeteer.launch({
       args: ["--no-sandbox", "--start-maximized"],
       headless: false,
@@ -37,7 +37,7 @@ module.exports = indeedSignIn = () =>
 
     // Going to URL
     try {
-        await page.goto("https://www.indeed.com/?vjk=b40f4447c5cc20cc");
+        await page.goto("https://www.linkedin.com/");
         await sleep(3000);
         await page.waitForSelector("input");
         await showNotification("Please login with your account", "Login with your account to apply");
@@ -50,10 +50,12 @@ module.exports = indeedSignIn = () =>
 
     // Saving cookies 
     try {
-        await sleep(100000);
+        await sleep(2000);
+        await page.waitForNavigation({timeout: 120000});
+        await sleep(2000);
         
         const cookies = await page.cookies();
-        await fs.writeFile("./public/pptr/indeed/indeedCookies.js", JSON.stringify(cookies, null, 2));
+        await fs.writeFile("./src/electron/pptr/linkedin/linkedinCookies.js", JSON.stringify(cookies, null, 2));
         
         await sleep(4000);
         await showNotification("Logged in Sucessfully, Restarting the App", "Please wait for a moment");

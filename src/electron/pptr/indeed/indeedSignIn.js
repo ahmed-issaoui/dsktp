@@ -6,7 +6,7 @@ const { executablePath } = require("puppeteer");
 const fs = require("fs/promises");
 const { Notification } = require("electron");
 
-module.exports = glassdoorSignIn = () =>
+module.exports = indeedSignIn = () =>
   (async () => {
     // Using plugins
     puppeteer.use(hidden());
@@ -23,7 +23,7 @@ module.exports = glassdoorSignIn = () =>
 
     // Launching a browser and a blank page
 
-    await showNotification("Opening Glassdoor for Sign in","We are launching a new campaign on Glassdoor");
+    await showNotification("Opening Indeed for Sign in","We are launching a new campaign on Indeed");
     const browser = await puppeteer.launch({
       args: ["--no-sandbox", "--start-maximized"],
       headless: false,
@@ -37,7 +37,7 @@ module.exports = glassdoorSignIn = () =>
 
     // Going to URL
     try {
-        await page.goto("https://www.glassdoor.com/index.htm");
+        await page.goto("https://www.indeed.com/?vjk=b40f4447c5cc20cc");
         await sleep(3000);
         await page.waitForSelector("input");
         await showNotification("Please login with your account", "Login with your account to apply");
@@ -53,7 +53,7 @@ module.exports = glassdoorSignIn = () =>
         await sleep(100000);
         
         const cookies = await page.cookies();
-        await fs.writeFile("./public/pptr/glassdoor/glassdoorCookies.js", JSON.stringify(cookies, null, 2));
+        await fs.writeFile("./src/electron/pptr/indeed/indeedCookies.js", JSON.stringify(cookies, null, 2));
         
         await sleep(4000);
         await showNotification("Logged in Sucessfully, Restarting the App", "Please wait for a moment");

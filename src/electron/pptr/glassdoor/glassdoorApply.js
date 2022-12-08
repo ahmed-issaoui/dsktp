@@ -66,7 +66,7 @@ module.exports = glassdoorApply = (speed) =>
     try {
       await sleep(800);
       await showNotification("Entering your account", "We are logging you in with your account");
-      const cookiesString = await fs.readFile("./public/pptr/glassdoor/glassdoorCookies.js");
+      const cookiesString = await fs.readFile("./src/electron/pptr/glassdoor/glassdoorCookies.js");
       const cookiez = JSON.parse(cookiesString);
       await page.setCookie(...cookiez);
       await sleep(4000);

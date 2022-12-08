@@ -25,7 +25,7 @@ const createWindow = () => {
 		minWidth: 700,
 		minHeight: 450,
 		maxHeight: 700,
-		icon: (path.join(__dirname, './assets/images/icon-easyjob.ico')),
+		icon: (path.join(__dirname, '../../public/assets/images/icon-easyjob.ico')),
 		titleBarStyle: 'hidden',
 		titleBarOverlay: {
 			color: '#000000',
@@ -142,7 +142,7 @@ ipcMain.on("get/platformParams", (event, data) => {
 
 ipcMain.handle("get/puppeteer", async (event, args)=>{
 	if (platform == "linkedin") {
-			if (fs.existsSync('./public/pptr/linkedin/linkedinCookies.js')) {
+			if (fs.existsSync('./src/electron/pptr/linkedin/linkedinCookies.js')) {
 				console.log('Cookies exist, Launching Linkedin Apply');
 				try { linkedinApply(speed); }catch(error) {console.error(error);}
 
@@ -158,7 +158,7 @@ ipcMain.handle("get/puppeteer", async (event, args)=>{
 			}
 	}
 	else if (platform == "glassdoor") {
-			if (fs.existsSync('./public/pptr/glassdoor/glassdoorCookies.js')) {
+			if (fs.existsSync('./src/electron/pptr/glassdoor/glassdoorCookies.js')) {
 				console.log('Cookies exist, Launching Glassdoor Apply');
 				try { glassdoorApply(speed); }catch(error) {console.error(error);}
 
@@ -174,7 +174,7 @@ ipcMain.handle("get/puppeteer", async (event, args)=>{
 			}
 	}
 	else if (platform == "indeed") {
-			if (fs.existsSync('./public/pptr/indeed/indeedCookies.js')) {
+			if (fs.existsSync('./src/electron/pptr/indeed/indeedCookies.js')) {
 				console.log('Cookies exist, Launching Indeed Apply');
 				try { indeedApply(speed); }catch(error) {console.error(error);}
 

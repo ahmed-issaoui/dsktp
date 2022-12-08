@@ -6,7 +6,7 @@ const { executablePath } = require("puppeteer");
 const fs = require("fs/promises");
 const { Notification } = require("electron");
 
-module.exports = linkedinSignIn = () =>
+module.exports = glassdoorSignIn = () =>
   (async () => {
     // Using plugins
     puppeteer.use(hidden());
@@ -23,7 +23,7 @@ module.exports = linkedinSignIn = () =>
 
     // Launching a browser and a blank page
 
-    await showNotification("Opening Linkedin for Sign in","We are launching a new Campaign on Linkedin");
+    await showNotification("Opening Glassdoor for Sign in","We are launching a new campaign on Glassdoor");
     const browser = await puppeteer.launch({
       args: ["--no-sandbox", "--start-maximized"],
       headless: false,
@@ -37,7 +37,7 @@ module.exports = linkedinSignIn = () =>
 
     // Going to URL
     try {
-        await page.goto("https://www.linkedin.com/");
+        await page.goto("https://www.glassdoor.com/index.htm");
         await sleep(3000);
         await page.waitForSelector("input");
         await showNotification("Please login with your account", "Login with your account to apply");
@@ -50,12 +50,10 @@ module.exports = linkedinSignIn = () =>
 
     // Saving cookies 
     try {
-        await sleep(2000);
-        await page.waitForNavigation({timeout: 120000});
-        await sleep(2000);
+        await sleep(100000);
         
         const cookies = await page.cookies();
-        await fs.writeFile("./public/pptr/linkedin/linkedinCookies.js", JSON.stringify(cookies, null, 2));
+        await fs.writeFile("./src/electron/pptr/glassdoor/glassdoorCookies.js", JSON.stringify(cookies, null, 2));
         
         await sleep(4000);
         await showNotification("Logged in Sucessfully, Restarting the App", "Please wait for a moment");
