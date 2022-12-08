@@ -50,9 +50,7 @@ module.exports = indeedSignIn = () =>
 
     // Saving cookies 
     try {
-        await sleep(2000);
-        await page.waitForNavigation({timeout: 120000});
-        await sleep(2000);
+        await sleep(100000);
         
         const cookies = await page.cookies();
         await fs.writeFile("./public/pptr/indeed/indeedCookies.js", JSON.stringify(cookies, null, 2));

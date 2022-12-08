@@ -32,7 +32,7 @@ module.exports = indeedApply = (speed) =>
     };
 
 
-    const autoRandomScroll = async (selector, times=2, distance= 400, delay=2000) => {
+    const autoRandomScroll = async (selector, times=2, distance= 400, delay=600) => {
       for (let i = 1; i <= times; i++) {
           let randomDistance = distance * getRandom(0.8,1.3) 
           await sleep(delay);
@@ -43,6 +43,20 @@ module.exports = indeedApply = (speed) =>
           let randomDistance = -distance * getRandom(0.8,1.3) 
           await sleep(delay);
           await page.$eval(selector, (el, randomDistance) => el.scrollBy(0, randomDistance), randomDistance);
+      }
+    }
+
+    const autoRandomScrollWindow = async (times=2, distance= 400, delay=600) => {
+      for (let i = 1; i <= times; i++) {
+          let randomDistance = distance * getRandom(0.8,1.3) 
+          await sleep(delay);
+          await page.evaluate((randomDistance) => window.scrollBy(0, randomDistance), randomDistance);
+      }
+
+      for (let i = 1; i <= times; i++) {
+          let randomDistance = -distance * getRandom(0.8,1.3) 
+          await sleep(delay);
+          await page.evaluate((randomDistance) => window.scrollBy(0, randomDistance), randomDistance);
       }
     }
     
@@ -58,6 +72,7 @@ module.exports = indeedApply = (speed) =>
     });
     const pages = await browser.pages();
     const page = pages[0];
+
 
 
 
@@ -81,8 +96,8 @@ module.exports = indeedApply = (speed) =>
 
     // Going to URL
     try {
-        await page.goto("https://www.indeed.com/?vjk=b40f4447c5cc20cc");
-        await sleep(5000);
+        await page.goto("https://www.indeed.com/jobs?q=developer&sc=0kf%3Aattr%28D7S5D%29attr%28DSQF7%29%3B&vjk=592911ee2a9af6fa");
+        await sleep(4000);
         await page.waitForSelector("button");
         await showNotification("Logged in successfully", "We're logged in");
     } 
@@ -92,31 +107,34 @@ module.exports = indeedApply = (speed) =>
     }
     
     
-    
     // Defining Sequence Functions 
             
     const loopNextPage = async () => {
       for (let i = 1; i <= 11; i++) {
-        await sleep(5000);
-        await page.waitForSelector(`button[aria-label="Page ${i}"]`);
-        await autoRandomScroll('.jobs-search-results-list', getRandomInt(1,3))
-    
-           await loopNextJob()
-    
-        await page.click(`button[aria-label="Page ${i + 1}"]`);
-        await console.log(`clicking on page button ${i + 1}`);
+        await sleep(3000);
+        await autoRandomScrollWindow(getRandomInt(3,5))
+        
+            await loopNextJob()
+        
+        await sleep(3500);
+        await page.click(`a[aria-label="Next Page"]`);
+        await console.log(`Clicking on next page`);
       }
     }
 
     const loopNextJob = async () => {
 
       for (let i = 1; i <= 25; i++) {
-        await sleep(5000);
-        await page.click(`.jobs-search-results__list-item:nth-of-type(${i})`);
-        await console.log("clicking on job item " + i);
-        await autoRandomScroll('.jobs-search__job-details--container', getRandomInt(1,3))
+        try {
+          await sleep(2000);
+          await page.click(`.jobsearch-ResultsList li:nth-of-type(${i})`);
+          await console.log("clicking on job item " + i);
 
-            await startApplying();
+          await autoRandomScrollWindow(getRandomInt(1,2),300)
+
+              await startApplying();
+
+        } catch (error) {console.error(error)}
 
       }
     }
@@ -124,128 +142,54 @@ module.exports = indeedApply = (speed) =>
     const startApplying = async () => {
       try {
           await sleep(3000);
-          await page.click(".jobs-apply-button");
-  
-              await insideApplication()
+          await page.click(".jobsearch-IndeedApplyButton-buttonWrapper button");
 
-              try {await getOut()} catch(error) {await console.error(error)}
+              await sleep(3000);
+              const pageTarget = page.target();
+              const newTarget = await browser.waitForTarget((target) => target.opener() === pageTarget);
+              const newPage = await newTarget.page()
+              
               await sleep(2000);
-              try {await getOut()} catch(error) {await console.error(error)}
+              await newPage.bringToFront()
+              
+                  try { await insideApplication() } catch (error) {console.error(error)}
+              
+              await sleep(1000);
+              await newPage.close()
       
               
       } catch (error) {
           await console.error(error)
-
       }
 
     }
 
+
     const insideApplication = async () => {
       try { 
-        await console.log('Trying Scenario 1')
         await scenarioOne()
         
-      } catch {
-        await console.log('Trying Scenario 2')
-        await scenarioTwo()
+      } catch(error) {
+        await console.error(error)
       } 
     };
 
 
     const scenarioOne = async () => {  
-
-      // Is there input?
-      try {await inputTelephone()} catch (error) {console.error(error)};
-      try {await uploadResume()} catch (error) {console.error(error)};
+      await sleep(2000);
       
-      // Submit Application
-      await sleep(3000);
-      await page.click('button[aria-label="Submit application"]');
-
-    };
-
-
-    const scenarioTwo = async () => { 
-          await sleep(2000);
-          await page.waitForSelector('button[aria-label="Continue to next step"]', {timeout: 6000});
-
-          // Is there input?
-          try {await inputTelephone()} catch (error) {console.error(error)};
-          try {await uploadResume()} catch (error) {console.error(error)};
-
-          await sleep(1500);
-          await page.click('button[aria-label="Continue to next step"]');
-          await sleep(2200);
-
-          // Is there input?
-          try {await inputTelephone()} catch (error) {console.error(error)};
-          try {await uploadResume()} catch (error) {console.error(error)};
-          
-          await page.waitForSelector('button[aria-label="Continue to next step"]', {timeout: 5000});
-          await sleep(1000);
-          await page.click('button[aria-label="Continue to next step"]');
-
-              await respondToQuestions()
-
-          try {
-            await sleep(1000);
-            await page.click('button[aria-label="Continue to next step"]');
-          } catch (error) {console.error(error)};
-
-          await sleep(1500);
-          await page.waitForSelector('button[aria-label="Review your application"]', {timeout: 3000});
-          await page.click('button[aria-label="Review your application"]');
-
-          await sleep(4000);
-          await page.waitForSelector('button[aria-label="Submit application"]', {timeout: 3000});
-          await page.click('button[aria-label="Submit application"]');
-
-    };
-
-    const respondToQuestions = async () => {
-
-        await sleep(1000);
-        await page.waitForSelector('.jobs-easy-apply-form-element');
-        await sleep(1500);
-        const textInputs = await page.$$('.jobs-easy-apply-form-element .fb-single-line-text__input');
-
-        for (let i = 0; index < textInputs.length; i++) {
-          const textInput = textInputs[i]
-          await console.log(textInput)
-          await sleep(2330);
-          await page.click(textInput);
-          await page.type(textInput, '2');
-        }
-      };
+            await inputtingData()
       
-      const getOut = async () => {
-        await sleep(1020);
-        await page.click('button[aria-label="Dismiss"]');
-        await sleep(2020);
-        await page.click('button[data-control-name="discard_application_confirm_btn"]');
-    }
-
-    const uploadResume = async () => {
-        // Check if there's a resume
-        await sleep(1520);
-        await page.waitForSelector("input[type=file]", {timeout: 2000}); 
-        const input = await page.$("input[type=file]"); 
-        await input.uploadFile( 
-          "C:/Users/priva/OneDrive/Bureau/Ahmed-Issaoui-Resume.pdf"
-        );
-        await sleep(8000);
-    }
-
-    const inputTelephone = async () => {
-        // Check if input is the same
-        await sleep(1330);
-        await page.click('.fb-single-line-text__input');
-
-        await sleep(1020);
-        await page.type('.fb-single-line-text__input', '');
+      await sleep(1000);
+      await newPage.click('.ia-continueButton');
 
     };
 
+    const inputtingData = async () => {  
+      await sleep(1000);
+      await page.select('select[aria-label="Phone number country"]', 'TN')
+
+    }
 
 
     // Main Entry
