@@ -23,6 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 #ignore cookies files
-linkedinCookies.js
-glassdoorCookies.js
-indeedCookies.js
+linkedinCookies.txt
+glassdoorCookies.txt
+indeedCookies.txt
