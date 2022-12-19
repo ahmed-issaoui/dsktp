@@ -1,16 +1,16 @@
 const puppeteer = require("puppeteer-extra");
 const hidden = require("puppeteer-extra-plugin-stealth");
-const autoScrollPlugin = require("puppeteer-extra-plugin-auto-scroll");
 
 const { executablePath } = require("puppeteer");
+const { Notification, safeStorage } = require("electron");
+
 const fs = require("fs/promises");
-const { Notification } = require("electron");
+const path = require("path");
 
 module.exports = linkedinApply = (speed) =>
   (async () => {
     // Using plugins
     puppeteer.use(hidden());
-    puppeteer.use(autoScrollPlugin());
 
 
     const showNotification = (title, body) => {
@@ -66,9 +66,20 @@ module.exports = linkedinApply = (speed) =>
     try {
       await sleep(800);
       await showNotification("Entering your account", "We are logging you in with your account");
-      const cookiesString = await fs.readFile("./src/electron/pptr/linkedin/linkedinCookies.js");
-      const cookiez = JSON.parse(cookiesString);
-      await page.setCookie(...cookiez);
+
+      const linkedinCookiesPath = path.join(__dirname, 'linkedinCookies.txt')
+      const cookiesFile = await fs.readFile(linkedinCookiesPath);
+
+      if (safeStorage.isEncryptionAvailable()) {
+
+        try {
+          var decryptedCookies = safeStorage.decryptString(cookiesFile)
+        } 
+        catch (error) {console.error(error)}
+      }  
+
+      const finalCookie = JSON.parse(decryptedCookies);
+      await page.setCookie(...finalCookie);
       await sleep(4000);
     }
 
@@ -82,7 +93,7 @@ module.exports = linkedinApply = (speed) =>
     // Going to URL
     try {
         await page.goto("https://www.linkedin.com/jobs/search/?currentJobId=3353469753&f_AL=true&geoId=100876405&keywords=react&location=Colombia&refresh=true");
-        await sleep(5000);
+        await sleep(10000);
         await page.waitForSelector("button");
         await showNotification("Logged in successfully", "We're logged in");
     } 

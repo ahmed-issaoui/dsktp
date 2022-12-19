@@ -1,16 +1,16 @@
 const puppeteer = require("puppeteer-extra");
 const hidden = require("puppeteer-extra-plugin-stealth");
-const autoScrollPlugin = require("puppeteer-extra-plugin-auto-scroll");
 
 const { executablePath } = require("puppeteer");
+const { Notification, safeStorage } = require("electron");
+
 const fs = require("fs/promises");
-const { Notification } = require("electron");
+const path = require("path");
 
 module.exports = glassdoorApply = (speed) =>
   (async () => {
     // Using plugins
     puppeteer.use(hidden());
-    puppeteer.use(autoScrollPlugin());
 
 
     const showNotification = (title, body) => {
@@ -66,9 +66,20 @@ module.exports = glassdoorApply = (speed) =>
     try {
       await sleep(800);
       await showNotification("Entering your account", "We are logging you in with your account");
-      const cookiesString = await fs.readFile("./src/electron/pptr/glassdoor/glassdoorCookies.js");
-      const cookiez = JSON.parse(cookiesString);
-      await page.setCookie(...cookiez);
+
+      const glassdoorCookiesPath = path.join(__dirname, 'glassdoorCookies.txt')
+      const cookiesFile = await fs.readFile(glassdoorCookiesPath);
+
+      if (safeStorage.isEncryptionAvailable()) {
+
+        try {
+          var decryptedCookies = safeStorage.decryptString(cookiesFile)
+        } 
+        catch (error) {console.error(error)}
+      }  
+
+      const finalCookie = JSON.parse(decryptedCookies);
+      await page.setCookie(...finalCookie);
       await sleep(4000);
     }
 

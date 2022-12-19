@@ -1,14 +1,22 @@
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import styles from './WelcomePage.module.css'
+import { useEffect } from "react";
 
 
 const WelcomePage = () => {
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    const goNext = setTimeout(() => {
+      navigate("/EnterAccount")
+    }, 1500);
+
+    return () => clearTimeout(goNext);
+  }, [navigate]);
+
   return (
     <div className={styles.section}>
        <img src="./assets/images/logo-easyjob.svg" alt="logo-easyjob"/>
-       <Link to='/ChooseJobBoard'>Next</Link>
-       <Link to='/Parameters'>Parameters</Link>
-
     </div>
   )
 }

@@ -1,16 +1,17 @@
 const puppeteer = require("puppeteer-extra");
 const hidden = require("puppeteer-extra-plugin-stealth");
-const autoScrollPlugin = require("puppeteer-extra-plugin-auto-scroll");
 
 const { executablePath } = require("puppeteer");
+const { Notification, safeStorage } = require("electron");
+
 const fs = require("fs/promises");
-const { Notification } = require("electron");
+const path = require("path");
+
 
 module.exports = indeedSignIn = () =>
   (async () => {
     // Using plugins
     puppeteer.use(hidden());
-    puppeteer.use(autoScrollPlugin());
 
 
     const showNotification = (title, body) => {
@@ -38,8 +39,8 @@ module.exports = indeedSignIn = () =>
     // Going to URL
     try {
         await page.goto("https://www.indeed.com/?vjk=b40f4447c5cc20cc");
-        await sleep(3000);
-        await page.waitForSelector("input");
+        await sleep(10000);
+        await page.waitForSelector("div");
         await showNotification("Please login with your account", "Login with your account to apply");
     } 
     catch {
@@ -51,9 +52,21 @@ module.exports = indeedSignIn = () =>
     // Saving cookies 
     try {
         await sleep(100000);
-        
         const cookies = await page.cookies();
-        await fs.writeFile("./src/electron/pptr/indeed/indeedCookies.js", JSON.stringify(cookies, null, 2));
+
+        const stringifiedCookies = await JSON.stringify(cookies, null, 2)
+
+        const indeedCookiesPath = path.join(__dirname, 'indeedCookies.txt')
+
+        if (safeStorage.isEncryptionAvailable()) {
+          await sleep(4000);
+
+          try {
+            const encryptedCookies = safeStorage.encryptString(stringifiedCookies);
+            await fs.writeFile(indeedCookiesPath, encryptedCookies);
+          } 
+          catch (error) {console.error(error)}
+        }  
         
         await sleep(4000);
         await showNotification("Logged in Sucessfully, Restarting the App", "Please wait for a moment");

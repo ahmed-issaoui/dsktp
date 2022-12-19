@@ -1,16 +1,18 @@
 const puppeteer = require("puppeteer-extra");
 const hidden = require("puppeteer-extra-plugin-stealth");
-const autoScrollPlugin = require("puppeteer-extra-plugin-auto-scroll");
 
 const { executablePath } = require("puppeteer");
-const fs = require("fs/promises");
-const { Notification } = require("electron");
+const { Notification, safeStorage } = require("electron");
 
-module.exports = linkedinSignIn = () =>
+const fs = require("fs/promises");
+const path = require("path");
+
+
+
+const linkedinSignIn = () =>
   (async () => {
     // Using plugins
     puppeteer.use(hidden());
-    puppeteer.use(autoScrollPlugin());
 
 
     const showNotification = (title, body) => {
@@ -55,7 +57,22 @@ module.exports = linkedinSignIn = () =>
         await sleep(2000);
         
         const cookies = await page.cookies();
-        await fs.writeFile("./src/electron/pptr/linkedin/linkedinCookies.js", JSON.stringify(cookies, null, 2));
+        const stringifiedCookies = await JSON.stringify(cookies, null, 2)
+
+        const linkedinCookiesPath = path.join(__dirname, 'linkedinCookies.txt')
+
+        if (safeStorage.isEncryptionAvailable()) {
+          await sleep(4000);
+
+          try {
+            const encryptedCookies = safeStorage.encryptString(stringifiedCookies);
+            await fs.writeFile(linkedinCookiesPath, encryptedCookies);
+        
+
+          } 
+          catch (error) {console.error(error)}
+        }  
+
         
         await sleep(4000);
         await showNotification("Logged in Sucessfully, Restarting the App", "Please wait for a moment");
@@ -75,3 +92,5 @@ module.exports = linkedinSignIn = () =>
   })();
 
 
+
+  module.exports = {linkedinSignIn}

@@ -4,8 +4,11 @@ const { autoUpdater } = require("electron-updater");
 const isDev = require("electron-is-dev");
 const path = require("path");
 const fs = require("fs");
+const shell = require('electron').shell;
 
-const linkedinSignIn = require("./pptr/linkedin/linkedinSignIn");
+
+const {linkedinSignIn} = require("./pptr/linkedin/linkedinSignIn");
+
 const linkedinApply = require("./pptr/linkedin/linkedinApply");
 
 const glassdoorSignIn = require("./pptr/glassdoor/glassdoorSignIn");
@@ -124,7 +127,6 @@ var speed;
 
 ipcMain.on("get/speedParams", (event, data) => {
 	speed = data;
-	console.log('inside function ' + speed)
 });
 
 // Platform 
@@ -133,16 +135,26 @@ var platform;
 
 ipcMain.on("get/platformParams", (event, data) => {
 	platform = data;
-	console.log('platform is ' + platform)
+});
+
+
+// Opening external links
+
+ipcMain.on('open-register', (event, data) => {
+	shell.openExternal('https://job-app-f2665.web.app/enter/register');
+});
+
+ipcMain.on('open-forgot', (event, data) => {
+	shell.openExternal('https://job-app-f2665.web.app/enter/reset');
 });
 
 
 // Handling message to launch puppeteer from renderer)
 
-
-ipcMain.handle("get/puppeteer", async (event, args)=>{
+ipcMain.handle("get/puppeteer", async (event, data)=>{
 	if (platform == "linkedin") {
-			if (fs.existsSync('./src/electron/pptr/linkedin/linkedinCookies.js')) {
+			const linkedinCookiesPath = path.join(__dirname, './pptr/linkedin/linkedinCookies.txt')
+			if (fs.existsSync(linkedinCookiesPath)) {
 				console.log('Cookies exist, Launching Linkedin Apply');
 				try { linkedinApply(speed); }catch(error) {console.error(error);}
 
@@ -158,7 +170,9 @@ ipcMain.handle("get/puppeteer", async (event, args)=>{
 			}
 	}
 	else if (platform == "glassdoor") {
-			if (fs.existsSync('./src/electron/pptr/glassdoor/glassdoorCookies.js')) {
+			const glassdoorCookiesPath = path.join(__dirname, './pptr/glassdoor/glassdoorCookies.txt')
+
+			if (fs.existsSync(glassdoorCookiesPath)) {
 				console.log('Cookies exist, Launching Glassdoor Apply');
 				try { glassdoorApply(speed); }catch(error) {console.error(error);}
 
@@ -174,7 +188,9 @@ ipcMain.handle("get/puppeteer", async (event, args)=>{
 			}
 	}
 	else if (platform == "indeed") {
-			if (fs.existsSync('./src/electron/pptr/indeed/indeedCookies.js')) {
+			const indeedCookiesPath = path.join(__dirname, './pptr/indeed/indeedCookies.txt')
+
+			if (fs.existsSync(indeedCookiesPath)) {
 				console.log('Cookies exist, Launching Indeed Apply');
 				try { indeedApply(speed); }catch(error) {console.error(error);}
 
@@ -190,3 +206,4 @@ ipcMain.handle("get/puppeteer", async (event, args)=>{
 			}
 	}
   });
+
