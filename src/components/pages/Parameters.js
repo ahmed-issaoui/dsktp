@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./Parameters.module.css";
 
 const Parameters = () => {
+  
   return (
     <div className={styles.section}>
 

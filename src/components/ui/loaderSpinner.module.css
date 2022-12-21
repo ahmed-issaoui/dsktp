@@ -1,0 +1,25 @@
+.spinner {
+    left: 50%;
+    margin-left: -20px;
+    top: 50%;
+    margin-top: -20px;
+    position: absolute;
+    z-index: 19 !important;
+    animation: spinner-animation 900ms linear infinite;
+}
+
+.spinnerIcon {
+    width: 40px;
+    height: 40px;
+    border:  solid 4px transparent;
+    border-top-color:  #FFFFFF
+!important;
+    border-left-color: #FFFFFF
+!important;
+    border-radius: 50%;
+}
+
+@keyframes spinner-animation {
+  0%   { transform: rotate(0deg);   transform: rotate(0deg); }
+  100% { transform: rotate(360deg); transform: rotate(360deg); }
+}

@@ -75,6 +75,8 @@
   width: 8rem;
   top: 20px;
   left: 30px;
+  cursor: pointer;
+
 }
 
 .navIcons {
@@ -89,4 +91,5 @@
 .navIcon {
   height: 2.5rem;
   width: auto;
+  cursor: pointer;
 }

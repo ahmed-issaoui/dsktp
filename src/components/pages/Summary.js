@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./Summary.module.css";
 
 const Summary = () => {
+  async function handleLaunch() {window.api.pptr()};
 
   const handleInputChange = (e) => {
     var platform = e.target.value;
@@ -26,8 +27,8 @@ const Summary = () => {
               <button form="form1" type="button" className={styles.secondaryButton}>Back </button>
             </Link>
 
-            <Link to='/LaunchCampaign'>
-              <button form="form1" type="button" className={styles.primaryButton}>Next</button>
+            <Link to='/'>
+              <button form="form1" type="button" className={styles.primaryButton} onClick={handleLaunch}>Launch</button>
             </Link>
         </div>
 

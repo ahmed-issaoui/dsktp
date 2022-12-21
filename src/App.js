@@ -16,7 +16,6 @@ import CandidacyDetails from './components/pages/CandidacyDetails';
 import PotentialQuestions from "./components/pages/PotentialQuestions";
 import SpeedParams from "./components/pages/SpeedParams";
 import Summary from "./components/pages/Summary";
-import LaunchCampaign from "./components/pages/LaunchCampaign";
 import Parameters from "./components/pages/Parameters";
 import NotFound from "./components/pages/NotFound";
 import EnterAccount from "./components/pages/EnterAccount";
@@ -47,7 +46,6 @@ function App() {
           <Route path="/PotentialQuestions" element={ <PotentialQuestions/>} />
           <Route path="/SpeedParams" element={ <SpeedParams/>} />
           <Route path="/Summary" element={ <Summary/>} />
-          <Route path="/LaunchCampaign" element={ <LaunchCampaign/>} />
 
           <Route path="/Parameters" element={ <Parameters/>} />
           <Route path="*" element={ <NotFound/>} />

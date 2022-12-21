@@ -1,7 +1,15 @@
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import styles from "./SpeedParams.module.css";
 
 const SpeedParams = () => {
+  let navigate = useNavigate();
+
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      navigate('/Summary')
+    }
+  }
 
   const handleInputChange = (e) => {
     var speed = e.target.value;
@@ -17,7 +25,7 @@ const SpeedParams = () => {
         <h1>Speed Parameters</h1>
 
         <form className={styles.form1}>
-          <input type="text" placeholder="Speed" onChange={(e)=> {handleInputChange(e)}} />
+          <input type="text" placeholder="Speed" onChange={(e)=> {handleInputChange(e)}} onKeyDown={(e)=>{handleEnter(e)}}/>
          
           {/* <select className={styles.selectSpeed}>
             <option selected>Normal Speed x1</option>

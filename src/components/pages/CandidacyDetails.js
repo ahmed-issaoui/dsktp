@@ -1,7 +1,16 @@
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import styles from "./CandidacyDetails.module.css";
 
 const CandidacyDetails = () => {
+  let navigate = useNavigate();
+
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      navigate('/PotentialQuestions')
+    }
+  }
+  
   return (
     <div className={styles.section}>
 
@@ -9,10 +18,10 @@ const CandidacyDetails = () => {
         <h1>Candidacy Details</h1>
 
         <form className={styles.form1}>
-          <input type="text" placeholder="Name" />
-          <input type="text" placeholder="Phone" />
-          <input type="text" placeholder="Email" />
-          <input type="file" placeholder="Add Resume" />
+          <input type="text" placeholder="Name" onKeyDown={(e)=>{handleEnter(e)}}/>
+          <input type="text" placeholder="Phone" onKeyDown={(e)=>{handleEnter(e)}}/>
+          <input type="text" placeholder="Email" onKeyDown={(e)=>{handleEnter(e)}}/>
+          <input type="file" placeholder="Add Resume" onKeyDown={(e)=>{handleEnter(e)}}/>
 
           <div className={styles.buttonPart}>
             <Link to='/SearchDetails'>

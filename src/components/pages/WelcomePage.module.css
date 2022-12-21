@@ -5,18 +5,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    animation-name: fadeIn;
-    animation-duration: 2s;
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
   }
   
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
