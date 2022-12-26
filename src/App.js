@@ -1,11 +1,8 @@
 
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import styles from './App.module.css'
-
-import { logout } from "./firebase/firebaseClient";
-import { useAuthState } from "react-firebase-hooks/auth";
-import {auth} from './firebase/firebaseClient'
-
+import { useNavigate } from "react-router-dom";
+import { createContext, useState } from "react";
 
 import BackgroundCircle from "./components/ui/backgroundCircle";
 
@@ -19,53 +16,77 @@ import Summary from "./components/pages/Summary";
 import Parameters from "./components/pages/Parameters";
 import NotFound from "./components/pages/NotFound";
 import EnterAccount from "./components/pages/EnterAccount";
+import UpgradeAccount from "./components/pages/UpgradeAccount";
+import NavBar from "./components/ui/navBar";
 
-
+export const CampaignContext = createContext(null)
 
 function App() {
+
   let navigate = useNavigate();
-  const [user, loading] = useAuthState(auth);
+
+  const [campaignDetails, setCampaignDetails] = useState({
+    platform: '',
+    speed: 1,
+    jobTitle: '',
+    location: '',
+    remote: true,
+    name: '',
+    phone: '',
+    email: '',
+    resume: '',
+    coverLetter: '',
+    questions: {
+      allowedToWork: '',
+      visaSponsorship: '',
+      skills: '',
+      experience: '',
+      salary: '',
+      veteran: '',
+      startDate: '',
+      currentLocation: '',
+      ethnicity: ''
+    }
+  })
 
 
   return (
-    <div className={styles.main}>
-      <div className={styles.primaryCircle}>
-        <BackgroundCircle />
-      </div>
+    <CampaignContext.Provider value={{campaignDetails, setCampaignDetails}}>
+        <div className={styles.main}>
+          <div className={styles.primaryCircle}>
+            <BackgroundCircle />
+          </div>
 
-      <div className={styles.content}>
+          <div className={styles.content}>
 
-        <img src="../assets/images/logo-easyjob.svg" alt="logo easyjob" className={styles.imgLogo} onClick={()=> navigate("/")}/>
+            <img src="../assets/images/logo-easyjob.svg" alt="logo easyjob" className={styles.imgLogo} onClick={()=> navigate("/")}/>
 
-        <Routes>
-          <Route path="/" element={<WelcomePage />} />
-          <Route path="/EnterAccount" element={<EnterAccount />} />
-          <Route path="/ChooseJobBoard" element={ <ChooseJobBoard/>} />
-          <Route path="/SearchDetails" element={ <SearchDetails/>} />
-          <Route path="/CandidacyDetails" element={ <CandidacyDetails/>} />
-          <Route path="/PotentialQuestions" element={ <PotentialQuestions/>} />
-          <Route path="/SpeedParams" element={ <SpeedParams/>} />
-          <Route path="/Summary" element={ <Summary/>} />
+            <Routes>
+              <Route path="/" element={<WelcomePage />} />
+              <Route path="/EnterAccount" element={<EnterAccount />} />
+              <Route path="/ChooseJobBoard" element={ <ChooseJobBoard/>} />
+              <Route path="/SearchDetails" element={ <SearchDetails/>} />
+              <Route path="/CandidacyDetails" element={ <CandidacyDetails/>} />
+              <Route path="/PotentialQuestions" element={ <PotentialQuestions/>} />
+              <Route path="/SpeedParams" element={ <SpeedParams/>} />
+              <Route path="/Summary" element={ <Summary/>} />
 
-          <Route path="/Parameters" element={ <Parameters/>} />
-          <Route path="*" element={ <NotFound/>} />
-        </Routes>
+              <Route path="/UpgradeAccount" element={ <UpgradeAccount/>} />
+              <Route path="/Parameters" element={ <Parameters/>} />
+              <Route path="*" element={ <NotFound/>} />
+            </Routes>
 
-        <div className={styles.navIcons}>
-          <img src="../assets/images/icon-profile.png" alt="profile icon" className={styles.navIcon} onClick={()=> navigate("/Parameters")}/>
-          <img src="../assets/images/icon-support.png" alt="support icon" className={styles.navIcon}/>
-          <img src="../assets/images/icon-notifications.png" alt="notifications icon" className={styles.navIcon}/>
-          {user && <button onClick={logout}>Logout</button>}
+            <div className={styles.navBar}>
+              <NavBar/>
+            </div>
+          </div>
 
+          <div className={styles.secondaryCircle}>
+            <BackgroundCircle />
+          </div>
 
         </div>
-      </div>
-
-      <div className={styles.secondaryCircle}>
-        <BackgroundCircle />
-      </div>
-
-    </div>
+    </CampaignContext.Provider>
   );
 }
 

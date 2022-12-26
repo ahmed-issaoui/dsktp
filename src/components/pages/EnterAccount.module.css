@@ -20,10 +20,16 @@
   }
 }
 
+.imgContainer img {
+  height: auto;
+  width: 20rem;
+}
+
 .textPart {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-right: 2rem;
 }
 
 
@@ -34,22 +40,60 @@
 }
 
 .buttonPart button {
-  width: 8rem;
-  height: 3rem;
+  width: 13rem;
+  height: 2.6rem;
   border-radius: 3rem;
   color: white;
   font-size: 1.1rem;
   cursor: pointer;
   box-shadow: 5px 4px 47px 14px rgb(145 71 241 / 13%);
+  border: 2px solid #785df5;
+  background-color: #785df5;
   cursor: pointer;
 }
 
-.primaryButton {
-  border: 2px solid #785df5;
-  background-color: #785df5;
+
+
+
+.featureElement {
+  display: flex;
+  align-items: center;
+  width: 13rem;
+  gap: 0.4rem;
+  height: 2.6rem;
+  margin: 0rem 0 1rem 0;
+  padding: 0rem 1.2rem;
+  border-radius: 10rem;
+  border: 2px solid #785DF5;
+  box-shadow: 5px 4px 47px 14px rgba(145, 71, 241, 0.13);
+  cursor: pointer;
 }
 
-.secondaryButton {
-  border: 2px solid #785df5;
-  background: rgba(0, 0, 0, 0);
+
+
+.featureImg {
+  width: 1rem;
+  height: auto;
+  width: 1.4rem;
+}
+
+
+.featureElement p {
+  font-size: 1rem;
+  margin: 0 0 0 0.5rem;
+}
+
+
+.inputElement {
+  font-size: 1rem;
+  color: white;
+  width: 13rem;
+  height: 2.6rem;
+  margin: 0.4rem 0;
+  border-radius: 10rem;
+  border: 2px solid #785DF5;
+  box-shadow: 5px 4px 47px 14px rgba(145, 71, 241, 0.13);
+  background: rgba(0,0,0,0);
+  padding: 0rem 1.2rem;
+
 }

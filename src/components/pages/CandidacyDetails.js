@@ -1,12 +1,33 @@
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./CandidacyDetails.module.css";
+import { useContext, useState} from "react";
+import { CampaignContext } from "../../App";
 
 const CandidacyDetails = () => {
   let navigate = useNavigate();
 
+  const {campaignDetails, setCampaignDetails} = useContext(CampaignContext)
+
+  const [isMissingInput, setIsMissingInput] = useState(false)
+
+
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
+      handleNext()
+    }
+  }
+  
+
+  const handleNext = () => {
+    if (!campaignDetails.name || !campaignDetails.phone || !campaignDetails.email) {
+      setIsMissingInput(true);
+
+      setTimeout(() => {
+        setIsMissingInput(false);
+      }, 1200);
+    }
+    if (campaignDetails.name && campaignDetails.phone && campaignDetails.email) {
       navigate('/PotentialQuestions')
     }
   }
@@ -18,9 +39,30 @@ const CandidacyDetails = () => {
         <h1>Candidacy Details</h1>
 
         <form className={styles.form1}>
-          <input type="text" placeholder="Name" onKeyDown={(e)=>{handleEnter(e)}}/>
-          <input type="text" placeholder="Phone" onKeyDown={(e)=>{handleEnter(e)}}/>
-          <input type="text" placeholder="Email" onKeyDown={(e)=>{handleEnter(e)}}/>
+          <input 
+              type="text" placeholder="Name" 
+              value={campaignDetails.name} 
+              onChange={(e) => setCampaignDetails({...campaignDetails, name: e.target.value})} 
+              onKeyDown={(e)=>{handleEnter(e)}}
+              className={(isMissingInput && !campaignDetails.name) ? styles.missingInput : null} 
+
+          />
+          <input 
+              type="text" placeholder="Phone" 
+              value={campaignDetails.phone} 
+              onChange={(e) => setCampaignDetails({...campaignDetails, phone: e.target.value})} 
+              onKeyDown={(e)=>{handleEnter(e)}}
+              className={(isMissingInput && !campaignDetails.phone) ? styles.missingInput : null} 
+
+          />
+          <input 
+              type="text" placeholder="Email" 
+              value={campaignDetails.email} 
+              onChange={(e) => setCampaignDetails({...campaignDetails, email: e.target.value})} 
+              onKeyDown={(e)=>{handleEnter(e)}}
+              className={(isMissingInput && !campaignDetails.email) ? styles.missingInput : null} 
+
+          />
           <input type="file" placeholder="Add Resume" onKeyDown={(e)=>{handleEnter(e)}}/>
 
           <div className={styles.buttonPart}>
@@ -28,9 +70,7 @@ const CandidacyDetails = () => {
               <button form="form1" type="button" className={styles.secondaryButton}>Back </button>
             </Link>
 
-            <Link to='/PotentialQuestions'>
-              <button form="form1" type="button" className={styles.primaryButton}>Next</button>
-            </Link>
+            <button form="form1" type="button" className={styles.primaryButton} onClick={handleNext}>Next</button>
           </div>
         </form>
       </div>

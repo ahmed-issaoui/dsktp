@@ -27,7 +27,9 @@ function EnterAccount() {
       return;
     }
     if (user) {navigate("/ChooseJobBoard")};
-  }, [user, loading, navigate]);
+    if (errorText) {alert(errorText)}
+
+  }, [user, loading, errorText, navigate]);
 
 
 
@@ -40,6 +42,13 @@ function EnterAccount() {
     logInWithEmailAndPassword(email, password)
   }
 
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      submitHandlerLogin()
+    }
+  }
+
   const handleRegister = () => {
     window.api.registerAccount();
   }
@@ -49,61 +58,55 @@ function EnterAccount() {
   }
 
   return ( 
-  <>
-
-    {loading &&         
-        <div className={styles.textPart}>
-            <div className={styles.titlePart}>
-                <LoaderSpinner/>
-            </div>
-        </div>
-    }
-
-    {!loading && 
       <div className={styles.section}>
-        {/* <div className={styles.imgContainer}>
-          <Image src="/images/section7-img.png"alt="section7-img"width={538} height={538} priority={true}/>
-        </div>  */}
+          {loading &&         
+              <div className={styles.textPart}>
+                  <div className={styles.titlePart}>
+                      <LoaderSpinner/>
+                  </div>
+              </div>
+          }
 
-        <div className={styles.textPart}>
-            <div className={styles.titlePart}>
-              <h2>Enter Your Account</h2>
-              {!user && <h2>You are not logged in</h2>}
-              {user && <h2>You are logged in</h2>}
-              {user && isUserPremium && <h1>You are also premium</h1>}
+          {!loading && !user &&
+          <>
+            <div className={styles.imgContainer}>
+              <img src="../assets/images/enter-img.png"alt="section7-img"/>
+            </div> 
+            <div className={styles.textPart}>
+                <div className={styles.titlePart}>
+                  <h1>Enter Your Account</h1>
+                  {isUserPremium && <h2>You are premium</h2>}
 
-              {errorText && <div className={styles.errorText}>{errorText}</div>}
-            </div>
-
-            <div className={styles.features}>
-
-              <div className={styles.featureElement} onClick={signInWithGoogle}  >
-                <div className={styles.featureImg}>
-                  {/* <Image src="/images/google-icon.png" alt="google-icon" width={38} height={40} priority={true}/> */}
                 </div>
-                <p >Continue with Google</p>
+
+                <div className={styles.features}>
+
+                <div className={styles.featureElement} onClick={signInWithGoogle} >
+                  <img src="../assets/images/google-icon.png" alt="google-icon" className={styles.featureImg}/>
+                  <p >Continue with Google</p>
               </div>
 
 
-              <form id="form1">
-                <input className={styles.inputElement} type='text' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email'/><br/>
-                <input className={styles.inputElement} value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder='Password'/>
-              </form>
-              <div className={styles.buttonPart}>
-                <div className={styles.btnImgContainer}>
-                  {/* <img src="/images/option-button.png" alt="option-button" /> */}
-                </div>
-                    <button className={styles.submitButton} form="form1" type="button" onClick={submitHandlerLogin}>Confirm</button>  
+                  <form id="form1">
+                    <input className={styles.inputElement} type='text' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' onKeyDown={(e)=>{handleEnter(e)}}/><br/>
+                    <input className={styles.inputElement} value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder='Password' onKeyDown={(e)=>{handleEnter(e)}}/>
+                  </form>
 
-              </div>
-              <div><p onClick={handleForgotPassword}>Forgot Password</p></div>
-              <div><p onClick={handleRegister}>Register</p></div>
-              
-            </div>
-          </div>
+                  <div className={styles.buttonPart}>
+    
+                        <button className={styles.primaryButton}  onClick={submitHandlerLogin}>Confirm</button>  
+
+                  </div>
+                  <div><p onClick={handleForgotPassword}>Forgot Password</p></div>
+                  <div><p onClick={handleRegister}>Create an Account</p></div>
+                  {/* {errorText && <div className={styles.errorText}>{errorText}</div>} */}
+
+                  
+                </div>
+              </div> 
+              </>
+              }
       </div>
-    }
-  </>
   )
 }
 

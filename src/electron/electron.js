@@ -2,6 +2,7 @@
 const { app, dialog, BrowserWindow, ipcMain} = require("electron");
 const { autoUpdater } = require("electron-updater");
 const isDev = require("electron-is-dev");
+
 const path = require("path");
 const fs = require("fs");
 const shell = require('electron').shell;
@@ -131,11 +132,6 @@ ipcMain.on("get/speedParams", (event, data) => {
 
 // Platform 
 
-var platform;
-
-ipcMain.on("get/platformParams", (event, data) => {
-	platform = data;
-});
 
 
 // Opening external links
@@ -148,11 +144,17 @@ ipcMain.on('open-forgot', (event, data) => {
 	shell.openExternal('https://job-app-f2665.web.app/enter/reset');
 });
 
+ipcMain.on('open-upgrade', (event, data) => {
+	shell.openExternal('https://job-app-f2665.web.app/enter/signin');
+});
+
+
 
 // Handling message to launch puppeteer from renderer)
 
 ipcMain.handle("get/puppeteer", async (event, data)=>{
-	if (platform == "linkedin") {
+	const campaignDetails = data;
+	if (campaignDetails.platform == "linkedin") {
 			const linkedinCookiesPath = path.join(__dirname, './pptr/linkedin/linkedinCookies.txt')
 			if (fs.existsSync(linkedinCookiesPath)) {
 				console.log('Cookies exist, Launching Linkedin Apply');
@@ -169,7 +171,7 @@ ipcMain.handle("get/puppeteer", async (event, data)=>{
 				})();
 			}
 	}
-	else if (platform == "glassdoor") {
+	else if (campaignDetails.platform == "glassdoor") {
 			const glassdoorCookiesPath = path.join(__dirname, './pptr/glassdoor/glassdoorCookies.txt')
 
 			if (fs.existsSync(glassdoorCookiesPath)) {
@@ -187,7 +189,7 @@ ipcMain.handle("get/puppeteer", async (event, data)=>{
 				})();
 			}
 	}
-	else if (platform == "indeed") {
+	else if (campaignDetails.platform == "indeed") {
 			const indeedCookiesPath = path.join(__dirname, './pptr/indeed/indeedCookies.txt')
 
 			if (fs.existsSync(indeedCookiesPath)) {
@@ -206,4 +208,21 @@ ipcMain.handle("get/puppeteer", async (event, data)=>{
 			}
 	}
   });
+
+
+//   app.whenReady().then(
+
+// 	ipcMain.on('read-file', (event) => {
+// 		// const fileContent = fs.readFileSync('./file-to-read.txt', { encoding: 'utf-8' })
+// 		event.sender.send('read-file-success', firebaseConfig)
+// 	})
+
+//   );
+
+
+
+
+
+
+
 

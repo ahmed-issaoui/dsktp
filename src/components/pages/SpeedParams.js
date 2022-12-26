@@ -1,8 +1,13 @@
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./SpeedParams.module.css";
+import { useContext} from "react";
+import { CampaignContext } from "../../App";
+
 
 const SpeedParams = () => {
   let navigate = useNavigate();
+  const {campaignDetails, setCampaignDetails} = useContext(CampaignContext)
+
 
   const handleEnter = (e) => {
     if (e.key === "Enter") {
@@ -12,8 +17,9 @@ const SpeedParams = () => {
   }
 
   const handleInputChange = (e) => {
-    var speed = e.target.value;
-    window.api.speedParams(speed);
+    setCampaignDetails({...campaignDetails, speed: e.target.value})
+    var speeds = e.target.value;
+    window.api.speedParams(speeds);
   }
 
   
@@ -25,7 +31,7 @@ const SpeedParams = () => {
         <h1>Speed Parameters</h1>
 
         <form className={styles.form1}>
-          <input type="text" placeholder="Speed" onChange={(e)=> {handleInputChange(e)}} onKeyDown={(e)=>{handleEnter(e)}}/>
+          <input type="text" placeholder="Speed" value={campaignDetails.speed}  onChange={(e)=> {handleInputChange(e)}} onKeyDown={(e)=>{handleEnter(e)}}/>
          
           {/* <select className={styles.selectSpeed}>
             <option selected>Normal Speed x1</option>

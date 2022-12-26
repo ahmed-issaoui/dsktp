@@ -4,15 +4,19 @@
 const {ipcRenderer, contextBridge} = require('electron');
 
 const WINDOW_API = {
-    pptr: () => ipcRenderer.invoke("get/puppeteer"),
+    pptr: (campaignDetails) => ipcRenderer.invoke("get/puppeteer", campaignDetails),
     
     speedParams: (speed) => ipcRenderer.send("get/speedParams", speed),
-    platformParams: (platform) => ipcRenderer.send("get/platformParams", platform),
 
     registerAccount: () => ipcRenderer.sendSync('open-register'),
-    forgot: () => ipcRenderer.sendSync('open-forgot')
+    forgot: () => ipcRenderer.sendSync('open-forgot'),
+    upgradeAccount: () => ipcRenderer.sendSync('open-upgrade'),
 
-
+    readFile: () => {
+        ipcRenderer.send('read-file')
+        return new Promise((resolve) => ipcRenderer.once('read-file-success', (event, data) => resolve({ event, data }))
+        )
+    },
 
 }
 
