@@ -1,11 +1,54 @@
+
+@font-face {
+  font-family: 'Gilroy-Light';
+  src: url('../public/assets/fonts/Gilroy-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Gilroy-Regular';
+  src: url('../public/assets/fonts/Gilroy-Regular.ttf');
+}
+@font-face {
+  font-family: 'Gilroy-Medium';
+  src: url('../public/assets/fonts/Gilroy-Medium.ttf');
+}
+@font-face {
+  font-family: 'Gilroy-Bold';
+  src: url('../public/assets/fonts/Gilroy-Bold.ttf');
+}
+
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
+html, body {
+  padding: 0;
+  margin: 0;
+  background-color: black;
+  color: white;
+  font-family: 'Gilroy-Medium','Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+    
+}
+
+
+h1 {
+  font-family: 'Gilroy-Bold','Segoe UI', 'Roboto', 'Oxygen'
+}
+
+input, p {
+  font-family: 'Gilroy-Regular','Segoe UI', 'Roboto', 'Oxygen'
+}
+button  {
+  font-family: 'Gilroy-Medium','Segoe UI', 'Roboto', 'Oxygen'
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

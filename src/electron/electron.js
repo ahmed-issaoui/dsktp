@@ -65,14 +65,14 @@ const createWindow = () => {
 	};
 
 	win.setMenu(null)
-
+	
 };
 
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(createWindow);
+app.whenReady().then(createWindow)
 
 
 
@@ -144,6 +144,10 @@ ipcMain.on('open-forgot', (event, data) => {
 	shell.openExternal('https://job-app-f2665.web.app/enter/reset');
 });
 
+ipcMain.on('open-support', (event, data) => {
+	shell.openExternal('https://easyjob.atlassian.net/servicedesk/customer/portal/1');
+});
+
 ipcMain.on('open-upgrade', (event, data) => {
 	shell.openExternal('https://job-app-f2665.web.app/enter/signin');
 });
@@ -210,19 +214,14 @@ ipcMain.handle("get/puppeteer", async (event, data)=>{
   });
 
 
-//   app.whenReady().then(
 
-// 	ipcMain.on('read-file', (event) => {
-// 		// const fileContent = fs.readFileSync('./file-to-read.txt', { encoding: 'utf-8' })
-// 		event.sender.send('read-file-success', firebaseConfig)
-// 	})
+// const getConfig = () => {
+// 	ipcMain.handle('get/config', (event, data) => {
+// 	return firebaseConfig
+// })
+// }
 
-//   );
-
-
-
-
-
+// You add it to whenready
 
 
 

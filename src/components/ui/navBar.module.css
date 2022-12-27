@@ -4,6 +4,7 @@
   justify-content: space-between;
   flex-direction: row;
   padding: 0 2rem;
+  align-items: center;
 }
 
 .navIcons {
@@ -21,7 +22,7 @@
 
 .logoutButton {
   z-index: 3;
-  width: 7rem;
+  width: 8rem;
   height: 2.6rem;
   border-radius: 3rem;
   color: white;
@@ -35,6 +36,38 @@
 }
 
 
+
 .logoutButton:hover {
   opacity: 1
+}
+
+.linksContainer{
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+
+
+
+.accountLink {
+  width: 12rem;
+  height: 2.6rem;
+  border-radius: 3rem;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  cursor: pointer;
+  border: none;
+  background: none;
+  opacity: 0.5;
+  font-family: 'Gilroy-Light';
+}
+
+
+
+
+.accountLink:hover {
+  opacity: 1;
+  color:#785df5;
 }

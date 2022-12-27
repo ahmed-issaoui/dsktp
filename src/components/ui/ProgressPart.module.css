@@ -1,0 +1,26 @@
+.progressPart {
+  width: 5rem;
+  display: flex;
+}
+
+.totalBar {
+  background: #2b1143;
+  min-width: 10rem;
+  opacity: 0.4;
+  height: 1.4rem;
+  border-radius: 2rem;
+}
+.partialBar {
+  background: #785df5;
+  height: 1.4rem;
+  border-radius: 2rem;
+}
+
+.number {
+  font-size: 1.2rem;
+  padding: 0 1em;
+  font-family: 'Gilroy-Regular';
+  opacity: 0.7;
+  color: #cdcdcd;
+  margin: 0;
+}

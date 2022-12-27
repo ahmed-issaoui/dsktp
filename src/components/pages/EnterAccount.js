@@ -3,6 +3,7 @@ import styles from './EnterAccount.module.css';
 
 import { useEffect, useState } from "react";
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from '../../firebase/firebaseClient'
+
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import usePremiumStatus from '../../firebase/usePremiumStatus';
@@ -49,14 +50,6 @@ function EnterAccount() {
     }
   }
 
-  const handleRegister = () => {
-    window.api.registerAccount();
-  }
-
-  const handleForgotPassword = () => {
-    window.api.forgot();
-  }
-
   return ( 
       <div className={styles.section}>
           {loading &&         
@@ -97,9 +90,8 @@ function EnterAccount() {
                         <button className={styles.primaryButton}  onClick={submitHandlerLogin}>Confirm</button>  
 
                   </div>
-                  <div><p onClick={handleForgotPassword}>Forgot Password</p></div>
-                  <div><p onClick={handleRegister}>Create an Account</p></div>
-                  {/* {errorText && <div className={styles.errorText}>{errorText}</div>} */}
+
+                  {/* {errorText && <div className={styles.errorText}>{errorText}</div>}  */}
 
                   
                 </div>
