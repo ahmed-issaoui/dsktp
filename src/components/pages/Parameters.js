@@ -3,12 +3,17 @@ import styles from "./Parameters.module.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/firebaseClient";
 
-
+import { useEffect, useContext} from "react";
+import { CampaignContext } from "../../App";
 
 
 const Parameters = () => {
   const [user, loading] = useAuthState(auth);
   
+  const {setProgressCount} = useContext(CampaignContext)
+  useEffect(() => {
+    setProgressCount(0)
+  }, []);
 
   return (
     <div className={styles.section}>
@@ -27,7 +32,7 @@ const Parameters = () => {
         </form>
 
         <div className={styles.buttonPart}>
-            <Link to='/'>
+            <Link to='/ChooseJobBoard'>
               <button form="form1" type="button" className={styles.secondaryButton}>Home</button>
             </Link>
         </div>

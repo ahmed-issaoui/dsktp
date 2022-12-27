@@ -30,7 +30,7 @@ function EnterAccount() {
     if (user) {navigate("/ChooseJobBoard")};
     if (errorText) {alert(errorText)}
 
-  }, [user, loading, errorText, navigate]);
+  }, [user, loading, errorText]);
 
 
 
@@ -63,7 +63,7 @@ function EnterAccount() {
           {!loading && !user &&
           <>
             <div className={styles.imgContainer}>
-              <img src="../assets/images/enter-img.png"alt="section7-img"/>
+              <img draggable='false' src="../assets/images/enter-img.png"alt="section7-img"/>
             </div> 
             <div className={styles.textPart}>
                 <div className={styles.titlePart}>
@@ -75,7 +75,7 @@ function EnterAccount() {
                 <div className={styles.features}>
 
                 <div className={styles.featureElement} onClick={signInWithGoogle} >
-                  <img src="../assets/images/google-icon.png" alt="google-icon" className={styles.featureImg}/>
+                  <img draggable='false' src="../assets/images/google-icon.png" alt="google-icon" className={styles.featureImg}/>
                   <p >Continue with Google</p>
               </div>
 

@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
 import styles from "./Summary.module.css";
-import { useContext} from "react";
+import { useContext, useEffect} from "react";
 import { CampaignContext } from "../../App";
 
 const Summary = () => {
-  const {campaignDetails, setCampaignDetails} = useContext(CampaignContext)
+  const {campaignDetails, setProgressCount} = useContext(CampaignContext)
+  
+  useEffect(() => {
+    setProgressCount(98)
+  }, []);
 
   function handleLaunch() {
     window.api.pptr(campaignDetails)

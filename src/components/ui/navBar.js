@@ -40,8 +40,8 @@ function NavBar() {
     { !user && 
       <div className={styles.navContainer}>
           <div className={styles.navIcons}> 
-            <img src="../assets/images/icon-profile.png" alt="profile icon" className={styles.navIcon} />
-            <img src="../assets/images/icon-notifications.png" alt="notifications icon" className={styles.navIcon}/>
+            <img draggable='false' src="../assets/images/icon-profile.png" alt="profile icon" className={styles.navIcon} />
+            <img draggable='false' src="../assets/images/icon-notifications.png" alt="notifications icon" className={styles.navIcon}/>
           </div>
 
           <div className={styles.linksContainer}>
@@ -55,8 +55,8 @@ function NavBar() {
       <div className={styles.navContainer}>
         
           <div className={styles.navIcons}> 
-            <img src="../assets/images/icon-profile.png" alt="profile icon" className={styles.navIcon} onClick={()=> navigate("/Parameters")}/>
-            <img src="../assets/images/icon-notifications.png" alt="notifications icon" className={styles.navIcon}/>
+            <img draggable='false' src="../assets/images/icon-profile.png" alt="profile icon" className={styles.navIcon} onClick={()=> navigate("/Parameters")}/>
+            <img draggable='false' src="../assets/images/icon-notifications.png" alt="notifications icon" className={styles.navIcon}/>
           </div>
 
           <ProgressPart/>

@@ -5,8 +5,29 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+  }
+  
+
+ 
+  
+  .primaryButton {
+    width: 12rem;
+    height: 3rem;
+    border: 2px solid #785df5;
+    background-color: #785df5;
+    border-radius: 3rem;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 5px 4px 47px 14px rgb(145 71 241 / 13%);
+    cursor: pointer;
+  }
+
+  .primaryButton:hover {
+    background-color: #7053f1;
   }
   

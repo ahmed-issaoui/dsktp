@@ -1,11 +1,11 @@
 import styles from './UpgradeAccount.module.css'
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import { auth } from '../../firebase/firebaseClient'
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import usePremiumStatus from '../../firebase/usePremiumStatus';
 import LoaderSpinner from '../ui/loaderSpinner';
-
+import { CampaignContext } from "../../App";
 
 const UpgradeAccount = () => {
 
@@ -14,6 +14,13 @@ const UpgradeAccount = () => {
   const [premiumLoading, setPremiumLoading] = useState(true)
 
   let navigate = useNavigate();
+
+  const {setProgressCount} = useContext(CampaignContext)
+
+  useEffect(() => {
+    setProgressCount(0)
+  }, []);
+
 
 
   useEffect(() => {
@@ -24,11 +31,11 @@ const UpgradeAccount = () => {
 
     const premiumLoader = setTimeout(() => {
       setPremiumLoading(false)
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(premiumLoader);
 
-  }, [user, loading, navigate]);
+  }, [user, loading]);
 
 
   
@@ -46,7 +53,7 @@ const UpgradeAccount = () => {
     {!isUserPremium && !premiumLoading &&
       <div className={styles.section}>
             <h1>You need to upgrade your account</h1>
-            <div><p onClick={handleUpgrade}>Forgot Password</p></div>
+            <button className={styles.primaryButton} onClick={handleUpgrade}>Go to Website</button>
       </div>
     }
     </>

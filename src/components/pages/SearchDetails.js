@@ -1,15 +1,18 @@
 import { useNavigate, Link } from "react-router-dom";
 import { CampaignContext } from "../../App";
-import { useContext, useState} from "react";
+import { useContext, useState, useEffect} from "react";
 import styles from './SearchDetails.module.css'
 
 
 const SearchDetails = () => {
   let navigate = useNavigate();
-  const {campaignDetails, setCampaignDetails} = useContext(CampaignContext)
+  const {campaignDetails, setCampaignDetails, setProgressCount} = useContext(CampaignContext)
   
   const [isMissingInput, setIsMissingInput] = useState(false)
 
+  useEffect(() => {
+    setProgressCount(13)
+  }, []);
 
   const handleEnter = (e) => {
     if (e.key === "Enter") {

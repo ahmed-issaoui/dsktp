@@ -1,13 +1,17 @@
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./SpeedParams.module.css";
-import { useContext} from "react";
+import { useContext, useEffect} from "react";
 import { CampaignContext } from "../../App";
 
 
 const SpeedParams = () => {
   let navigate = useNavigate();
-  const {campaignDetails, setCampaignDetails} = useContext(CampaignContext)
 
+  const {campaignDetails, setCampaignDetails, setProgressCount} = useContext(CampaignContext)
+  
+  useEffect(() => {
+    setProgressCount(87)
+  }, []);
 
   const handleEnter = (e) => {
     if (e.key === "Enter") {

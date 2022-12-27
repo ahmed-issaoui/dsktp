@@ -6,9 +6,6 @@
   align-items: center;
   animation-name: fadeIn;
   animation-duration: 0.5s;
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
 }
 
 @keyframes fadeIn {
@@ -54,6 +51,10 @@
   cursor: pointer;
 }
 
+.featureElement:hover {
+  background: rgba(40, 24, 80, 0.15);
+}
+
 
 
 .featureImg {
@@ -85,6 +86,11 @@
 
 }
 
+.inputElement:hover {
+  background: rgba(40, 24, 80, 0.1);
+}
+
+
 
 .buttonPart {
   display: flex;
@@ -99,8 +105,12 @@
   color: white;
   font-size: 1.1rem;
   cursor: pointer;
-  box-shadow: 5px 4px 47px 14px rgb(145 71 241 / 13%);
+  box-shadow: 5px 4px 47px 14px rgba(145, 71, 241, 0.13);
   border: 2px solid #785df5;
   background-color: #785df5;
   cursor: pointer;
+}
+
+.buttonPart button:hover {
+  background-color: #7053f1;
 }

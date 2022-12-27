@@ -3,16 +3,19 @@
   display: flex;
 }
 
+
+
 .totalBar {
-  background: #2b1143;
+  background: #29224d;
   min-width: 10rem;
-  opacity: 0.4;
+  opacity: 0.5;
   height: 1.4rem;
   border-radius: 2rem;
 }
 .partialBar {
   background: #785df5;
   height: 1.4rem;
+  min-width: 1rem;
   border-radius: 2rem;
 }
 

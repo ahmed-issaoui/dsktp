@@ -1,13 +1,16 @@
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./PotentialQuestions.module.css";
 import { CampaignContext } from "../../App";
-import { useContext} from "react";
+import { useContext, useEffect} from "react";
 
 
 const PotentialQuestions = () => {
   let navigate = useNavigate();
-  const {campaignDetails, setCampaignDetails} = useContext(CampaignContext)
-
+  const {campaignDetails, setCampaignDetails, setProgressCount} = useContext(CampaignContext)
+  
+  useEffect(() => {
+    setProgressCount(72)
+  }, []);
 
   const handleEnter = (e) => {
     if (e.key === "Enter") {

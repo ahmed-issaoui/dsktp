@@ -44,14 +44,14 @@
 .linksContainer{
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 
 
 
 .accountLink {
-  width: 12rem;
+  width: 10rem;
   height: 2.6rem;
   border-radius: 3rem;
   color: white;

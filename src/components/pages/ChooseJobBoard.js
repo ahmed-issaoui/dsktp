@@ -11,7 +11,7 @@ import { CampaignContext } from "../../App";
 const ChooseJobBoard = () => {
   let navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
-  const {campaignDetails, setCampaignDetails} = useContext(CampaignContext)
+  const {campaignDetails, setCampaignDetails, setProgressCount} = useContext(CampaignContext)
 
   const initialCampaignState = {
     platform: '',
@@ -38,6 +38,7 @@ const ChooseJobBoard = () => {
   }
   useEffect(() => {
     setCampaignDetails(initialCampaignState)
+    setProgressCount(1)
   }, []);
 
   useEffect(() => {
@@ -54,6 +55,7 @@ const ChooseJobBoard = () => {
           <h1 >Start a new campaign</h1>
           <div className={styles.channels}>
             <img
+              draggable='false'
               src="../assets/images/img-glassdoor.png"
               alt="glassdoor"
               className={styles.glassdoor}
@@ -66,6 +68,7 @@ const ChooseJobBoard = () => {
               }}
             />
             <img
+              draggable='false'
               src="../assets/images/img-linkedin.png"
               alt="linkedin"
               className={styles.linkedin}
@@ -79,6 +82,7 @@ const ChooseJobBoard = () => {
 
             />
             <img
+              draggable='false'
               src="../assets/images/img-indeed.png"
               alt="indeed"
               className={styles.indeed}

@@ -24,7 +24,7 @@ export const CampaignContext = createContext(null)
 function App() {
 
   let navigate = useNavigate();
-
+  const [progressCount, setProgressCount] = useState(1)
   const [campaignDetails, setCampaignDetails] = useState({
     platform: '',
     speed: 1,
@@ -51,7 +51,7 @@ function App() {
 
 
   return (
-    <CampaignContext.Provider value={{campaignDetails, setCampaignDetails}}>
+    <CampaignContext.Provider value={{campaignDetails, setCampaignDetails, progressCount, setProgressCount}}>
         <div className={styles.main}>
           <div className={styles.primaryCircle}>
             <BackgroundCircle />
@@ -59,7 +59,7 @@ function App() {
 
           <div className={styles.content}>
 
-            <img src="../assets/images/logo-easyjob.svg" alt="logo easyjob" className={styles.imgLogo} onClick={()=> navigate("/")}/>
+            <img draggable='false' src="../assets/images/logo-easyjob.svg" alt="logo easyjob" className={styles.imgLogo} onClick={()=> navigate("/ChooseJobBoard")}/>
 
             <Routes>
               <Route path="/" element={<WelcomePage />} />
