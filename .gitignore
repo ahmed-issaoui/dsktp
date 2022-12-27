@@ -26,3 +26,4 @@ yarn-error.log*
 linkedinCookies.txt
 glassdoorCookies.txt
 indeedCookies.txt
+firebaseClient.js

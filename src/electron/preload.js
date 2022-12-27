@@ -8,18 +8,13 @@ const WINDOW_API = {
     
     speedParams: (speed) => ipcRenderer.send("get/speedParams", speed),
 
-    registerAccount: () => ipcRenderer.sendSync('open-register'),
-    forgot: () => ipcRenderer.sendSync('open-forgot'),
-    upgradeAccount: () => ipcRenderer.sendSync('open-upgrade'),
+    registerAccount: () => ipcRenderer.send('open-register'),
+    forgot: () => ipcRenderer.send('open-forgot'),
+    support: () => ipcRenderer.send('open-support'),
+    upgradeAccount: () => ipcRenderer.send('open-upgrade'),
 
-    readFile: () => {
-        ipcRenderer.send('read-file')
-        return new Promise((resolve) => ipcRenderer.once('read-file-success', (event, data) => resolve({ event, data }))
-        )
-    },
-
+    // getConfig: () => ipcRenderer.invoke('get/config'),
 }
 
-//window api
 
 contextBridge.exposeInMainWorld("api", WINDOW_API)
