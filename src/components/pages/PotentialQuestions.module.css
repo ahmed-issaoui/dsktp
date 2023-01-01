@@ -26,29 +26,44 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 1rem;
-  margin: 0 19vw;
+  margin: 0 10vw;
+}
+
+.textPart h1{
+  margin-top: 0;
 }
 
 .form1 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-.form1 input {
+.form1 textarea {
   font-size: 1.1rem;
+  font-family: 'Gilroy-Regular','Segoe UI', 'Roboto', 'Oxygen';
   color: white;
-  height: 3rem;
-  width: 13.8rem;
-  margin: 0.4rem 0;
-  border-radius: 10rem;
+  height: 2.8rem;
+  width: 16rem;
+  margin: 0.4rem 0.2rem;
+  border-radius: 1.2rem;
   border: 2px solid #785df5;
   box-shadow: 5px 4px 47px 14px rgba(145, 71, 241, 0.13);
   background: rgba(0, 0, 0, 0);
-  padding: 0 1.5rem;
+  padding: 0.8rem 1.5rem;
+  resize: none;
 }
+.form1 textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.form1 textarea {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 
 .buttonPart {
   display: flex;

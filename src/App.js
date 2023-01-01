@@ -59,7 +59,10 @@ function App() {
 
           <div className={styles.content}>
 
-            <img draggable='false' src="../assets/images/logo-easyjob.svg" alt="logo easyjob" className={styles.imgLogo} onClick={()=> navigate("/ChooseJobBoard")}/>
+            <img draggable='false' src="../assets/images/logo-easyjob.svg" 
+                alt="logo easyjob" className={styles.imgLogo} 
+                onClick={()=> navigate("/ChooseJobBoard")}
+            />
 
             <Routes>
               <Route path="/" element={<WelcomePage />} />

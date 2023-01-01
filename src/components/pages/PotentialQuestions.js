@@ -22,9 +22,9 @@ const PotentialQuestions = () => {
     <div className={styles.section}>
 
       <div className={styles.textPart}>
-        <h1>Possible Questions</h1>
+        <h1>Possible Questions in Platforms</h1>
         <form className={styles.form1}>
-          <input type="text" placeholder="Are you allowed to work in the country you're applying to?" 
+          <textarea type="text" placeholder="Are you allowed to work in the country you're applying to?" 
               value={campaignDetails.questions.allowedToWork} 
               onChange={(e) => setCampaignDetails({
                 ...campaignDetails, 
@@ -33,8 +33,8 @@ const PotentialQuestions = () => {
                   allowedToWork: e.target.value
                 }
               })} 
-              onKeyDown={(e)=>{handleEnter(e)}}/>
-          <input type="text" placeholder="Do you need visa sponsorship?" 
+              onKeyDown={(e)=>{handleEnter(e)}}></textarea>
+          <textarea type="text" placeholder="Do you need visa sponsorship?" 
               value={campaignDetails.questions.visaSponsorship} 
 
               onChange={(e) => setCampaignDetails({
@@ -45,9 +45,9 @@ const PotentialQuestions = () => {
                 }
               })}
 
-              onKeyDown={(e)=>{handleEnter(e)}} />
+              onKeyDown={(e)=>{handleEnter(e)}}></textarea>
 
-          <input type="text" placeholder="How many years do you have in the skill?" 
+          <textarea type="text" placeholder="How many years do you have in the skill?" 
               value={campaignDetails.questions.skills} 
 
               onChange={(e) => setCampaignDetails({
@@ -58,9 +58,9 @@ const PotentialQuestions = () => {
                 }
               })} 
           
-            onKeyDown={(e)=>{handleEnter(e)}} />
+            onKeyDown={(e)=>{handleEnter(e)}}></textarea>
 
-          <input type="text" placeholder="Are you an army veteran?" 
+          <textarea type="text" placeholder="Are you an army veteran?" 
               value={campaignDetails.questions.veteran} 
 
               onChange={(e) => setCampaignDetails({
@@ -70,9 +70,9 @@ const PotentialQuestions = () => {
                   veteran: e.target.value
                 }
               })} 
-            onKeyDown={(e)=>{handleEnter(e)}} />
+            onKeyDown={(e)=>{handleEnter(e)}}></textarea>
 
-          <input type="text" placeholder="Where are you located right now?" 
+          <textarea type="text" placeholder="Where are you located right now?" 
               value={campaignDetails.questions.currentLocation} 
 
               onChange={(e) => setCampaignDetails({
@@ -82,9 +82,9 @@ const PotentialQuestions = () => {
                   currentLocation: e.target.value
                 }
               })} 
-            onKeyDown={(e)=>{handleEnter(e)}} />
+            onKeyDown={(e)=>{handleEnter(e)}} ></textarea>
 
-          <input type="text" placeholder="Do you have a bachelor degree?" 
+          <textarea type="text" placeholder="Do you have a bachelor degree?" 
               value={campaignDetails.questions.degree} 
 
               onChange={(e) => setCampaignDetails({
@@ -95,7 +95,7 @@ const PotentialQuestions = () => {
                 }
               })}
 
-              onKeyDown={(e)=>{handleEnter(e)}} />
+              onKeyDown={(e)=>{handleEnter(e)}}></textarea>
         </form>
 
         <div className={styles.buttonPart}>
