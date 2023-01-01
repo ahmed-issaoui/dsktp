@@ -34,13 +34,12 @@ const SpeedParams = () => {
 
       <div className={styles.textPart}>
         <h1>Speed Parameters</h1>
-        {/* <h2>{isSelectOpen? 'Open' : 'Closed' } {campaignDetails.speed}</h2> */}
 
         <div className={styles.selectComponent}>
 
           <div className={styles.selectContainer}>
               <div className={styles.selectDisplay}>
-                <p>Speed: {(campaignDetails.speed === 1)? "Normal x1" : "Faster x1.5"}</p>
+                <p>{(campaignDetails.speed === 1)? "Normal Speed x1" : "Faster but Riskier x1.5"}</p>
               </div>
 
               <div className={styles.arrowContainer} onClick={()=> setIsSelectOpen(!isSelectOpen)}>
@@ -66,8 +65,8 @@ const SpeedParams = () => {
           </div>
       </div>
 
-      <div class="imgPart">
-        <img src="../assets/images/img-page3.png" alt="page2img" />
+      <div className={styles.imgPart}>
+        <img src="../assets/images/speed.png" alt="page2img" />
       </div>
     </div>
   );

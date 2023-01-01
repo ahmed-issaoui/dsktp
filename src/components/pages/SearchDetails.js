@@ -24,14 +24,14 @@ const SearchDetails = () => {
   
 
   const handleNext = () => {
-    if (!campaignDetails.jobTitle || !campaignDetails.location || !campaignDetails.remote) {
+    if (!campaignDetails.jobTitle || !campaignDetails.location) {
       setIsMissingInput(true);
 
       setTimeout(() => {
         setIsMissingInput(false);
       }, 1200);
     }
-    if (campaignDetails.jobTitle && campaignDetails.location && campaignDetails.remote) {
+    if (campaignDetails.jobTitle && campaignDetails.location) {
       navigate('/CandidacyDetails')
     }
   }

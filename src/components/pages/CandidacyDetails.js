@@ -1,6 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./CandidacyDetails.module.css";
-import { useContext, useState, useEffect} from "react";
+import { useContext, useState, useEffect, useRef} from "react";
 import { CampaignContext } from "../../App";
 
 const CandidacyDetails = () => {
@@ -12,7 +12,13 @@ const CandidacyDetails = () => {
 
   useEffect(() => {
     setProgressCount(42)
+    
   }, []);
+
+  useEffect(() => {
+    if (campaignDetails.resume.size > 5000000) {alert('Resume file size is too big')}
+    
+  }, [campaignDetails.resume]);
 
   const handleEnter = (e) => {
     if (e.key === "Enter") {
@@ -34,6 +40,19 @@ const CandidacyDetails = () => {
       navigate('/PotentialQuestions')
     }
   }
+
+  const hiddenInputCV = useRef(null);
+  const hiddenInputCover = useRef(null);
+
+  const handleClickCV = () => {
+    hiddenInputCV.current.click();
+
+  }
+  const handleClickCover = () => {
+    hiddenInputCover.current.click()
+
+  }
+
 
   const handleUploadCV = (e) => {
     
@@ -57,6 +76,7 @@ const CandidacyDetails = () => {
       setCampaignDetails({...campaignDetails, coverLetter: file})
     }
   }
+  
   
   return (
     <div className={styles.section}>
@@ -95,24 +115,37 @@ const CandidacyDetails = () => {
             <div className={styles.upload}>
                 <button 
                   className={(isMissingInput && !campaignDetails.resume) ? styles.missingUploadButton : styles.uploadButton} 
-                  type="button" >Upload CV </button>
+                  type="button"
+                  title= {campaignDetails.resume? campaignDetails.resume.name: ''}
+                  style={{backgroundColor: campaignDetails.resume? '#785df5' : 'rgba(0, 0, 0, 0)'}}
+                  onClick={handleClickCV}>
+                    {campaignDetails.resume? campaignDetails.resume.name : 'Upload CV'} 
+                </button>
+                  
                 <input 
                     type="file" 
                     className={styles.uploadInput} 
-                    onChange={(e) => handleUploadCV(e)}/>
+                    ref={hiddenInputCV}
+                    onChange={(e) => handleUploadCV(e)}
+                    />
             </div>
 
             <div className={styles.upload}>
-                <button className={styles.uploadButton} type="button" >Cover Letter </button>
+                <button 
+                    className={styles.uploadButton} 
+                    type="button" 
+                    onClick={handleClickCover}
+                    >Cover Letter </button>
                 <input 
                     className={styles.uploadInput} 
                     type="file" 
-                    onChange={(e) => handleUploadCoverLetter(e)}/>
+                    ref={hiddenInputCover}
+                    onChange={(e) => handleUploadCoverLetter(e)}
+
+                    />
             </div>
           </div>
 
-          <p>{campaignDetails.resume? campaignDetails.resume.name : 'No Resume'}</p>
-          <p>{campaignDetails.coverLetter? campaignDetails.coverLetter.name : 'No Cover Letter'}</p>
 
           <div className={styles.buttonPart}>
             <Link to='/SearchDetails'>
@@ -124,7 +157,7 @@ const CandidacyDetails = () => {
         </form>
       </div>
 
-      <div class="imgPart">
+      <div className={styles.imgPart}>
         <img src="../assets/images/img-page3.png" alt="page2img" />
       </div>
     </div>

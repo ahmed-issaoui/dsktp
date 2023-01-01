@@ -80,22 +80,21 @@
 
 
 .uploadButton {
-  position: absolute;
   width: 8rem;
   height: 3rem;
   border-radius: 3rem;
   color: white;
   font-size: 1.1rem;
   font-family: 'Gilroy-Regular';
-  cursor: pointer;
   box-shadow: 5px 4px 47px 14px rgb(145 71 241 / 13%);
   border: 2px solid #785df5;
   background: rgba(0, 0, 0, 0);
   cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .missingUploadButton {
-  position: absolute;
   width: 8rem;
   height: 3rem;
   border-radius: 3rem;
@@ -113,7 +112,7 @@
 }
 
 .uploadInput{
-  opacity: 0;
+  display: none;
   position: relative;
   font-size: 1.1rem;
   width: 8rem;

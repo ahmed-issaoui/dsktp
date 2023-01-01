@@ -29,11 +29,11 @@ const UpgradeAccount = () => {
     }
     if (!user && !loading) {navigate("/EnterAccount")};
 
-    const premiumLoader = setTimeout(() => {
+    const manageLoader = setTimeout(() => {
       setPremiumLoading(false)
     }, 1000);
 
-    return () => clearTimeout(premiumLoader);
+    return () => clearTimeout(manageLoader);
 
   }, [user, loading]);
 
@@ -43,13 +43,18 @@ const UpgradeAccount = () => {
     window.api.upgradeAccount();
   }
 
-
+  if (isUserPremium) {
+    navigate("/EnterAccount") 
+  }
+  if (premiumLoading) {
+    return (
+      <>
+        <LoaderSpinner/>
+      </>
+    )
+  };
   return (
     <>
-    {premiumLoading && <LoaderSpinner/>}
-
-    {isUserPremium && navigate("/EnterAccount")}
-
     {!isUserPremium && !premiumLoading &&
       <div className={styles.section}>
             <h1>You need to upgrade your account</h1>
