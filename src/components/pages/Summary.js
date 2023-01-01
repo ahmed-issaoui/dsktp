@@ -20,45 +20,63 @@ const Summary = () => {
       <div className={styles.textPart}>
         <h1>Campaign Summary</h1>
         <div className={styles.summaryDetails}>
-          <div>
-            <h3>Platform:</h3>
-            <p>{campaignDetails.platform}</p>
+          <div className={styles.column}>
+              <div className={styles.detailsContainerSmall}>
+                <div className={styles.element}>
+                  <h3>Platform</h3>
+                  <p>{campaignDetails.platform}</p>
+                </div>
+                <div className={styles.element}>
+                  <h3>Speed</h3>
+                  <p>{campaignDetails.speed}</p>
+                </div>
+              </div>
+
+              <div className={styles.detailsContainerBig}>
+                <div className={styles.element}>
+                  <h3>Job Title</h3>
+                  <p>{campaignDetails.jobTitle}</p>
+                </div>
+                <div className={styles.element}>
+                  <h3>Location</h3>
+                  <p>{campaignDetails.location}</p>
+                </div>
+                <div className={styles.element}>
+                  <h3>Remote</h3>
+                  <p>{campaignDetails.remote? 'Yes' : 'No'}</p>
+                </div>
+              </div>
           </div>
-          <div>
-            <h3>Speed:</h3>
-            <p>x{campaignDetails.speed}</p>
-          </div>
-          <div>
-            <h3>Job Title:</h3>
-            <p>{campaignDetails.jobTitle}</p>
-          </div>
-          <div>
-            <h3>Location:</h3>
-            <p>{campaignDetails.location}</p>
-          </div>
-          <div>
-            <h3>Remote:</h3>
-            <p>{campaignDetails.remote}</p>
-          </div>
-          <div>
-            <h3>Name:</h3>
-            <p>{campaignDetails.name}</p>
-          </div>
-          <div>
-            <h3>Phone:</h3>
-            <p>{campaignDetails.phone}</p>
-          </div>
-          <div>
-            <h3>Email:</h3>
-            <p>{campaignDetails.email}</p>
+          <div className={styles.column}>
+
+              <div className={styles.detailsContainerBig}>
+                <div className={styles.element}>
+                  <h3>Name</h3>
+                  <p>{campaignDetails.name}</p>
+                </div>
+                <div className={styles.element}>
+                  <h3>Phone</h3>
+                  <p>{campaignDetails.phone}</p>
+                </div>
+                <div className={styles.element}>
+                  <h3>Email</h3>
+                  <p>{campaignDetails.email}</p>
+                </div>
+              </div>
+
+              <div className={styles.detailsContainerSmall}>
+                <div className={styles.element}>
+                  <h3>Resume</h3>
+                  <p>{campaignDetails.resume? campaignDetails.resume.name : 'No' }</p>
+                </div>
+                <div className={styles.element}>
+                  <h3>Cover Letter</h3>
+                  <p>{campaignDetails.coverLetter? campaignDetails.coverLetter.name : 'No' }</p>
+                </div>
+              </div>
           </div>
 
-          <p>Question: {campaignDetails.questions.allowedToWork}</p>
-          <p>Question: {campaignDetails.questions.visaSponsorship}</p>
-          <p>Question: {campaignDetails.questions.skills}</p>
-          <p>Question: {campaignDetails.questions.veteran}</p>
-          <p>Question: {campaignDetails.questions.currentLocation}</p>
-          <p>Question: {campaignDetails.questions.currentLocation}</p>
+
         </div>
 
         <div className={styles.buttonPart}>

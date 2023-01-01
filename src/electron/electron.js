@@ -5,6 +5,8 @@ const isDev = require("electron-is-dev");
 
 const path = require("path");
 const fs = require("fs");
+const fsPromises = require("fs/promises");
+
 const shell = require('electron').shell;
 
 
@@ -24,10 +26,10 @@ const createWindow = () => {
 	// Create the browser window.
 	const win = new BrowserWindow({
 		width: 900,
-		height: 600,
+		height: 620,
 		maxWidth: 1000,
 		minWidth: 800,
-		minHeight: 500,
+		minHeight: 550,
 		maxHeight: 700,
 		maximizable: false,
 		icon: (path.join(__dirname, '../../public/assets/images/icon-easyjob.ico')),
@@ -159,6 +161,17 @@ ipcMain.on('open-upgrade', (event, data) => {
 
 ipcMain.handle("get/puppeteer", async (event, data)=>{
 	const campaignDetails = data;
+
+	// console.log(data.resume.name)
+	// // const resumePath = path.join(__dirname, `resumeee.pdf`)
+	
+	// // try {
+	// // 	let newFile = new File(campaignDetails.resume, 'resume.pdf')
+	// // 	fs.writeFile(resumePath, newFile);
+	// // } catch (error) {console.error(error)}
+
+
+
 	if (campaignDetails.platform == "linkedin") {
 			const linkedinCookiesPath = path.join(__dirname, './pptr/linkedin/linkedinCookies.txt')
 			if (fs.existsSync(linkedinCookiesPath)) {

@@ -1,6 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./SpeedParams.module.css";
-import { useContext, useEffect} from "react";
+import { useContext, useEffect, useState} from "react";
 import { CampaignContext } from "../../App";
 
 
@@ -8,7 +8,8 @@ const SpeedParams = () => {
   let navigate = useNavigate();
 
   const {campaignDetails, setCampaignDetails, setProgressCount} = useContext(CampaignContext)
-  
+  const [isSelectOpen, setIsSelectOpen] = useState(false)
+
   useEffect(() => {
     setProgressCount(87)
   }, []);
@@ -20,29 +21,41 @@ const SpeedParams = () => {
     }
   }
 
-  const handleInputChange = (e) => {
-    setCampaignDetails({...campaignDetails, speed: e.target.value})
-    var speeds = e.target.value;
-    window.api.speedParams(speeds);
-  }
+  // const handleInputChange = (e) => {
+  //   setCampaignDetails({...campaignDetails, speed: e.target.value})
+  //   var speeds = e.target.value;
+  //   window.api.speedParams(speeds);
+  // }
 
   
 
   return (
-    <div className={styles.section}>
+    <div className={styles.section} onClick={()=> {if(isSelectOpen){setIsSelectOpen(false)}}}>
 
       <div className={styles.textPart}>
         <h1>Speed Parameters</h1>
+        {/* <h2>{isSelectOpen? 'Open' : 'Closed' } {campaignDetails.speed}</h2> */}
 
-        <form className={styles.form1}>
-          <input type="text" placeholder="Speed" value={campaignDetails.speed}  onChange={(e)=> {handleInputChange(e)}} onKeyDown={(e)=>{handleEnter(e)}}/>
+        <div className={styles.selectComponent}>
+
+          <div className={styles.selectContainer}>
+              <div className={styles.selectDisplay}>
+                <p>Speed: {(campaignDetails.speed === 1)? "Normal x1" : "Faster x1.5"}</p>
+              </div>
+
+              <div className={styles.arrowContainer} onClick={()=> setIsSelectOpen(!isSelectOpen)}>
+                  <img src="../assets/images/arrow.png" style={{transform: isSelectOpen ? 'rotate(180deg)' : '' }} alt="arrow"/>
+              </div>
+          </div>
+          <div className={styles.optionsContainer} style={{display: isSelectOpen ? '' : 'none' }}>
+            <div className={styles.option} onClick={()=> setCampaignDetails({...campaignDetails, speed: 1})}> Normal x1 </div>
+            <div className={styles.option}onClick={()=> setCampaignDetails({...campaignDetails, speed: 1.5})}> Faster x1.5 </div>
+          </div>
          
-          {/* <select className={styles.selectSpeed}>
-            <option selected>Normal Speed x1</option>
-            <option>Faster but Riskier x1.25</option>
-          </select> */}
-          
-          <div className={styles.buttonPart}>
+
+        </div>
+        
+        <div className={styles.buttonPart}>
             <Link to='/PotentialQuestions'>
               <button form="form1" type="button" className={styles.secondaryButton}>Back </button>
             </Link>
@@ -51,7 +64,6 @@ const SpeedParams = () => {
               <button form="form1" type="button" className={styles.primaryButton}>Next</button>
             </Link>
           </div>
-        </form>
       </div>
 
       <div class="imgPart">

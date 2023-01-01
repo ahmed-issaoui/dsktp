@@ -27,27 +27,74 @@
   flex-direction: column;
   align-items: center;
   row-gap: 1rem;
-  margin: 0 19vw;
+  margin: 0 10vw;
+}
+.textPart h1{
+margin-bottom: 1rem;
 }
 
 .summaryDetails {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-.form1 input {
-  font-size: 1.1rem;
+.column {
+  height: 12rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; 
+}
+
+.detailsContainerSmall {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
   color: white;
-  height: 3rem;
-  width: 13.8rem;
-  margin: 0.4rem 0;
-  border-radius: 10rem;
+  width: 16rem;
+  height: auto;
+  margin: 0rem 0;
+  border-radius: 1.5rem;
   border: 2px solid #785df5;
   box-shadow: 5px 4px 47px 14px rgba(145, 71, 241, 0.13);
   background: rgba(0, 0, 0, 0);
-  padding: 0 1.5rem;
+  padding: 1rem 1rem;
+}
+
+
+.detailsContainerBig {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: white;
+  width: 16rem;
+  height: auto;
+  margin: 0rem 0;
+  border-radius: 1.5rem;
+  border: 2px solid #785df5;
+  box-shadow: 5px 4px 47px 14px rgba(145, 71, 241, 0.13);
+  background: rgba(0, 0, 0, 0);
+  padding: 1rem 1rem;
+}
+
+.element {
+  display: flex;
+  align-items: baseline;
+  margin: 0.3rem 0;
+}
+
+
+.element h3{
+  font-size: 1rem;
+  display: inline-block;
+  width: 6rem;
+  margin: 0;
+}
+.element p{
+  margin: 0;
+  overflow: hidden;
 }
 
 .buttonPart {

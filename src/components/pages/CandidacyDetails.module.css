@@ -66,6 +66,72 @@
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
+.uploadPart {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 0.4rem 0;
+
+}
+
+.upload {
+  width: 8rem;
+}
+
+
+.uploadButton {
+  position: absolute;
+  width: 8rem;
+  height: 3rem;
+  border-radius: 3rem;
+  color: white;
+  font-size: 1.1rem;
+  font-family: 'Gilroy-Regular';
+  cursor: pointer;
+  box-shadow: 5px 4px 47px 14px rgb(145 71 241 / 13%);
+  border: 2px solid #785df5;
+  background: rgba(0, 0, 0, 0);
+  cursor: pointer;
+}
+
+.missingUploadButton {
+  position: absolute;
+  width: 8rem;
+  height: 3rem;
+  border-radius: 3rem;
+  color: white;
+  font-size: 1.1rem;
+  font-family: 'Gilroy-Regular';
+  cursor: pointer;
+  box-shadow: 5px 4px 47px 14px rgb(145 71 241 / 13%);
+  border: 2px solid #785df5;
+  background: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  animation: shake 0.5s;
+  animation-iteration-count: 1;
+  border-color: coral !important
+}
+
+.uploadInput{
+  opacity: 0;
+  position: relative;
+  font-size: 1.1rem;
+  width: 8rem;
+  color: white;
+  height: 3rem !important; 
+  margin: 0 !important;
+  border-radius: 0rem;
+  border: 2px solid #785df5;
+  box-shadow: none !important;
+  background: rgba(0, 0, 0, 0);
+  padding: 0 !important;
+  cursor: pointer;
+}  
+
+.uploadInput input{
+  cursor: pointer;
+}  
+
 .buttonPart {
   display: flex;
   width: 17rem;

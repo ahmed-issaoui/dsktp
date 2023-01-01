@@ -9,6 +9,7 @@ const SearchDetails = () => {
   const {campaignDetails, setCampaignDetails, setProgressCount} = useContext(CampaignContext)
   
   const [isMissingInput, setIsMissingInput] = useState(false)
+  const [isSelectOpen, setIsSelectOpen] = useState(false)
 
   useEffect(() => {
     setProgressCount(13)
@@ -36,7 +37,7 @@ const SearchDetails = () => {
   }
 
   return (
-    <div className={styles.section}>
+    <div className={styles.section}  onClick={()=> {if(isSelectOpen){setIsSelectOpen(false)}}}>
 
       <div className={styles.imgPart}>
         <img src="./assets/images/img-page2.png" alt="page2img" />
@@ -60,14 +61,39 @@ const SearchDetails = () => {
               onKeyDown={(e)=>{handleEnter(e)}} 
               className={(isMissingInput && !campaignDetails.location) ? styles.missingInput : null} 
           />
+          <div className={styles.selectComponent}>
 
+              <div className={styles.selectContainer} onClick={()=> setIsSelectOpen(!isSelectOpen)}>
+                  <div className={styles.selectDisplay}>
+                    <p style={{opacity: (campaignDetails.jobTitle || campaignDetails.location)? '1' : '0.5'}}>Remote: {(campaignDetails.remote === true)? "Yes" : "No"}</p>
+                  </div>
+                  <div className={styles.arrowContainer}>
+                      <img src="../assets/images/arrow.png" style={{transform: isSelectOpen ? 'rotate(180deg)' : '' }} alt='arrow'/>
+                  </div>
+              </div>
+              
+              <div className={styles.optionsContainer} style={{display: isSelectOpen ? '' : 'none' }}>
+                <div className={styles.option} onClick={()=> setCampaignDetails({...campaignDetails, remote: true})}>Yes</div>
+                <div className={styles.option} onClick={()=> setCampaignDetails({...campaignDetails, remote: false})}>No </div>
+              </div>
+         
+          </div>
+
+          {/* <div>
+               <p style={{display: "inline-block", marginRight: "3rem"}}>Remote</p>
+              <label for="yes">Yes</label>
+              <input type="radio" id="yes" name="answer" value="yes" checked/>
+              <label for="no">No</label>
+              <input type="radio" id="no" name="answer" value="no"/> 
+          </div> */}
+{/* 
           <input 
               type="text" placeholder="Remote" 
               value={campaignDetails.remote} 
               onChange={(e) => setCampaignDetails({...campaignDetails, remote: e.target.value})} 
               onKeyDown={(e)=>{handleEnter(e)}} 
               className={(isMissingInput && !campaignDetails.remote) ? styles.missingInput : null} 
-          />
+          /> */}
           <div className={styles.buttonPart} >
             <Link to='/ChooseJobBoard'>
               <button form="form1" type="button" className={styles.secondaryButton}>Back </button>

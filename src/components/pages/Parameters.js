@@ -20,22 +20,41 @@ const Parameters = () => {
 
       <div className={styles.textPart}>
         <h1>Account</h1>
-        <form className={styles.form1}>
-          <h3>Account Email</h3>
-          <p>{user.email}</p>
-          <button>Manage Subscription </button>
-          <h3>Customer Support Email</h3>
-          <p> support@easyjob.atlassian.net </p>
-          <h3>Customer Support Portal</h3>
-          <p>https://easyjob.atlassian.net/servicedesk/customer/portal/1</p>
-          <button>Visit</button>
-        </form>
+        <div className={styles.elementsContainer}>
 
-        <div className={styles.buttonPart}>
-            <Link to='/ChooseJobBoard'>
-              <button form="form1" type="button" className={styles.secondaryButton}>Home</button>
-            </Link>
+            <div className={styles.element}>
+              <h3>Account Email</h3>
+              <div className={styles.elementData}> 
+                <p>{user.email}</p>
+              </div>
+            </div>
+
+            <div className={styles.element}>
+              <h3>Subscription</h3>
+              <div className={styles.elementDataLink}> 
+                <p>Manage on Customer Portal</p>
+              </div>
+            </div>
+
+            <div className={styles.element}>
+              <h3>Support Email</h3>
+              <div className={styles.elementData}>
+                <p>support@easyjob.atlassian.net</p>
+              </div>
+            </div>
+
+            <div className={styles.element}>
+              <h3>Support Portal</h3>
+              <div className={styles.elementDataLink}>
+                <p>https://easyjob.atlassian.net/servicedesk/customer/portal/1</p>
+              </div>
+            </div>
+
         </div>
+
+        <Link to='/ChooseJobBoard'>
+          <button form="form1" type="button" className={styles.primaryButton}>Back</button>
+        </Link>
 
       </div>
       

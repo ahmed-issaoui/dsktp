@@ -31,7 +31,7 @@ const UpgradeAccount = () => {
 
     const premiumLoader = setTimeout(() => {
       setPremiumLoading(false)
-    }, 500);
+    }, 1000);
 
     return () => clearTimeout(premiumLoader);
 

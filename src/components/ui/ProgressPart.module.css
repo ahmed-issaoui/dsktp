@@ -1,6 +1,7 @@
 .progressPart {
   width: 5rem;
   display: flex;
+  align-items: center;
 }
 
 
@@ -9,12 +10,14 @@
   background: #29224d;
   min-width: 10rem;
   opacity: 0.5;
-  height: 1.4rem;
+  height: 1.3rem;
   border-radius: 2rem;
 }
 .partialBar {
-  background: #785df5;
-  height: 1.4rem;
+  /* background: #785df5; */
+  background-image: linear-gradient(to right, #795df522 ,#785df5);
+
+  height: 1.3rem;
   min-width: 1rem;
   border-radius: 2rem;
 }

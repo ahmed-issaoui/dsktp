@@ -34,6 +34,29 @@ const CandidacyDetails = () => {
       navigate('/PotentialQuestions')
     }
   }
+
+  const handleUploadCV = (e) => {
+    
+    let file = e.target.files[0];
+    
+    if (file) {
+      setCampaignDetails({...campaignDetails, resume: file}) ;
+    }
+    if (!file) {
+      setCampaignDetails({...campaignDetails, resume: file})
+    }
+  }
+  const handleUploadCoverLetter = (e) => {
+    
+    let file = e.target.files[0];
+    
+    if (file) {
+      setCampaignDetails({...campaignDetails, coverLetter: file}) ;
+    }
+    if (!file) {
+      setCampaignDetails({...campaignDetails, coverLetter: file})
+    }
+  }
   
   return (
     <div className={styles.section}>
@@ -66,7 +89,30 @@ const CandidacyDetails = () => {
               className={(isMissingInput && !campaignDetails.email) ? styles.missingInput : null} 
 
           />
-          <input type="file" placeholder="Add Resume" onKeyDown={(e)=>{handleEnter(e)}}/>
+
+          
+          <div className={styles.uploadPart}>
+            <div className={styles.upload}>
+                <button 
+                  className={(isMissingInput && !campaignDetails.resume) ? styles.missingUploadButton : styles.uploadButton} 
+                  type="button" >Upload CV </button>
+                <input 
+                    type="file" 
+                    className={styles.uploadInput} 
+                    onChange={(e) => handleUploadCV(e)}/>
+            </div>
+
+            <div className={styles.upload}>
+                <button className={styles.uploadButton} type="button" >Cover Letter </button>
+                <input 
+                    className={styles.uploadInput} 
+                    type="file" 
+                    onChange={(e) => handleUploadCoverLetter(e)}/>
+            </div>
+          </div>
+
+          <p>{campaignDetails.resume? campaignDetails.resume.name : 'No Resume'}</p>
+          <p>{campaignDetails.coverLetter? campaignDetails.coverLetter.name : 'No Cover Letter'}</p>
 
           <div className={styles.buttonPart}>
             <Link to='/SearchDetails'>

@@ -24,7 +24,7 @@ const PotentialQuestions = () => {
       <div className={styles.textPart}>
         <h1>Possible Questions</h1>
         <form className={styles.form1}>
-          <input type="text" placeholder="Are you allowed to work in this country?" 
+          <input type="text" placeholder="Are you allowed to work in the country you're applying to?" 
               value={campaignDetails.questions.allowedToWork} 
               onChange={(e) => setCampaignDetails({
                 ...campaignDetails, 

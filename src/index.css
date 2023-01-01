@@ -41,7 +41,8 @@ html, body {
 
 
 h1 {
-  font-family: 'Gilroy-Bold','Segoe UI', 'Roboto', 'Oxygen'
+  font-family: 'Gilroy-Bold','Segoe UI', 'Roboto', 'Oxygen';
+  margin-top: 0;
 }
 
 input, p {
@@ -53,6 +54,5 @@ button  {
 
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

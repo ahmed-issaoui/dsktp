@@ -34,7 +34,7 @@ function App() {
     name: '',
     phone: '',
     email: '',
-    resume: '',
+    resume: {},
     coverLetter: '',
     questions: {
       allowedToWork: '',
