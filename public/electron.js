@@ -44,7 +44,6 @@ const createWindow = () => {
  		},
 		webPreferences: {
 			preload: path.join(__dirname, 'preload.js'),
-			// devTools: true,
 		},
 		
 	});
@@ -61,8 +60,6 @@ const createWindow = () => {
 
 	// Open the DevTools.
 	if (isDev) {
-		require('react-devtools-electron');
-		win.webContents.openDevTools();
 		console.log('Is dev true')
 	};
 
