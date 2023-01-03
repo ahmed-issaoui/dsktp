@@ -73,6 +73,9 @@
 .arrowContainer img {
   width: 1.2rem;
   height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .optionsContainer {
@@ -88,6 +91,8 @@
   background: rgb(16, 11, 28);
   padding: 0.3rem 0;
   width: 17rem;
+  z-index: 1;
+
 }
 
 .option {
@@ -114,15 +119,18 @@
 
 .buttonPart {
   display: flex;
-  width: 17rem;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 1rem;
   margin-top: 1.5rem;
 }
 
 
 
-
-.buttonPart button {
+.primaryButton {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  align-items: center;
   width: 8rem;
   height: 3rem;
   border-radius: 3rem;
@@ -131,15 +139,59 @@
   cursor: pointer;
   box-shadow: 5px 4px 47px 14px rgb(145 71 241 / 13%);
   cursor: pointer;
-}
-
-.primaryButton {
   border: 2px solid #785df5;
   background-color: #785df5;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
+
+.primaryButton img{
+  width: 1rem;
+  height: auto;
+  transform: rotate(-90deg);
+  z-index: 0;
+
+}
+
+.primaryButton p{
+  margin: 0;
+  padding:0;  
+  margin-left: 0.5rem;
+  font-family: 'Gilroy-Medium';
+}
+
 
 .secondaryButton {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  align-items: center;
+  width: 8rem;
+  height: 3rem;
+  border-radius: 3rem;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 5px 4px 47px 14px rgb(145 71 241 / 13%);
+  cursor: pointer;
   border: 2px solid #785df5;
   background: rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 
+.secondaryButton img{
+  width: 1rem;
+  height: auto;
+  transform: rotate(90deg);
+  z-index: 0;
+}
+
+.secondaryButton p{
+  margin: 0;
+  padding:0;  
+  margin-right: 0.5rem;
+  font-family: 'Gilroy-Medium';
+}

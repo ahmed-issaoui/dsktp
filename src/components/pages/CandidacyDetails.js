@@ -16,7 +16,7 @@ const CandidacyDetails = () => {
   }, []);
 
   useEffect(() => {
-    if (campaignDetails.resume.size > 5000000) {alert('Resume file size is too big')}
+    if (campaignDetails.resume.size > 2000000) {alert('Resume file size is too big. It might get rejected by the job board')}
     
   }, [campaignDetails.resume]);
 
@@ -59,12 +59,17 @@ const CandidacyDetails = () => {
     let file = e.target.files[0];
     
     if (file) {
-      setCampaignDetails({...campaignDetails, resume: file}) ;
-    }
-    if (!file) {
-      setCampaignDetails({...campaignDetails, resume: file})
+      setCampaignDetails({
+        ...campaignDetails, 
+        resume: {
+          name: file.name,
+          size: file.size,
+          path: file.path
+        } 
+      }) ;
     }
   }
+
   const handleUploadCoverLetter = (e) => {
     
     let file = e.target.files[0];
@@ -116,10 +121,10 @@ const CandidacyDetails = () => {
                 <button 
                   className={(isMissingInput && !campaignDetails.resume) ? styles.missingUploadButton : styles.uploadButton} 
                   type="button"
-                  title= {campaignDetails.resume? campaignDetails.resume.name: ''}
-                  style={{backgroundColor: campaignDetails.resume? '#785df5' : 'rgba(0, 0, 0, 0)'}}
+                  title= {campaignDetails.resume.name? campaignDetails.resume.name: ''}
+                  style={{backgroundColor: campaignDetails.resume.name? '#785df5' : 'rgba(0, 0, 0, 0)'}}
                   onClick={handleClickCV}>
-                    {campaignDetails.resume? campaignDetails.resume.name : 'Upload CV'} 
+                    {campaignDetails.resume.name? campaignDetails.resume.name : 'Upload CV'} 
                 </button>
                   
                 <input 
@@ -147,14 +152,20 @@ const CandidacyDetails = () => {
           </div>
 
 
-          <div className={styles.buttonPart}>
-            <Link to='/SearchDetails'>
-              <button form="form1" type="button" className={styles.secondaryButton}>Back </button>
-            </Link>
-
-            <button form="form1" type="button" className={styles.primaryButton} onClick={handleNext}>Next</button>
-          </div>
         </form>
+        
+        <div className={styles.buttonPart}>
+            <div className={styles.secondaryButton} onClick={()=> navigate('/SearchDetails')}>
+              <img src="../assets/images/arrow.png" alt="back" />
+              <p>Back</p>
+            </div>
+
+            <div className={styles.primaryButton} onClick={handleNext}>
+              <p>Next</p>
+              <img src="../assets/images/arrow.png" alt="back" />
+            </div>
+        </div>
+        
       </div>
 
       <div className={styles.imgPart}>

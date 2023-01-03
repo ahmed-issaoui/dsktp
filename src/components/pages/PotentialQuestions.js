@@ -15,9 +15,15 @@ const PotentialQuestions = () => {
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      navigate('/SpeedParams')
+      handleNext()
     }
   }
+  
+
+  const handleNext = () => {
+      navigate('/SpeedParams')
+  }
+
   return (
     <div className={styles.section}>
 
@@ -99,14 +105,18 @@ const PotentialQuestions = () => {
         </form>
 
         <div className={styles.buttonPart}>
-            <Link to='/CandidacyDetails'>
-              <button form="form1" type="button" className={styles.secondaryButton}>Back </button>
-            </Link>
+            <div className={styles.secondaryButton} onClick={()=> navigate('/CandidacyDetails')}>
+              <img src="../assets/images/arrow.png" alt="back" />
+              <p>Back</p>
+            </div>
 
-            <Link to='/SpeedParams'>
-              <button form="form1" type="button" className={styles.primaryButton}>Next</button>
-            </Link>
+            <div className={styles.primaryButton} onClick={handleNext}>
+              <p>Next</p>
+              <img src="../assets/images/arrow.png" alt="back" />
+            </div>
         </div>
+
+        
 
       </div>
       

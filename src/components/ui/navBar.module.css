@@ -1,4 +1,8 @@
 
+.preloader{
+  display: none;
+}
+
 .navContainer {
   display: flex;
   justify-content: space-between;
@@ -21,8 +25,12 @@
 }
 
 .logoutButton {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  align-items: center;
   z-index: 3;
-  width: 8rem;
+  width: 8.5rem;
   height: 2.6rem;
   border-radius: 3rem;
   color: white;
@@ -32,8 +40,25 @@
   cursor: pointer;
   border: 2px solid #785df5;
   background: rgba(0, 0, 0, 0);
-  opacity: 0.5
+  opacity: 0.5;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
+
+
+.logoutButton img{
+  width: 1.4rem;
+  height: auto;
+}
+
+.logoutButton p{
+  margin: 0;
+  padding:0;  
+  margin-right: 0.5rem;
+  font-family: 'Gilroy-Medium';
+}
+
 
 
 
@@ -41,13 +66,14 @@
   opacity: 1
 }
 
+
+
+
 .linksContainer{
   display: flex;
   justify-content: space-between;
   gap: 2rem;
 }
-
-
 
 
 .accountLink {

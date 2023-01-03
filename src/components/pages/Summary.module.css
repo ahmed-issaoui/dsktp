@@ -99,13 +99,19 @@ margin-bottom: 1rem;
 
 .buttonPart {
   display: flex;
-  width: 17rem;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 1rem;
   margin-top: 1.5rem;
 }
 
-.buttonPart button {
-  width: 8rem;
+
+
+.primaryButton {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  align-items: center;
+  width: 8.5rem;
   height: 3rem;
   border-radius: 3rem;
   color: white;
@@ -113,14 +119,52 @@ margin-bottom: 1rem;
   cursor: pointer;
   box-shadow: 5px 4px 47px 14px rgb(145 71 241 / 13%);
   cursor: pointer;
-}
-
-.primaryButton {
   border: 2px solid #785df5;
   background-color: #785df5;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.primaryButton img{
+  width: 1.8rem;
+  height: auto;
+
+}
+.primaryButton p{
+  margin: 0;
+  padding:0;  
+  font-family: 'Gilroy-Medium';
 }
 
 .secondaryButton {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  align-items: center;
+  width: 8.5rem;
+  height: 3rem;
+  border-radius: 3rem;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 5px 4px 47px 14px rgb(145 71 241 / 13%);
+  cursor: pointer;
   border: 2px solid #785df5;
   background: rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.secondaryButton img{
+  width: 1rem;
+  height: auto;
+  transform: rotate(90deg);
+}
+
+.secondaryButton p{
+  margin: 0;
+  padding:0;  
+  margin-right: 0.5rem;
+  font-family: 'Gilroy-Medium';
 }

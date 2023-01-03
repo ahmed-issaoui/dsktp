@@ -43,24 +43,7 @@
   animation-delay: 2s;
   z-index: 0;
 }
-/* 
-@keyframes circleChange1 {
-  from {
-    left: -5vw;
-  }
-  to {
-    left: 95vw;
-  }
-}
 
-@keyframes circleChange2 {
-  from {
-    right: -5vw;
-  }
-  to {
-    right: 95vw;
-  }
-} */
 
 
 .content {
@@ -76,6 +59,7 @@
   cursor: pointer;
 
 }
+
 
 .navBar {
   position: fixed;

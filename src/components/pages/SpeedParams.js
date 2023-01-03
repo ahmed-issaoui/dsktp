@@ -14,20 +14,10 @@ const SpeedParams = () => {
     setProgressCount(87)
   }, []);
 
-  const handleEnter = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
+  const handleEnter = () => {
       navigate('/Summary')
-    }
   }
 
-  // const handleInputChange = (e) => {
-  //   setCampaignDetails({...campaignDetails, speed: e.target.value})
-  //   var speeds = e.target.value;
-  //   window.api.speedParams(speeds);
-  // }
-
-  
 
   return (
     <div className={styles.section} onClick={()=> {if(isSelectOpen){setIsSelectOpen(false)}}}>
@@ -36,16 +26,16 @@ const SpeedParams = () => {
         <h1>Speed Parameters</h1>
 
         <div className={styles.selectComponent}>
-
-          <div className={styles.selectContainer}>
+          
+          <div className={styles.selectContainer} onClick={()=> setIsSelectOpen(!isSelectOpen)}>
               <div className={styles.selectDisplay}>
                 <p>{(campaignDetails.speed === 1)? "Normal Speed x1" : "Faster but Riskier x1.5"}</p>
               </div>
-
-              <div className={styles.arrowContainer} onClick={()=> setIsSelectOpen(!isSelectOpen)}>
+              <div className={styles.arrowContainer} >
                   <img src="../assets/images/arrow.png" style={{transform: isSelectOpen ? 'rotate(180deg)' : '' }} alt="arrow"/>
               </div>
           </div>
+
           <div className={styles.optionsContainer} style={{display: isSelectOpen ? '' : 'none' }}>
             <div className={styles.option} onClick={()=> setCampaignDetails({...campaignDetails, speed: 1})}> Normal x1 </div>
             <div className={styles.option}onClick={()=> setCampaignDetails({...campaignDetails, speed: 1.5})}> Faster x1.5 </div>
@@ -55,14 +45,16 @@ const SpeedParams = () => {
         </div>
         
         <div className={styles.buttonPart}>
-            <Link to='/PotentialQuestions'>
-              <button form="form1" type="button" className={styles.secondaryButton}>Back </button>
-            </Link>
+            <div className={styles.secondaryButton} onClick={()=> navigate('/PotentialQuestions')}>
+              <img src="../assets/images/arrow.png" alt="back" />
+              <p>Back</p>
+            </div>
 
-            <Link to='/Summary'>
-              <button form="form1" type="button" className={styles.primaryButton}>Next</button>
-            </Link>
-          </div>
+            <div className={styles.primaryButton} onClick={handleEnter}>
+              <p>Next</p>
+              <img src="../assets/images/arrow.png" alt="back" />
+            </div>
+        </div>
       </div>
 
       <div className={styles.imgPart}>

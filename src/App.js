@@ -2,7 +2,7 @@
 import { Routes, Route } from "react-router-dom";
 import styles from './App.module.css'
 import { useNavigate } from "react-router-dom";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 import BackgroundCircle from "./components/ui/backgroundCircle";
 
@@ -19,10 +19,14 @@ import EnterAccount from "./components/pages/EnterAccount";
 import UpgradeAccount from "./components/pages/UpgradeAccount";
 import NavBar from "./components/ui/navBar";
 
+
+
+
 export const CampaignContext = createContext(null)
 
 function App() {
 
+  
   let navigate = useNavigate();
   const [progressCount, setProgressCount] = useState(1)
   const [campaignDetails, setCampaignDetails] = useState({
@@ -34,7 +38,11 @@ function App() {
     name: '',
     phone: '',
     email: '',
-    resume: {},
+    resume: {
+      name: '',
+      size: null,
+      path: ''
+    },
     coverLetter: '',
     questions: {
       allowedToWork: '',

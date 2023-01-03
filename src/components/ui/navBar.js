@@ -2,7 +2,7 @@ import styles from './navBar.module.css';
 import { useAuthState } from "react-firebase-hooks/auth";
 import {auth, logout} from "../../firebase/firebaseClient"
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import usePremiumStatus from '../../firebase/usePremiumStatus';
 import ProgressPart from './ProgressPart';
 
@@ -35,8 +35,10 @@ function NavBar() {
   }
 
 
+
   return (
     <>
+
     { !user && 
       <div className={styles.navContainer}>
           <div className={styles.navIcons}> 
@@ -60,9 +62,30 @@ function NavBar() {
           </div>
 
           <ProgressPart/>
-          
-          <button className={styles.logoutButton} onClick={logout}>Logout</button>
+          <div className={styles.logoutButton} onClick={logout}>
+              <p>Logout</p>
+              <img src="../assets/images/icon-logout.png" alt="back" />
+          </div>
+
+          {/* <button className={styles.logoutButton} onClick={logout}>Logout</button> */}
       </div>
+    }
+
+    {user && isUserPremium &&
+      <div className={styles.preloader}>
+          <img src='../assets/images/img-glassdoor.png' alt='1'/>
+          <img src='../assets/images/img-indeed.png'alt='2'/>
+          <img src='../assets/images/img-linkedin.png' alt='3'/>
+          <img src='../assets/images/img-page2.png' alt='4'/>
+          <img src='../assets/images/img-page3.png' alt='5'/>
+          <img src='../assets/images/speed.png' alt='6'/>
+          <img src='../assets/images/arrow.png'alt='7' />
+          <img src='../assets/images/enter-img.png' alt='8'/>
+          <img src='../assets/images/google-icon.png' alt='9'/>
+          <img src='../assets/images/icon-notifications.png' alt='11'/>
+          <img src='../assets/images/icon-profile.png'alt='12' />
+      </div>
+    
     }
     </>
   );

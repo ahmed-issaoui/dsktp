@@ -79,28 +79,19 @@ const SearchDetails = () => {
          
           </div>
 
-          {/* <div>
-               <p style={{display: "inline-block", marginRight: "3rem"}}>Remote</p>
-              <label for="yes">Yes</label>
-              <input type="radio" id="yes" name="answer" value="yes" checked/>
-              <label for="no">No</label>
-              <input type="radio" id="no" name="answer" value="no"/> 
-          </div> */}
-{/* 
-          <input 
-              type="text" placeholder="Remote" 
-              value={campaignDetails.remote} 
-              onChange={(e) => setCampaignDetails({...campaignDetails, remote: e.target.value})} 
-              onKeyDown={(e)=>{handleEnter(e)}} 
-              className={(isMissingInput && !campaignDetails.remote) ? styles.missingInput : null} 
-          /> */}
-          <div className={styles.buttonPart} >
-            <Link to='/ChooseJobBoard'>
-              <button form="form1" type="button" className={styles.secondaryButton}>Back </button>
-            </Link>
+          <div className={styles.buttonPart}>
+            <div className={styles.secondaryButton} onClick={()=> navigate('/ChooseJobBoard')}>
+              <img src="../assets/images/arrow.png" alt="back" />
+              <p>Back</p>
+            </div>
 
-              <button form="form1" type="button" className={styles.primaryButton} onClick={handleNext}>Next</button>
-           </div>
+            <div className={styles.primaryButton} onClick={handleNext}>
+              <p>Next</p>
+              <img src="../assets/images/arrow.png" alt="back" />
+            </div>
+          </div>
+
+
         </form>
       </div>
 

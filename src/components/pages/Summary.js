@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Summary.module.css";
 import { useContext, useEffect} from "react";
 import { CampaignContext } from "../../App";
 
 const Summary = () => {
+  let navigate = useNavigate();
+
   const {campaignDetails, setProgressCount} = useContext(CampaignContext)
   
   useEffect(() => {
@@ -12,6 +14,8 @@ const Summary = () => {
 
   function handleLaunch() {
     window.api.pptr(campaignDetails)
+    navigate('/')
+
   };
 
   return (
@@ -80,13 +84,16 @@ const Summary = () => {
         </div>
 
         <div className={styles.buttonPart}>
-            <Link to='/SpeedParams'>
-              <button form="form1" type="button" className={styles.secondaryButton}>Back </button>
-            </Link>
 
-            <Link to='/'>
-              <button form="form1" type="button" className={styles.primaryButton} onClick={handleLaunch}>Launch</button>
-            </Link>
+            <div className={styles.secondaryButton} onClick={()=> navigate('/SpeedParams')}>
+              <img src="../assets/images/arrow.png" alt="back" />
+              <p>Back</p>
+            </div>
+
+            <div className={styles.primaryButton} onClick={handleLaunch}>
+              <img src="../assets/images/icon-launch.png" alt="launch" />
+              <p>Launch</p>
+            </div>
         </div>
 
       </div>
