@@ -20,7 +20,7 @@ function NavBar() {
     if (!user && !loading) {navigate('/EnterAccount')}
     if (user && !loading && !error && !isUserPremium) {navigate('/UpgradeAccount')}
 
-  }, [user, loading, isUserPremium, navigate]);
+  }, [user, loading, error, isUserPremium, navigate]);
 
 
   const handleRegister = () => {

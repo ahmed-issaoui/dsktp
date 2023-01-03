@@ -43,7 +43,10 @@
   "build": {
     "appId": "com.easyjob.app",
     "productName": "Easyjob",
-    "files": ["build/**/*", "node_modules/**/*"],
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
     "copyright": "Copyright © 2023 Easyjob",
     "directories": {
       "output": "electron-build",

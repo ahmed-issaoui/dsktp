@@ -3,9 +3,11 @@ const { app, dialog, BrowserWindow, ipcMain} = require("electron");
 const { autoUpdater } = require("electron-updater");
 const isDev = require("electron-is-dev");
 
+
 const path = require("path");
 const fs = require("fs");
 const fsPromises = require("fs/promises");
+
 
 const shell = require('electron').shell;
 
@@ -42,7 +44,7 @@ const createWindow = () => {
  		},
 		webPreferences: {
 			preload: path.join(__dirname, 'preload.js'),
-			devTools: true,
+			// devTools: true,
 		},
 		
 	});
@@ -52,14 +54,15 @@ const createWindow = () => {
 	win.loadURL(
 		isDev
 			? "http://localhost:3000"
-			: `file://${path.join(__dirname, "../build/index.html")}`
+			// : "http://localhost:9123"
+			: `file://${path.join(__dirname, "index.html")}`
 	);
 
 
 	// Open the DevTools.
 	if (isDev) {
-		// win.webContents.openDevTools({ mode: "detach" });
-		// require('react-devtools-electron');
+		require('react-devtools-electron');
+		win.webContents.openDevTools();
 		console.log('Is dev true')
 	};
 

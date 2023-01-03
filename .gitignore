@@ -23,8 +23,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-#ignore cookies files
-linkedinCookies.txt
-glassdoorCookies.txt
-indeedCookies.txt
-firebaseClient.js
+#ignore cookies files 
+linkedinCookies.txt 
+glassdoorCookies.txt 
+indeedCookies.txt 

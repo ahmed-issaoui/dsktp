@@ -16,7 +16,7 @@ function EnterAccount() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorText, setErrorText] = useState(null);
-  const [user, loading] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(auth);
   const isUserPremium = usePremiumStatus(user)
   let navigate = useNavigate();
 
@@ -30,14 +30,13 @@ function EnterAccount() {
     if (user) {navigate("/ChooseJobBoard")};
     if (errorText) {alert(errorText)}
 
-  }, [user, loading, errorText]);
+  }, [user, loading, errorText, error]);
 
 
 
   const submitHandlerLogin = () => {
     if (!email || !password) {
       setErrorText('Please enter email and password')
-      return 
     }
 
     logInWithEmailAndPassword(email, password)
@@ -90,9 +89,6 @@ function EnterAccount() {
                         <button className={styles.primaryButton}  onClick={submitHandlerLogin}>Confirm</button>  
 
                   </div>
-
-                  {/* {errorText && <div className={styles.errorText}>{errorText}</div>}  */}
-
                   
                 </div>
               </div> 
