@@ -7,7 +7,7 @@
   "homepage": "./",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ahmed-issaoui/easyjob"
+    "url": "https://github.com/ahmed-issaoui/easyjob-desktop"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
