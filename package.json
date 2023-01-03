@@ -3,8 +3,14 @@
   "version": "0.1.0",
   "productName": "Easyjob",
   "private": true,
-  "main": "src/electron/electron.js",
+  "main": "./public/electron.js",
   "homepage": "./",
+  "author": {
+    "email": "support@easyjob.atlassian.net",
+    "name": "Easyjob",
+    "url": "https://www.easyjob.tech"
+  },
+  "description": "Apply to thousands of jobs in one click",
   "repository": {
     "type": "git",
     "url": "https://github.com/ahmed-issaoui/easyjob-desktop"
@@ -37,9 +43,11 @@
   "build": {
     "appId": "com.easyjob.app",
     "productName": "Easyjob",
+    "files": ["build/**/*", "node_modules/**/*"],
+    "copyright": "Copyright © 2023 Easyjob",
     "directories": {
       "output": "electron-build",
-      "buildResources": "build-assets"
+      "buildResources": "public"
     },
     "win": {
       "publish": [
@@ -55,14 +63,10 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "last 1 electron version"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 electron version"
     ]
   },
   "devDependencies": {

@@ -9,7 +9,7 @@ import ProgressPart from './ProgressPart';
 
 function NavBar() {
   let navigate = useNavigate();
-  const [user, loading] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(auth);
   const isUserPremium = usePremiumStatus(user)
 
   useEffect(() => {
@@ -18,7 +18,7 @@ function NavBar() {
     } 
 
     if (!user && !loading) {navigate('/EnterAccount')}
-    if (user && !isUserPremium) {navigate('/UpgradeAccount')}
+    if (user && !loading && !error && !isUserPremium) {navigate('/UpgradeAccount')}
 
   }, [user, loading, isUserPremium, navigate]);
 
@@ -42,8 +42,8 @@ function NavBar() {
     { !user && 
       <div className={styles.navContainer}>
           <div className={styles.navIcons}> 
-            <img draggable='false' src="../assets/images/icon-profile.png" alt="profile icon" className={styles.navIcon} />
-            <img draggable='false' src="../assets/images/icon-notifications.png" alt="notifications icon" className={styles.navIcon}/>
+            <img draggable='false' src="./assets/images/icon-profile.png" alt="profile icon" className={styles.navIcon} />
+            <img draggable='false' src="./assets/images/icon-notifications.png" alt="notifications icon" className={styles.navIcon}/>
           </div>
 
           <div className={styles.linksContainer}>
@@ -57,14 +57,14 @@ function NavBar() {
       <div className={styles.navContainer}>
         
           <div className={styles.navIcons}> 
-            <img draggable='false' src="../assets/images/icon-profile.png" alt="profile icon" className={styles.navIcon} onClick={()=> navigate("/Parameters")}/>
-            <img draggable='false' src="../assets/images/icon-notifications.png" alt="notifications icon" className={styles.navIcon}/>
+            <img draggable='false' src="./assets/images/icon-profile.png" alt="profile icon" className={styles.navIcon} onClick={()=> navigate("/Parameters")}/>
+            <img draggable='false' src="./assets/images/icon-notifications.png" alt="notifications icon" className={styles.navIcon}/>
           </div>
 
           <ProgressPart/>
           <div className={styles.logoutButton} onClick={logout}>
               <p>Logout</p>
-              <img src="../assets/images/icon-logout.png" alt="back" />
+              <img src="./assets/images/icon-logout.png" alt="back" />
           </div>
 
           {/* <button className={styles.logoutButton} onClick={logout}>Logout</button> */}
@@ -73,17 +73,17 @@ function NavBar() {
 
     {user && isUserPremium &&
       <div className={styles.preloader}>
-          <img src='../assets/images/img-glassdoor.png' alt='1'/>
-          <img src='../assets/images/img-indeed.png'alt='2'/>
-          <img src='../assets/images/img-linkedin.png' alt='3'/>
-          <img src='../assets/images/img-page2.png' alt='4'/>
-          <img src='../assets/images/img-page3.png' alt='5'/>
-          <img src='../assets/images/speed.png' alt='6'/>
-          <img src='../assets/images/arrow.png'alt='7' />
-          <img src='../assets/images/enter-img.png' alt='8'/>
-          <img src='../assets/images/google-icon.png' alt='9'/>
-          <img src='../assets/images/icon-notifications.png' alt='11'/>
-          <img src='../assets/images/icon-profile.png'alt='12' />
+          <img src='./assets/images/img-glassdoor.png' alt='1'/>
+          <img src='./assets/images/img-indeed.png'alt='2'/>
+          <img src='./assets/images/img-linkedin.png' alt='3'/>
+          <img src='./assets/images/img-page2.png' alt='4'/>
+          <img src='./assets/images/img-page3.png' alt='5'/>
+          <img src='./assets/images/speed.png' alt='6'/>
+          <img src='./assets/images/arrow.png'alt='7' />
+          <img src='./assets/images/enter-img.png' alt='8'/>
+          <img src='./assets/images/google-icon.png' alt='9'/>
+          <img src='./assets/images/icon-notifications.png' alt='11'/>
+          <img src='./assets/images/icon-profile.png'alt='12' />
       </div>
     
     }

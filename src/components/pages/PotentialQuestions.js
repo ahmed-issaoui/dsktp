@@ -106,13 +106,13 @@ const PotentialQuestions = () => {
 
         <div className={styles.buttonPart}>
             <div className={styles.secondaryButton} onClick={()=> navigate('/CandidacyDetails')}>
-              <img src="../assets/images/arrow.png" alt="back" />
+              <img src="./assets/images/arrow.png" alt="back" />
               <p>Back</p>
             </div>
 
             <div className={styles.primaryButton} onClick={handleNext}>
               <p>Next</p>
-              <img src="../assets/images/arrow.png" alt="back" />
+              <img src="./assets/images/arrow.png" alt="back" />
             </div>
         </div>
 

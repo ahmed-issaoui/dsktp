@@ -56,7 +56,7 @@ const ChooseJobBoard = () => {
           <div className={styles.channels}>
             <img
               draggable='false'
-              src="../assets/images/img-glassdoor.png"
+              src="./assets/images/img-glassdoor.png"
               alt="glassdoor"
               className={styles.glassdoor}
               onClick={()=> {
@@ -69,7 +69,7 @@ const ChooseJobBoard = () => {
             />
             <img
               draggable='false'
-              src="../assets/images/img-linkedin.png"
+              src="./assets/images/img-linkedin.png"
               alt="linkedin"
               className={styles.linkedin}
               onClick={()=> {
@@ -83,7 +83,7 @@ const ChooseJobBoard = () => {
             />
             <img
               draggable='false'
-              src="../assets/images/img-indeed.png"
+              src="./assets/images/img-indeed.png"
               alt="indeed"
               className={styles.indeed}
               onClick={()=> {

@@ -156,20 +156,20 @@ const CandidacyDetails = () => {
         
         <div className={styles.buttonPart}>
             <div className={styles.secondaryButton} onClick={()=> navigate('/SearchDetails')}>
-              <img src="../assets/images/arrow.png" alt="back" />
+              <img src="./assets/images/arrow.png" alt="back" />
               <p>Back</p>
             </div>
 
             <div className={styles.primaryButton} onClick={handleNext}>
               <p>Next</p>
-              <img src="../assets/images/arrow.png" alt="back" />
+              <img src="./assets/images/arrow.png" alt="back" />
             </div>
         </div>
         
       </div>
 
       <div className={styles.imgPart}>
-        <img src="../assets/images/img-page3.png" alt="page2img" />
+        <img src="./assets/images/img-page3.png" alt="page2img" />
       </div>
     </div>
   );

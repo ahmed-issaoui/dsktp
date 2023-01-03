@@ -86,12 +86,12 @@ const Summary = () => {
         <div className={styles.buttonPart}>
 
             <div className={styles.secondaryButton} onClick={()=> navigate('/SpeedParams')}>
-              <img src="../assets/images/arrow.png" alt="back" />
+              <img src="./assets/images/arrow.png" alt="back" />
               <p>Back</p>
             </div>
 
             <div className={styles.primaryButton} onClick={handleLaunch}>
-              <img src="../assets/images/icon-launch.png" alt="launch" />
+              <img src="./assets/images/icon-launch.png" alt="launch" />
               <p>Launch</p>
             </div>
         </div>

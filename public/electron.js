@@ -32,7 +32,7 @@ const createWindow = () => {
 		minHeight: 550,
 		maxHeight: 700,
 		maximizable: false,
-		icon: (path.join(__dirname, '../../public/assets/images/icon-easyjob.ico')),
+		icon: (path.join(__dirname, './assets/images/icon-easyjob.ico')),
 		titleBarStyle: 'hidden',
 		titleBarOverlay: {
 			color: '#000000',

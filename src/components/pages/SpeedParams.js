@@ -32,7 +32,7 @@ const SpeedParams = () => {
                 <p>{(campaignDetails.speed === 1)? "Normal Speed x1" : "Faster but Riskier x1.5"}</p>
               </div>
               <div className={styles.arrowContainer} >
-                  <img src="../assets/images/arrow.png" style={{transform: isSelectOpen ? 'rotate(180deg)' : '' }} alt="arrow"/>
+                  <img src="./assets/images/arrow.png" style={{transform: isSelectOpen ? 'rotate(180deg)' : '' }} alt="arrow"/>
               </div>
           </div>
 
@@ -46,19 +46,19 @@ const SpeedParams = () => {
         
         <div className={styles.buttonPart}>
             <div className={styles.secondaryButton} onClick={()=> navigate('/PotentialQuestions')}>
-              <img src="../assets/images/arrow.png" alt="back" />
+              <img src="./assets/images/arrow.png" alt="back" />
               <p>Back</p>
             </div>
 
             <div className={styles.primaryButton} onClick={handleEnter}>
               <p>Next</p>
-              <img src="../assets/images/arrow.png" alt="back" />
+              <img src="./assets/images/arrow.png" alt="back" />
             </div>
         </div>
       </div>
 
       <div className={styles.imgPart}>
-        <img src="../assets/images/speed.png" alt="page2img" />
+        <img src="./assets/images/speed.png" alt="page2img" />
       </div>
     </div>
   );

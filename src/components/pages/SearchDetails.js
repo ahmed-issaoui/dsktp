@@ -68,7 +68,7 @@ const SearchDetails = () => {
                     <p style={{opacity: (campaignDetails.jobTitle || campaignDetails.location)? '1' : '0.5'}}>Remote: {(campaignDetails.remote === true)? "Yes" : "No"}</p>
                   </div>
                   <div className={styles.arrowContainer}>
-                      <img src="../assets/images/arrow.png" style={{transform: isSelectOpen ? 'rotate(180deg)' : '' }} alt='arrow'/>
+                      <img src="./assets/images/arrow.png" style={{transform: isSelectOpen ? 'rotate(180deg)' : '' }} alt='arrow'/>
                   </div>
               </div>
               
@@ -81,13 +81,13 @@ const SearchDetails = () => {
 
           <div className={styles.buttonPart}>
             <div className={styles.secondaryButton} onClick={()=> navigate('/ChooseJobBoard')}>
-              <img src="../assets/images/arrow.png" alt="back" />
+              <img src="./assets/images/arrow.png" alt="back" />
               <p>Back</p>
             </div>
 
             <div className={styles.primaryButton} onClick={handleNext}>
               <p>Next</p>
-              <img src="../assets/images/arrow.png" alt="back" />
+              <img src="./assets/images/arrow.png" alt="back" />
             </div>
           </div>
 
