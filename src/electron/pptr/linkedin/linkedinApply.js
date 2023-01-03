@@ -7,8 +7,14 @@ const { Notification, safeStorage } = require("electron");
 const fs = require("fs/promises");
 const path = require("path");
 
-module.exports = linkedinApply = (speed) =>
-  (async () => {
+module.exports = linkedinApply = async (campaignDetails) => {
+    const speed = campaignDetails.speed
+    const resumePath = campaignDetails.resume.path
+
+    console.log(speed)
+    console.log(resumePath)
+    console.log(campaignDetails)
+
     // Using plugins
     puppeteer.use(hidden());
 
@@ -91,6 +97,7 @@ module.exports = linkedinApply = (speed) =>
 
 
     // Going to URL
+    
     try {
         await page.goto("https://www.linkedin.com/jobs/search/?currentJobId=3353469753&f_AL=true&geoId=100876405&keywords=react&location=Colombia&refresh=true");
         await sleep(10000);
@@ -241,9 +248,7 @@ module.exports = linkedinApply = (speed) =>
         await sleep(1520);
         await page.waitForSelector("input[type=file]", {timeout: 2000}); 
         const input = await page.$("input[type=file]"); 
-        await input.uploadFile( 
-          "C:/Users/priva/OneDrive/Bureau/Ahmed-Issaoui-Resume.pdf"
-        );
+        await input.uploadFile(campaignDetails.resume.path);
         await sleep(8000);
     }
 
@@ -276,5 +281,5 @@ module.exports = linkedinApply = (speed) =>
     await browser.close()
 
 
-  })();
+  };
 

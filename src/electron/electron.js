@@ -161,7 +161,6 @@ ipcMain.on('open-upgrade', (event, data) => {
 
 ipcMain.handle("get/puppeteer", async (event, data)=>{
 	const campaignDetails = data;
-
 	// console.log(data.resume.name)
 	// // const resumePath = path.join(__dirname, `resumeee.pdf`)
 	
@@ -176,7 +175,7 @@ ipcMain.handle("get/puppeteer", async (event, data)=>{
 			const linkedinCookiesPath = path.join(__dirname, './pptr/linkedin/linkedinCookies.txt')
 			if (fs.existsSync(linkedinCookiesPath)) {
 				console.log('Cookies exist, Launching Linkedin Apply');
-				try { linkedinApply(speed); }catch(error) {console.error(error);}
+				try { linkedinApply(campaignDetails); }catch(error) {console.error(error);}
 
 			} else {
 				console.log('Cookies doesnt exist, Launching Linkedin Sign in then Apply ');
