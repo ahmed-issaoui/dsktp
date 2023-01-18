@@ -67,8 +67,6 @@ function EnterAccount() {
             <div className={styles.textPart}>
                 <div className={styles.titlePart}>
                   <h1>Enter Your Account</h1>
-                  {isUserPremium && <h2>You are premium</h2>}
-
                 </div>
 
                 <div className={styles.features}>
