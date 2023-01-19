@@ -23,6 +23,7 @@
     "cross-env": "^7.0.3",
     "electron-is-dev": "^2.0.0",
     "electron-updater": "^5.3.0",
+    "express": "^4.18.2",
     "firebase": "^9.14.0",
     "puppeteer": "^19.2.2",
     "puppeteer-extra": "^3.3.4",
@@ -37,6 +38,8 @@
   },
   "scripts": {
     "start": "concurrently \"cross-env BROWSER=none react-scripts start\" \"wait-on http://localhost:3000 && electron .\"",
+    "build:react": "react-scripts build",
+    "build:electron": "electron-builder --win",
     "build:prod": "react-scripts build && electron-builder --win",
     "build:publish": "set GH_TOKEN=<personal_access_token> && react-scripts build && electron-builder --win --publish always"
   },

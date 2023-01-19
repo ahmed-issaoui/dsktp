@@ -11,6 +11,7 @@ const WINDOW_API = {
     registerAccount: () => ipcRenderer.send('open-register'),
     forgot: () => ipcRenderer.send('open-forgot'),
     support: () => ipcRenderer.send('open-support'),
+    customerPortal: (url) => ipcRenderer.send('open-customerPortal',url),
     upgradeAccount: () => ipcRenderer.send('open-upgrade'),
 
     // getConfig: () => ipcRenderer.invoke('get/config'),

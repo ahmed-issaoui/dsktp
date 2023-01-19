@@ -22,6 +22,8 @@ const glassdoorApply = require("./pptr/glassdoor/glassdoorApply");
 const indeedSignIn = require("./pptr/indeed/indeedSignIn");
 const indeedApply = require("./pptr/indeed/indeedApply");
 
+const expressServer = require('./server');
+
 app.setAppUserModelId('Easyjob');
 
 const createWindow = () => {
@@ -53,7 +55,7 @@ const createWindow = () => {
 	win.loadURL(
 		isDev
 			? "http://localhost:3000"
-			: `file://${path.join(__dirname, "index.html")}`
+			: "http://localhost:4198"
 	);
 
 
@@ -74,7 +76,11 @@ const createWindow = () => {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(createWindow)
+app.whenReady().then( () => {
+	expressServer();
+	createWindow()
+
+})
 
 
 
@@ -152,6 +158,9 @@ ipcMain.on('open-support', (event, data) => {
 
 ipcMain.on('open-upgrade', (event, data) => {
 	shell.openExternal('https://job-app-f2665.web.app/enter/signin');
+});
+ipcMain.on('open-customerPortal', (event, data) => {
+	shell.openExternal(data);
 });
 
 
