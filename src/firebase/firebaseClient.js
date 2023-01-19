@@ -2,7 +2,6 @@
 import { initializeApp } from "firebase/app";
 import {getFirestore} from "firebase/firestore"
 import {getAuth, GoogleAuthProvider, signInWithEmailAndPassword,signInWithRedirect, signOut} from 'firebase/auth'
-import { getFunctions } from "firebase/functions";
 
 
 const firebaseConfig = {
@@ -18,7 +17,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app)
 const db = getFirestore(app)
-const functions = getFunctions(app);
 
 
 
@@ -58,9 +56,9 @@ const  logout = () => {
 // Exports 
 
 export {
+  app,
   auth,
   db,
-  functions,
   signInWithGoogle,
   logInWithEmailAndPassword,
   logout,
