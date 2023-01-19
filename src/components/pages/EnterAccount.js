@@ -66,7 +66,7 @@ function EnterAccount() {
             </div> 
             <div className={styles.textPart}>
                 <div className={styles.titlePart}>
-                  <h1>Enter Your Account.</h1>
+                  <h1>Enter Your Account</h1>
                 </div>
 
                 <div className={styles.features}>
