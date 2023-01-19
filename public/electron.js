@@ -102,6 +102,7 @@ app.on("activate", () => {
 	}
 });
 
+
 autoUpdater.on("update-available", (_event, releaseNotes, releaseName) => {
 	const dialogOpts = {
 		type: 'info',
