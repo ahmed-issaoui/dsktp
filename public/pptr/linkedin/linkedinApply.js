@@ -61,6 +61,7 @@ module.exports = linkedinApply = async (campaignDetails) => {
       ignoreHTTPSErrors: true,
       executablePath: executablePath(),
       devtools: false,
+      slowMo: 150
     });
     const pages = await browser.pages();
     const page = pages[0];
@@ -101,7 +102,7 @@ module.exports = linkedinApply = async (campaignDetails) => {
     try {
         await page.goto("https://www.linkedin.com/jobs/search/?currentJobId=3353469753&f_AL=true&geoId=100876405&keywords=react&location=Colombia&refresh=true");
         await sleep(10000);
-        await page.waitForSelector("button");
+        await page.waitForSelector("button",{timeout: 60000});
         await showNotification("Logged in successfully", "We're logged in");
     } 
     catch {

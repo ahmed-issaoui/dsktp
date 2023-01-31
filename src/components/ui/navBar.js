@@ -58,6 +58,7 @@ function NavBar() {
         
           <div className={styles.navIcons}> 
             <img draggable='false' src="./assets/images/icon-profile.png" alt="profile icon" className={styles.navIcon} onClick={()=> navigate("/Parameters")}/>
+            <img draggable='false' src="./assets/images/icon-support.png" alt="profile icon" className={styles.navIcon} onClick={()=> navigate("/Parameters")}/>
             <img draggable='false' src="./assets/images/icon-notifications.png" alt="notifications icon" className={styles.navIcon}/>
           </div>
 

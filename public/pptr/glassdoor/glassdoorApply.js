@@ -93,8 +93,8 @@ module.exports = glassdoorApply = (speed) =>
     // Going to URL
     try {
         await page.goto("https://www.glassdoor.com/Job/united-states-web-developer-jobs-SRCH_IL.0,13_IN1_KO14,27.htm?applicationType=1&remoteWorkType=1");
-        await sleep(4000);
-        await page.waitForSelector("button");
+        await sleep(10000);
+        await page.waitForSelector("button",{timeout: 60000});
         await showNotification("Logged in successfully", "We're logged in");
     } 
     catch {

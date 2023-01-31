@@ -109,8 +109,8 @@ module.exports = indeedApply = (speed) =>
     // Going to URL
     try {
         await page.goto("https://www.indeed.com/jobs?q=developer&sc=0kf%3Aattr%28D7S5D%29attr%28DSQF7%29%3B&vjk=592911ee2a9af6fa");
-        await sleep(4000);
-        await page.waitForSelector("button");
+        await sleep(10000);
+        await page.waitForSelector("button",{timeout: 60000});
         await showNotification("Logged in successfully", "We're logged in");
     } 
     catch {
