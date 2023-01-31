@@ -1,19 +1,19 @@
 {
   "name": "easyjob",
   "version": "0.9.1",
-  "productName": "Easyjob",
+  "productName": "Superlazy",
   "private": true,
   "main": "./public/electron.js",
   "homepage": "./",
   "author": {
     "email": "support@easyjob.atlassian.net",
-    "name": "Easyjob",
-    "url": "https://www.easyjob.tech"
+    "name": "Superlazy",
+    "url": "https://www.superlazy.io"
   },
   "description": "Apply to thousands of jobs in one click",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ahmed-issaoui/easyjob-desktop"
+    "url": "https://github.com/ahmed-issaoui/superlazy-desktop"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -44,13 +44,13 @@
     "build:publish": "react-scripts build && electron-builder --win --publish always"
   },
   "build": {
-    "appId": "com.easyjob.app",
-    "productName": "Easyjob",
+    "appId": "com.superlazy.app",
+    "productName": "Superlazy",
     "files": [
       "build/**/*",
       "node_modules/**/*"
     ],
-    "copyright": "Copyright © 2023 Easyjob",
+    "copyright": "Copyright © 2023 Superlazy",
     "directories": {
       "output": "electron-build",
       "buildResources": "public"
