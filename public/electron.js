@@ -24,7 +24,7 @@ const indeedApply = require("./pptr/indeed/indeedApply");
 
 const expressServer = require('./server');
 
-app.setAppUserModelId('Easyjob');
+app.setAppUserModelId('Superlazy');
 
 const createWindow = () => {
 	// Create the browser window.
@@ -36,7 +36,7 @@ const createWindow = () => {
 		minHeight: 550,
 		maxHeight: 700,
 		maximizable: false,
-		icon: (path.join(__dirname, './assets/images/icon-easyjob.ico')),
+		icon: (path.join(__dirname, './assets/images/icon-superlazy.ico')),
 		titleBarStyle: 'hidden',
 		titleBarOverlay: {
 			color: '#000000',

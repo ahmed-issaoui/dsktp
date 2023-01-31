@@ -16,7 +16,7 @@ const WelcomePage = () => {
 
   return (
     <div className={styles.section}>
-       <img src="./assets/images/logo-easyjob.svg" alt="logo-easyjob"/>
+       <img src="./assets/images/logo-superlazy.svg" alt="logo-superlazy"/>
     </div>
   )
 }
