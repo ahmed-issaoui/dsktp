@@ -6,7 +6,7 @@
   "main": "./public/electron.js",
   "homepage": "./",
   "author": {
-    "email": "support@easyjob.atlassian.net",
+    "email": "support@superlazyapp.atlassian.net",
     "name": "Superlazy",
     "url": "https://www.superlazy.io"
   },

@@ -27,7 +27,7 @@ const Parameters = () => {
     const functions = getFunctions(app,'europe-west1');
     const functionRef = httpsCallable(functions, 'ext-firestore-stripe-payments-createPortalLink',);
   
-    functionRef({returnUrl: 'https://easyjob.tech'})
+    functionRef({returnUrl: 'https://superlazy.io'})
     .then((result) => {
       const data = result.data
       window.api.customerPortal(data.url);
@@ -62,14 +62,14 @@ const Parameters = () => {
             <div className={styles.element} >
               <h3>Support Email</h3>
               <div className={styles.elementData}>
-                <p>support@easyjob.atlassian.net</p>
+                <p>support@superlazyapp.atlassian.net</p>
               </div>
             </div>
 
             <div className={styles.element}>
               <h3>Support Portal</h3>
               <div className={styles.elementDataLink} onClick={handleSupport}>
-                <p>https://easyjob.atlassian.net/servicedesk/customer/portal/1</p>
+                <p>https://superlazyapp.atlassian.net/servicedesk/customer/portal/1</p>
               </div>
             </div>
 

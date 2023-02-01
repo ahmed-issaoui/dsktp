@@ -154,7 +154,7 @@ ipcMain.on('open-forgot', (event, data) => {
 });
 
 ipcMain.on('open-support', (event, data) => {
-	shell.openExternal('https://easyjob.atlassian.net/servicedesk/customer/portal/1');
+	shell.openExternal('https://superlazyapp.atlassian.net/servicedesk/customer/portal/1');
 });
 
 ipcMain.on('open-upgrade', (event, data) => {
