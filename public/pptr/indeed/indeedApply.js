@@ -190,7 +190,7 @@ module.exports = indeedApply = (speed) =>
     const scenarioOne = async () => {  
       await sleep(2000);
       
-            await inputtingData()
+            await inputtingData() 
       
       await sleep(1000);
       await newPage.click('.ia-continueButton');

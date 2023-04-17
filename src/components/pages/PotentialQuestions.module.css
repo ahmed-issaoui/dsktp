@@ -49,7 +49,7 @@
   width: 16rem;
   margin: 0.4rem 0.2rem;
   border-radius: 1.2rem;
-  border: 2px solid #785df5;
+  border: 2px solid #695DF5;
   box-shadow: 5px 4px 47px 14px rgba(145, 71, 241, 0.13);
   background: rgba(0, 0, 0, 0);
   padding: 0.8rem 1.5rem;
@@ -87,8 +87,8 @@
   cursor: pointer;
   box-shadow: 5px 4px 47px 14px rgb(145 71 241 / 13%);
   cursor: pointer;
-  border: 2px solid #785df5;
-  background-color: #785df5;
+  border: 2px solid #695DF5;
+  background-color: #695DF5;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -121,7 +121,7 @@
   cursor: pointer;
   box-shadow: 5px 4px 47px 14px rgb(145 71 241 / 13%);
   cursor: pointer;
-  border: 2px solid #785df5;
+  border: 2px solid #695DF5;
   background: rgba(0, 0, 0, 0);
   box-sizing: border-box;
   -moz-box-sizing: border-box;

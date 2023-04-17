@@ -14,8 +14,8 @@
   border-radius: 2rem;
 }
 .partialBar {
-  /* background: #785df5; */
-  background-image: linear-gradient(to right, #795df522 ,#785df5);
+  /* background: #695DF5; */
+  background-image: linear-gradient(to right, #795df522 ,#695DF5);
 
   height: 1.3rem;
   min-width: 1rem;

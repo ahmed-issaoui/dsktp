@@ -122,7 +122,7 @@ const CandidacyDetails = () => {
                   className={(isMissingInput && !campaignDetails.resume) ? styles.missingUploadButton : styles.uploadButton} 
                   type="button"
                   title= {campaignDetails.resume.name? campaignDetails.resume.name: ''}
-                  style={{backgroundColor: campaignDetails.resume.name? '#785df5' : 'rgba(0, 0, 0, 0)'}}
+                  style={{backgroundColor: campaignDetails.resume.name? '#695DF5' : 'rgba(0, 0, 0, 0)'}}
                   onClick={handleClickCV}>
                     {campaignDetails.resume.name? campaignDetails.resume.name : 'Upload CV'} 
                 </button>

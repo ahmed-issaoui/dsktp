@@ -1,7 +1,7 @@
 .circle {
   height: 350px;
   width: 350px;
-  background-color: #785DF5;
+  background-color: #695DF5;
   border-radius: 50%;
   filter: blur(200px);
   z-index: -1;

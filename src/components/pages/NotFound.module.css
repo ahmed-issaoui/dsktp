@@ -45,11 +45,11 @@
 }
 
 .primaryButton {
-  border: 2px solid #785df5;
-  background-color: #785df5;
+  border: 2px solid #695DF5;
+  background-color: #695DF5;
 }
 
 .secondaryButton {
-  border: 2px solid #785df5;
+  border: 2px solid #695DF5;
   background: rgba(0, 0, 0, 0);
 }
