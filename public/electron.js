@@ -1,6 +1,7 @@
 
 const { app, dialog, BrowserWindow, ipcMain} = require("electron");
 const { autoUpdater } = require("electron-updater");
+const Store = require('electron-store');
 const isDev = require("electron-is-dev");
 
 
@@ -131,6 +132,77 @@ autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) => {
 
 
 
+// Persistent storage
+
+const schema = {
+
+	name: {
+		type: 'string',
+	},
+	email: {
+		type: 'string',
+	},
+	phone: {
+		type: 'string',
+	},
+	resumePath: {
+		type: 'string',
+	}
+};
+
+const store = new Store({schema});
+
+// Save data
+
+ipcMain.handle("load/data", async (event, data)=>{
+
+	const dataToLoad = {
+		name: "",
+		email: "",
+		phone: "",
+		resumePath: "",
+		answers: {},
+		history: []
+	};
+
+	try {
+		dataToLoad.user = store.get('user') ? store.get('user') : "" 
+		dataToLoad.name = store.get('name') ? store.get('name') : "" 
+		dataToLoad.email = store.get('email') ? store.get('email') : "" 
+		dataToLoad.phone = store.get('phone') ? store.get('phone') : "" 
+		dataToLoad.resumePath = store.get('resumePath') ? store.get('resumePath') : "" 
+	
+	} catch(err) {
+		console.error(err)
+	}
+
+
+	return dataToLoad
+
+
+})
+
+ipcMain.handle("save/data", async (event, data)=>{
+	const dataDetails = data;
+
+	const name = dataDetails.name ? dataDetails.name : "" 
+	const email = dataDetails.email ? dataDetails.email : "" 
+	const phone = dataDetails.phone ? dataDetails.phone : "" 
+	const resumePath = dataDetails.resume.path ? dataDetails.resume.path : "" 
+
+	try {
+		store.set('name', name);
+		store.set('email', email);
+		store.set('phone', phone);
+		store.set('resumePath', resumePath);
+	} catch(err) {
+		console.error(err)
+	}
+
+
+})
+
+
 // Saving Speed
 
 var speed;
@@ -140,7 +212,6 @@ ipcMain.on("get/speedParams", (event, data) => {
 });
 
 // Platform 
-
 
 
 // Opening external links
@@ -162,6 +233,77 @@ ipcMain.on('open-upgrade', (event, data) => {
 });
 ipcMain.on('open-customerPortal', (event, data) => {
 	shell.openExternal(data);
+});
+
+
+
+ipcMain.on('logout/pptr', (event, data) => {
+	const linkedinCookiesPath = path.join(__dirname, './pptr/linkedin/linkedinCookies.txt')
+	const glassdoorCookiesPath = path.join(__dirname, './pptr/glassdoor/glassdoorCookies.txt')
+	const indeedCookiesPath = path.join(__dirname, './pptr/indeed/indeedCookies.txt')
+
+	if (data === "glassdoor") {
+		if (fs.existsSync(glassdoorCookiesPath)) {
+			console.log('Cookies exist, deleting it')
+			try { 
+				
+				fs.unlink(glassdoorCookiesPath, (err => {
+					if (err) console.log(err);
+					else {
+					  console.log("Deleted cookie");
+					}
+				  }));
+			
+			} catch(error) {
+				console.error(error);
+			}
+
+		} else  {
+			console.log("cookies doesn't exist in the first place to be deleted")
+		}
+
+	}
+
+	else if (data === "linkedin") {
+		if (fs.existsSync(linkedinCookiesPath)) {
+			console.log('Cookies exist, deleting it')
+			try { 
+				
+				fs.unlink(linkedinCookiesPath, (err => {
+					if (err) console.log(err);
+					else {
+					  console.log("Deleted cookie");
+					}
+				  }));
+			
+			} catch(error) {
+				console.error(error);
+			}
+
+		} else  {
+			console.log("cookies doesn't exist in the first place to be deleted")
+		}
+	}
+	else if (data === "indeed") {
+		if (fs.existsSync(indeedCookiesPath)) {
+			console.log('Cookies exist, deleting it')
+			try { 
+				
+				fs.unlink(indeedCookiesPath, (err => {
+					if (err) console.log(err);
+					else {
+					  console.log("Deleted cookie");
+					}
+				  }));
+			
+			} catch(error) {
+				console.error(error);
+			}
+
+		} else  {
+			console.log("cookies doesn't exist in the first place to be deleted")
+		}
+	}
 });
 
 

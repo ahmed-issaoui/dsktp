@@ -29,12 +29,16 @@ function App() {
   
   let navigate = useNavigate();
   const [progressCount, setProgressCount] = useState(1)
+  const [inputSuggestions, setInputSuggestions] = useState({
+
+  })
+
   const [campaignDetails, setCampaignDetails] = useState({
     platform: '',
     speed: 1,
     jobTitle: '',
     location: '',
-    remote: true,
+    remote: '',
     name: '',
     phone: '',
     email: '',

@@ -5,8 +5,13 @@ const {ipcRenderer, contextBridge} = require('electron');
 
 const WINDOW_API = {
     pptr: (campaignDetails) => ipcRenderer.invoke("get/puppeteer", campaignDetails),
+
+    saveUserData: (dataToSave) => ipcRenderer.invoke("save/data", dataToSave),
+    loadUserData: () => ipcRenderer.invoke("load/data"),
     
     speedParams: (speed) => ipcRenderer.send("get/speedParams", speed),
+    
+    logoutPpptr: (platform) => ipcRenderer.send("logout/pptr", platform),
 
     registerAccount: () => ipcRenderer.send('open-register'),
     forgot: () => ipcRenderer.send('open-forgot'),

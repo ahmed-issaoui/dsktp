@@ -89,6 +89,7 @@
   background: rgb(16, 11, 28);
   padding: 0.3rem 0;
   width: 17rem;
+  z-index: 5;
 }
 
 .option {

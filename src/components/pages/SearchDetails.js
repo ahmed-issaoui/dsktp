@@ -65,7 +65,7 @@ const SearchDetails = () => {
 
               <div className={styles.selectContainer} onClick={()=> setIsSelectOpen(!isSelectOpen)}>
                   <div className={styles.selectDisplay}>
-                    <p style={{opacity: (campaignDetails.jobTitle || campaignDetails.location)? '1' : '0.5'}}>Remote: {(campaignDetails.remote === true)? "Yes" : "No"}</p>
+                    <p style={{opacity: (campaignDetails.jobTitle || campaignDetails.location)? '1' : '0.5'}}>Remote: {campaignDetails.remote}</p>
                   </div>
                   <div className={styles.arrowContainer}>
                       <img src="./assets/images/arrow.png" style={{transform: isSelectOpen ? 'rotate(180deg)' : '' }} alt='arrow'/>
@@ -73,8 +73,11 @@ const SearchDetails = () => {
               </div>
               
               <div className={styles.optionsContainer} style={{display: isSelectOpen ? '' : 'none' }}>
-                <div className={styles.option} onClick={()=> setCampaignDetails({...campaignDetails, remote: true})}>Yes</div>
-                <div className={styles.option} onClick={()=> setCampaignDetails({...campaignDetails, remote: false})}>No </div>
+                <div className={styles.option} onClick={()=> setCampaignDetails({...campaignDetails, remote: "All"})}>All</div>
+                <div className={styles.option} onClick={()=> setCampaignDetails({...campaignDetails, remote: "Onsite Only"})}>Onsite Only</div>
+                <div className={styles.option} onClick={()=> setCampaignDetails({...campaignDetails, remote: "Remote Only"})}>Remote Only</div>
+                <div className={styles.option} onClick={()=> setCampaignDetails({...campaignDetails, remote: "Hybrid Only"})}>Hybrid Only</div>
+                <div className={styles.option} onClick={()=> setCampaignDetails({...campaignDetails, remote: "Remote + Hybrid"})}>Remote + Hybrid</div>
               </div>
          
           </div>

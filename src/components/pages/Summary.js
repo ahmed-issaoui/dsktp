@@ -10,10 +10,12 @@ const Summary = () => {
   
   useEffect(() => {
     setProgressCount(98)
+    window.api.saveUserData(campaignDetails)
   }, []);
 
   function handleLaunch() {
     window.api.pptr(campaignDetails)
+    window.api.saveUserData(campaignDetails)
     navigate('/')
 
   };

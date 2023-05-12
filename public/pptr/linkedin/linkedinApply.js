@@ -10,10 +10,60 @@ const path = require("path");
 module.exports = linkedinApply = async (campaignDetails) => {
     const speed = campaignDetails.speed
     const resumePath = campaignDetails.resume.path
+    
+    let jobTitle = campaignDetails.jobTitle
+    let location = campaignDetails.location
+    const remote = campaignDetails.remote
+  
+    const cleaningJobTitle = () => {
+      jobTitle = jobTitle.replace("  ", " ")
+      jobTitle = jobTitle.replace("   ", " ")
+      jobTitle = jobTitle.replace("    ", " ")
 
-    console.log(speed)
-    console.log(resumePath)
-    console.log(campaignDetails)
+      while (jobTitle.charAt(jobTitle.length - 1) === " ")  {
+        jobTitle = jobTitle.slice(0, -1);
+      }
+
+      while (jobTitle.charAt(0) === " ")  {
+        jobTitle = jobTitle.slice(1);
+      }
+
+      jobTitle = jobTitle.replace(" ", "%20");
+
+    }
+
+    try {
+      cleaningJobTitle()
+    }
+    catch (error){
+      console.error(error)
+    }
+
+    const cleaningLocation = () => {
+        location = location.replace("  ", " ")
+        location = location.replace("   ", " ")
+        location = location.replace("    ", " ")
+        
+        while (location.charAt(location.length - 1) === " ")  {
+          location = location.slice(0, -1);
+        }
+
+        while (location.charAt(0) === " ")  {
+          location = location.slice(1);
+        }
+
+
+        location = location.replace(" ", "%20");
+        location = location.replace(",", "%2C");
+
+    }
+    try {
+      cleaningLocation()
+    }
+    catch (error){
+      console.error(error)
+    }
+    
 
     // Using plugins
     puppeteer.use(hidden());
@@ -70,43 +120,72 @@ module.exports = linkedinApply = async (campaignDetails) => {
 
     // Setting up cookies & logging in
 
-    try {
-      await sleep(800);
-      await showNotification("Entering your account", "We are logging you in with your account");
+    // try {
+    //   await sleep(800);
+    //   await showNotification("Entering your account", "We are logging you in with your account");
 
-      const linkedinCookiesPath = path.join(__dirname, 'linkedinCookies.txt')
-      const cookiesFile = await fs.readFile(linkedinCookiesPath);
+    //   const linkedinCookiesPath = path.join(__dirname, 'linkedinCookies.txt')
+    //   const cookiesFile = await fs.readFile(linkedinCookiesPath);
 
-      if (safeStorage.isEncryptionAvailable()) {
+    //   if (safeStorage.isEncryptionAvailable()) {
 
-        try {
-          var decryptedCookies = safeStorage.decryptString(cookiesFile)
-        } 
-        catch (error) {console.error(error)}
-      }  
+    //     try {
+    //       var decryptedCookies = safeStorage.decryptString(cookiesFile)
+    //     } 
+    //     catch (error) {console.error(error)}
+    //   }  
 
-      const finalCookie = JSON.parse(decryptedCookies);
-      await page.setCookie(...finalCookie);
-      await sleep(4000);
-    }
+    //   const finalCookie = JSON.parse(decryptedCookies);
+    //   await page.setCookie(...finalCookie);
+    //   await sleep(4000);
+    // }
 
-    catch {
-      await showNotification("Oops.. Something happend", "We couldn't log you in");
-      throw new Error('Error in cookies');
-    }
+    // catch {
+    //   await showNotification("Oops.. Something happend", "We couldn't log you in");
+    //   throw new Error('Error in cookies');
+    // }
     
 
 
     // Going to URL
-    
+
+    await sleep(2000);
+    await page.goto(`https://www.linkedin.com`);
+    await sleep(30000);
+
+    // "all" "onsite-only" "hybrid-only" "remote-only" "remote+hybrid"
+//     All
+// Onsite Only
+// Hybrid Only
+// Remote Only
+// Remote + Hybrid
+    let searchLink = ""
+
+    const defineLink = () => {
+      if (remote = "All" ) {
+        searchLink = `https://www.linkedin.com/jobs/search/?&f_AL=true&keywords=${jobTitle}&location=${location}&refresh=true`
+      }
+      else if (remote = "Onsite Only" ) {
+        searchLink = `https://www.linkedin.com/jobs/search/?&f_AL=true&f_WT=1&keywords=${jobTitle}&location=${location}&refresh=true`
+      }
+      if (remote = "Remote Only" ) {
+        searchLink = `https://www.linkedin.com/jobs/search/?&f_AL=true&f_WT=2&keywords=${jobTitle}&location=${location}&refresh=true`
+      }
+      if (remote = "Hybrid Only" ) {
+        searchLink = `https://www.linkedin.com/jobs/search/?&f_AL=true&f_WT=3&keywords=${jobTitle}&location=${location}&refresh=true`
+      }
+      if (remote = "Remote + Hybrid" ) {
+        searchLink = `https://www.linkedin.com/jobs/search/?&f_AL=true&f_WT=2%2C3&keywords=${jobTitle}&location=${location}&refresh=true`
+      }
+    }
     try {
-        await page.goto("https://www.linkedin.com/jobs/search/?currentJobId=3353469753&f_AL=true&geoId=100876405&keywords=react&location=Colombia&refresh=true");
-        await sleep(10000);
+      
+        await page.goto(searchLink);
+        await sleep(8000);
         await page.waitForSelector("button",{timeout: 60000});
-        await showNotification("Logged in successfully", "We're logged in");
     } 
     catch {
-        await showNotification("Oops.. Something happend", "Please check your internet connection");
+        showNotification("Oops.. Something happend", "Please check your internet connection");
         throw new Error('Couldnt Load the Page');
     }
     
