@@ -13,7 +13,7 @@ module.exports = linkedinApply = async (campaignDetails) => {
     
     let jobTitle = campaignDetails.jobTitle
     let location = campaignDetails.location
-    const remote = campaignDetails.remote
+    let remote = campaignDetails.remote
   
     const cleaningJobTitle = () => {
       jobTitle = jobTitle.replace("  ", " ")
@@ -120,30 +120,31 @@ module.exports = linkedinApply = async (campaignDetails) => {
 
     // Setting up cookies & logging in
 
-    // try {
-    //   await sleep(800);
-    //   await showNotification("Entering your account", "We are logging you in with your account");
+    try {
+      await sleep(800);
+      showNotification("Entering your account", "We are logging you in with your account");
 
-    //   const linkedinCookiesPath = path.join(__dirname, 'linkedinCookies.txt')
-    //   const cookiesFile = await fs.readFile(linkedinCookiesPath);
+      const linkedinCookiesPath = path.join(__dirname, 'linkedinCookies.txt')
+      const cookiesFile = await fs.readFile(linkedinCookiesPath);
 
-    //   if (safeStorage.isEncryptionAvailable()) {
+      if (safeStorage.isEncryptionAvailable()) {
 
-    //     try {
-    //       var decryptedCookies = safeStorage.decryptString(cookiesFile)
-    //     } 
-    //     catch (error) {console.error(error)}
-    //   }  
+        try {
+          var decryptedCookies = safeStorage.decryptString(cookiesFile)
+        } 
+        catch (error) {console.error(error)}
+      }  
 
-    //   const finalCookie = JSON.parse(decryptedCookies);
-    //   await page.setCookie(...finalCookie);
-    //   await sleep(4000);
-    // }
+      const finalCookie = JSON.parse(decryptedCookies);
+      await sleep(1000);
+      await page.setCookie(...finalCookie);
+      await sleep(4000);
+    }
 
-    // catch {
-    //   await showNotification("Oops.. Something happend", "We couldn't log you in");
-    //   throw new Error('Error in cookies');
-    // }
+    catch {
+      showNotification("Oops.. Something happend", "We couldn't log you in");
+      throw new Error('Error in cookies');
+    }
     
 
 
@@ -151,17 +152,14 @@ module.exports = linkedinApply = async (campaignDetails) => {
 
     await sleep(2000);
     await page.goto(`https://www.linkedin.com`);
-    await sleep(30000);
+    await sleep(10000);
+    await page.waitForSelector("button");
 
-    // "all" "onsite-only" "hybrid-only" "remote-only" "remote+hybrid"
-//     All
-// Onsite Only
-// Hybrid Only
-// Remote Only
-// Remote + Hybrid
+
+
     let searchLink = ""
 
-    const defineLink = () => {
+    const defineLink = (remote) => {
       if (remote = "All" ) {
         searchLink = `https://www.linkedin.com/jobs/search/?&f_AL=true&keywords=${jobTitle}&location=${location}&refresh=true`
       }
@@ -178,6 +176,9 @@ module.exports = linkedinApply = async (campaignDetails) => {
         searchLink = `https://www.linkedin.com/jobs/search/?&f_AL=true&f_WT=2%2C3&keywords=${jobTitle}&location=${location}&refresh=true`
       }
     }
+
+    defineLink(remote)
+
     try {
       
         await page.goto(searchLink);
@@ -328,7 +329,7 @@ module.exports = linkedinApply = async (campaignDetails) => {
         await sleep(1520);
         await page.waitForSelector("input[type=file]", {timeout: 2000}); 
         const input = await page.$("input[type=file]"); 
-        await input.uploadFile(campaignDetails.resume.path);
+        await input.uploadFile(resumePath);
         await sleep(8000);
     }
 

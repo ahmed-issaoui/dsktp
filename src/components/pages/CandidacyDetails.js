@@ -67,6 +67,7 @@ const CandidacyDetails = () => {
           path: file.path
         } 
       }) ;
+
     }
   }
 

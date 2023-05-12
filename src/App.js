@@ -38,7 +38,7 @@ function App() {
     speed: 1,
     jobTitle: '',
     location: '',
-    remote: '',
+    remote: 'All',
     name: '',
     phone: '',
     email: '',

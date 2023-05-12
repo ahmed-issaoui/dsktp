@@ -333,7 +333,7 @@ ipcMain.handle("get/puppeteer", async (event, data)=>{
 				(async () => {
 					try {
 						await linkedinSignIn();
-						await linkedinApply(speed)
+						await linkedinApply(campaignDetails)
 					}
 					catch (error) {console.error(error)}
 				})();

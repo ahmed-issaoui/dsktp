@@ -15,25 +15,8 @@ const ChooseJobBoard = () => {
   const [isSelectLinkedinOpen, setIsSelectLinkedinOpen] = useState(false)
   const [isSelectIndeedOpen, setIsSelectIndeedOpen] = useState(false)
 
-  const initialCampaignState = {
-    platform: '',
-    speed: 1,
-    resume: '',
-    coverLetter: '',
-    questions: {
-      allowedToWork: '',
-      visaSponsorship: '',
-      skills: '',
-      experience: '',
-      salary: '',
-      veteran: '',
-      startDate: '',
-      currentLocation: '',
-      ethnicity: ''
-    }
-  }
+  
   useEffect(() => {
-    setCampaignDetails(initialCampaignState)
     setProgressCount(1)
   }, []);
 
