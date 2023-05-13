@@ -18,6 +18,7 @@ import NotFound from "./components/pages/NotFound";
 import EnterAccount from "./components/pages/EnterAccount";
 import UpgradeAccount from "./components/pages/UpgradeAccount";
 import NavBar from "./components/ui/navBar";
+import Dashboard from "./components/pages/Dashboard";
 
 
 
@@ -73,12 +74,13 @@ function App() {
 
             <img draggable='false' src="./assets/images/logo-superlazy.svg" 
                 alt="logo superlazy" className={styles.imgLogo} 
-                onClick={()=> navigate("/ChooseJobBoard")}
+                onClick={()=> navigate("/Dashboard")}
             />
 
             <Routes>
               <Route path="/" element={<WelcomePage />} />
               <Route path="/EnterAccount" element={<EnterAccount />} />
+              <Route path="/Dashboard" element={ <Dashboard/>} />
               <Route path="/ChooseJobBoard" element={ <ChooseJobBoard/>} />
               <Route path="/SearchDetails" element={ <SearchDetails/>} />
               <Route path="/CandidacyDetails" element={ <CandidacyDetails/>} />

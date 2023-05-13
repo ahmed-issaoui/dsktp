@@ -65,7 +65,7 @@ function NavBar() {
           <ProgressPart/>
           <div className={styles.logoutButton} onClick={logout}>
               <p>Logout</p>
-              <img src="./assets/images/icon-logout.png" alt="back" />
+              <img src="./assets/images/icon-logout.png" alt="logout" />
           </div>
 
           {/* <button className={styles.logoutButton} onClick={logout}>Logout</button> */}

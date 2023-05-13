@@ -27,7 +27,7 @@ function EnterAccount() {
     if (loading) {
       return;
     }
-    if (user) {navigate("/ChooseJobBoard")};
+    if (user) {navigate("/Dashboard")};
     if (errorText) {alert(errorText)}
 
   }, [user, loading, errorText, error]);

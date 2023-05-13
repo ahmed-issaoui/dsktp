@@ -75,7 +75,7 @@ const Parameters = () => {
 
         </div>
 
-        <Link to='/ChooseJobBoard'>
+        <Link to='/Dashboard'>
           <button form="form1" type="button" className={styles.primaryButton}>Back</button>
         </Link>
 

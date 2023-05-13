@@ -53,7 +53,7 @@ const UpgradeAccount = () => {
   }
 
   if (isUserPremium) {
-    navigate("/ChooseJobBoard") 
+    navigate("/Dashboard") 
   }
   
   if (premiumLoading) {

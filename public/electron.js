@@ -62,7 +62,10 @@ const createWindow = () => {
 
 	// Open the DevTools.
 	if (isDev) {
-		console.log('Is dev true')
+		setTimeout(()=>{
+			win.webContents.openDevTools({ mode: 'detach' });
+
+		}, 3000)
 	};
 
 	if (!isDev) {

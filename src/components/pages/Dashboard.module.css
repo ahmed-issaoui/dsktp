@@ -1,0 +1,196 @@
+.section {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+}
+
+.titlePart {
+  width: 34rem;
+  display: flex;
+  justify-content: space-between;
+}
+.titlePart h1 {
+  margin-top: 0;
+}
+
+.titlePart p {
+  cursor: pointer;
+  opacity: 0.4;
+}
+
+
+.titlePart p:hover {
+  transform: scale(1.02);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.widgetsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  justify-content: center;
+  
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.widgetHistory {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  width: 34rem;
+  height: 12rem;
+  border: 2px solid #695DF5;
+  box-shadow: 5px 4px 47px 14px rgba(145, 71, 241, 0.13);
+  border-radius: 1.5rem;
+  position: relative;
+
+}
+
+.widgetHistory h3 {
+  margin: 0;
+  font-family: 'Gilroy-Regular';
+  display: block;
+  font-size: 1.1rem;
+  font-weight: initial;
+
+}
+
+.candlesContainer {
+  display: flex;
+  gap: 1rem;
+  align-items: end;
+  height: 4rem;
+}
+
+.candle {
+  width: 1rem;
+  min-height: 0.5rem;
+  height: 5rem;
+  max-height: 5rem;
+  border-radius: 1.5rem;
+  background-image: linear-gradient(to top, #795df522 ,#695DF5);
+  transition: height 1.5s
+}
+
+.smallerWidgetsContainer {
+  width: 34rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.widgetCampaign {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16rem;
+  height: 4rem;
+  cursor: pointer;
+  border: 2px solid #695DF5;
+  box-shadow: 5px 4px 47px 14px rgba(145, 71, 241, 0.13);
+  border-radius: 1.5rem;
+  background-color: #695DF5;
+
+}
+
+.widgetCampaign:hover {
+  transform: scale(1.02);
+
+}
+
+.widgetCampaign p {
+  font-family: 'Gilroy-Medium';
+  font-size: 1.1rem;
+}
+
+.widgetAutopilot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16rem;
+  height: 4rem;
+  cursor: pointer;
+  border: 2px solid #695DF5;
+  box-shadow: 5px 4px 47px 14px rgba(145, 71, 241, 0.13);
+  border-radius: 1.5rem;
+}
+
+
+.widgetAutopilot:hover {
+  transform: scale(1.02);
+}
+
+.widgetAutopilot p {
+  font-family: 'Gilroy-Medium';
+  font-size: 1.1rem;
+}
+
+
+.platformLogo {
+  width: 8rem;
+  height: auto;
+}
+
+.optionImage {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  top: 0.5rem;
+  right: 0.5rem;
+
+
+}
+
+
+.optionsContainer {
+  position: absolute;
+  top: 2.5rem;
+  right: 0.5rem;
+  width: 11.5rem;
+  font-size: 1.1rem;
+  color: white;
+  margin: 0.4rem 0;
+  border-radius: 1.5rem;
+  border: 1.5px solid #695DF5;
+  box-shadow: 5px 4px 47px 14px rgba(145, 71, 241, 0.13);
+  background: rgb(16, 11, 28);
+  padding: 0.3rem 0;
+  z-index: 5;
+}
+
+.option {
+  height: 2.2rem;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transform: none;
+
+}
+.option:nth-child(1) {
+  border-radius: 1.5rem 1.5rem 0 0rem;
+}
+.option:nth-child(2) {
+  border-radius: 0 0 1.5rem 1.5rem;
+}
+
+.option:hover {
+  background: rgb(38, 27, 62);
+
+}
