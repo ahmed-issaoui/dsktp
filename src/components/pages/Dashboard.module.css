@@ -52,7 +52,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
   width: 34rem;
   height: 12rem;
   border: 2px solid #695DF5;
@@ -68,14 +68,15 @@
   display: block;
   font-size: 1.1rem;
   font-weight: initial;
+  margin-bottom: 1rem;
 
 }
 
 .candlesContainer {
   display: flex;
   gap: 1rem;
-  align-items: end;
-  height: 4rem;
+  height: 6rem;
+
 }
 
 .candle {
@@ -86,6 +87,24 @@
   border-radius: 1.5rem;
   background-image: linear-gradient(to top, #795df522 ,#695DF5);
   transition: height 1.5s
+}
+
+.candleAndNumber {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 0.5rem
+
+}
+.candleCount {
+  opacity: 0;
+  margin: 0;
+  font-size: 0.8rem;
+  width: 1rem;
+  text-align: center;
+}
+.candleAndNumber:hover .candleCount {
+  opacity: 1;
 }
 
 .smallerWidgetsContainer {
@@ -104,7 +123,7 @@
   cursor: pointer;
   border: 2px solid #695DF5;
   box-shadow: 5px 4px 47px 14px rgba(145, 71, 241, 0.13);
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   background-color: #695DF5;
 
 }
@@ -128,12 +147,8 @@
   cursor: pointer;
   border: 2px solid #695DF5;
   box-shadow: 5px 4px 47px 14px rgba(145, 71, 241, 0.13);
-  border-radius: 1.5rem;
-}
-
-
-.widgetAutopilot:hover {
-  transform: scale(1.02);
+  border-radius: 1rem;
+  opacity: 0.5;
 }
 
 .widgetAutopilot p {

@@ -12,7 +12,7 @@ const SearchDetails = () => {
   const [isSelectOpen, setIsSelectOpen] = useState(false)
 
   useEffect(() => {
-    setProgressCount(13)
+    setProgressCount(24)
   }, []);
 
   const handleEnter = (e) => {

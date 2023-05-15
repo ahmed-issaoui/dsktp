@@ -17,7 +17,7 @@ const ChooseJobBoard = () => {
 
   
   useEffect(() => {
-    setProgressCount(1)
+    setProgressCount(12)
   }, []);
 
   useEffect(() => {

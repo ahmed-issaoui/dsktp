@@ -2,7 +2,7 @@ const puppeteer = require("puppeteer-extra");
 const hidden = require("puppeteer-extra-plugin-stealth");
 
 const { executablePath } = require("puppeteer");
-const { Notification, safeStorage } = require("electron");
+const { Notification, safeStorage, ipcMain } = require("electron");
 
 const fs = require("fs/promises");
 const path = require("path");
@@ -14,6 +14,18 @@ module.exports = linkedinApply = async (campaignDetails) => {
     let jobTitle = campaignDetails.jobTitle
     let location = campaignDetails.location
     let remote = campaignDetails.remote
+
+    // const todayIsFormatted = () => {
+    //   let now = Date.now()
+    // }
+
+    // let sessionCounter = 0
+    // let currentHistory = store.get('history')
+    // let savedTodayCounter = currentHistory['150523']
+
+    // current save = store.get
+    // store.save("history.today", currentSave + sessionCounter)
+    // save data to get data + save data
   
     const cleaningJobTitle = () => {
       jobTitle = jobTitle.replace("  ", " ")
@@ -217,6 +229,11 @@ module.exports = linkedinApply = async (campaignDetails) => {
 
             await startApplying();
 
+            if (sessionCounter % 7 === 0) {
+              console.log(x);
+
+            }
+          
       }
     }
 
@@ -241,11 +258,11 @@ module.exports = linkedinApply = async (campaignDetails) => {
 
     const insideApplication = async () => {
       try { 
-        await console.log('Trying Scenario 1')
+        console.log('Trying Scenario 1')
         await scenarioOne()
         
-      } catch {
-        await console.log('Trying Scenario 2')
+      } catch (err) {
+        console.log('Trying Scenario 2')
         await scenarioTwo()
       } 
     };
@@ -254,12 +271,13 @@ module.exports = linkedinApply = async (campaignDetails) => {
     const scenarioOne = async () => {  
 
       // Is there input?
-      try {await inputTelephone()} catch (error) {console.error(error)};
-      try {await uploadResume()} catch (error) {console.error(error)};
+      try {await inputTelephone()} catch (error) {console.log('No telephone')};
+      try {await uploadResume()} catch (error) {console.error('No upload resume')};
       
       // Submit Application
       await sleep(3000);
       await page.click('button[aria-label="Submit application"]');
+      sessionCounter++
 
     };
 
@@ -298,6 +316,8 @@ module.exports = linkedinApply = async (campaignDetails) => {
           await sleep(4000);
           await page.waitForSelector('button[aria-label="Submit application"]', {timeout: 3000});
           await page.click('button[aria-label="Submit application"]');
+          sessionCounter++
+
 
     };
 
@@ -348,11 +368,11 @@ module.exports = linkedinApply = async (campaignDetails) => {
     // Applying Sequence
     try {
       await loopNextPage()
-      await showNotification("We're done here", "We have finished our loop");
+      showNotification("We're done here", "We have finished our loop");
     }
 
     catch(error) {
-      await showNotification("Something went wrong", "Error happened during the process");
+      showNotification("Something went wrong", "Error happened during the process");
       console.error(error)
     }
 
