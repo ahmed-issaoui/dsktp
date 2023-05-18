@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   let navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
-  const {campaignDetails, setCampaignDetails, setProgressCount} = useContext(CampaignContext)
+  const {campaignDetails, setCampaignDetails, setProgressCount, autopilotCampaigns, setAutopilotCampaigns} = useContext(CampaignContext)
 
   
   useEffect(() => {
@@ -32,6 +32,8 @@ const Dashboard = () => {
         email: loadedData.email, 
         phone: loadedData.phone
       })
+
+      await setAutopilotCampaigns(loadedData.autopilotCampaignsList)
     }
 
     loadUserData()
@@ -118,7 +120,7 @@ const Dashboard = () => {
 
                   <div className={styles.smallerWidgetsContainer}>
                       
-                      <div className={styles.widgetAutopilot} onClick={()=>alert("Coming in the next patch")}> 
+                      <div className={styles.widgetAutopilot} onClick={()=> navigate('/Autopilot')}> 
                         <p >Autopilot</p>
                       </div>
                       <div className={styles.widgetCampaign} onClick={()=> navigate('/ChooseJobBoard')}> 

@@ -19,6 +19,8 @@ import EnterAccount from "./components/pages/EnterAccount";
 import UpgradeAccount from "./components/pages/UpgradeAccount";
 import NavBar from "./components/ui/navBar";
 import Dashboard from "./components/pages/Dashboard";
+import Autopilot from "./components/pages/Autopilot";
+import NewAutopilot from "./components/pages/NewAutopilot";
 
 
 
@@ -30,9 +32,7 @@ function App() {
   
   let navigate = useNavigate();
   const [progressCount, setProgressCount] = useState(1)
-  const [inputSuggestions, setInputSuggestions] = useState({
 
-  })
 
   const [campaignDetails, setCampaignDetails] = useState({
     platform: '',
@@ -62,9 +62,12 @@ function App() {
     }
   })
 
+  const [autopilotCampaigns, setAutopilotCampaigns] = useState([])
+
+
 
   return (
-    <CampaignContext.Provider value={{campaignDetails, setCampaignDetails, progressCount, setProgressCount}}>
+    <CampaignContext.Provider value={{campaignDetails, setCampaignDetails, progressCount, setProgressCount, autopilotCampaigns, setAutopilotCampaigns }}>
         <div className={styles.main}>
           <div className={styles.primaryCircle}>
             <BackgroundCircle />
@@ -81,6 +84,10 @@ function App() {
               <Route path="/" element={<WelcomePage />} />
               <Route path="/EnterAccount" element={<EnterAccount />} />
               <Route path="/Dashboard" element={ <Dashboard/>} />
+
+              <Route path="/Autopilot" element={ <Autopilot/>} />
+              <Route path="/NewAutopilot" element={ <NewAutopilot/>} />
+
               <Route path="/ChooseJobBoard" element={ <ChooseJobBoard/>} />
               <Route path="/SearchDetails" element={ <SearchDetails/>} />
               <Route path="/CandidacyDetails" element={ <CandidacyDetails/>} />

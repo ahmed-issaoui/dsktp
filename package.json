@@ -1,6 +1,6 @@
 {
   "name": "superlazy",
-  "version": "0.9.1",
+  "version": "0.9.4",
   "productName": "Superlazy",
   "private": true,
   "main": "./public/electron.js",
@@ -8,17 +8,19 @@
   "author": {
     "email": "support@superlazyapp.atlassian.net",
     "name": "Superlazy",
-    "url": "https://www.superlazy.io"
+    "url": "https://www.superlazy.co"
   },
   "description": "Apply to thousands of jobs in one click",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ahmed-issaoui/superlazy-desktop"
+    "url": "https://github.com/Highscale-Tech/desktop"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "auto-launch": "^5.0.6",
+    "caniuse-lite": "^1.0.30001487",
     "concurrently": "^7.5.0",
     "cross-env": "^7.0.3",
     "electron-is-dev": "^2.0.0",
@@ -39,10 +41,10 @@
   },
   "scripts": {
     "start": "concurrently \"cross-env BROWSER=none react-scripts start\" \"wait-on http://localhost:3000 && electron .\"",
-    "build:react": "react-scripts build",
-    "build:electron": "electron-builder --win",
-    "build:prod": "react-scripts build && electron-builder --win",
-    "build:publish": "react-scripts build && electron-builder --win --publish always"
+    "build:react-only": "react-scripts build",
+    "build:electron-only": "electron-builder",
+    "build:full": "react-scripts build && electron-builder --mac --win --linux",
+    "build:publish": "react-scripts build && electron-builder --publish always"
   },
   "build": {
     "appId": "com.superlazy.app",
@@ -56,10 +58,22 @@
       "output": "electron-build",
       "buildResources": "public"
     },
+    "mac": {
+      "target": "dmg"
+    },
     "win": {
+      "target": "nsis",
       "publish": [
         "github"
       ]
+    },
+    "linux": {
+      "target": "deb"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "Highscale-Tech",
+      "repo": "desktop"
     }
   },
   "eslintConfig": {

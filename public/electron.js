@@ -4,28 +4,26 @@ const { autoUpdater } = require("electron-updater");
 const Store = require('electron-store');
 const isDev = require("electron-is-dev");
 
-
 const path = require("path");
 const fs = require("fs");
 const fsPromises = require("fs/promises");
 
-
 const shell = require('electron').shell;
 
-
 const {linkedinSignIn} = require("./pptr/linkedin/linkedinSignIn");
-
 const linkedinApply = require("./pptr/linkedin/linkedinApply");
-
 const glassdoorSignIn = require("./pptr/glassdoor/glassdoorSignIn");
 const glassdoorApply = require("./pptr/glassdoor/glassdoorApply");
-
 const indeedSignIn = require("./pptr/indeed/indeedSignIn");
 const indeedApply = require("./pptr/indeed/indeedApply");
 
 const expressServer = require('./server');
 
+
+
+
 app.setAppUserModelId('Superlazy');
+
 
 const createWindow = () => {
 	// Create the browser window.
@@ -150,6 +148,16 @@ const schema = {
 	},
 	resumePath: {
 		type: 'string',
+	},
+	answers: {
+		type: 'object'
+	},
+
+	autopilotCampaignsList: {
+		type: 'array'
+	},
+	history: {
+		type: 'array'
 	}
 };
 
@@ -160,11 +168,12 @@ const store = new Store({schema});
 ipcMain.handle("load/data", async (event, data)=>{
 
 	const dataToLoad = {
-		name: "",
-		email: "",
-		phone: "",
-		resumePath: "",
+		name: "", 
+		email: "", 
+		phone: "", 
+		resumePath: "", 
 		answers: {},
+		autopilotCampaignsList: [],
 		history: []
 	};
 
@@ -174,6 +183,7 @@ ipcMain.handle("load/data", async (event, data)=>{
 		dataToLoad.email = store.get('email') ? store.get('email') : "" 
 		dataToLoad.phone = store.get('phone') ? store.get('phone') : "" 
 		dataToLoad.resumePath = store.get('resumePath') ? store.get('resumePath') : "" 
+		dataToLoad.autopilotCampaignsList = store.get('autopilotCampaignsList') ? store.get('autopilotCampaignsList') : []
 	
 	} catch(err) {
 		console.error(err)
@@ -204,6 +214,24 @@ ipcMain.handle("save/data", async (event, data)=>{
 
 
 })
+
+ipcMain.handle("save/autopilotList", async (event, data)=>{
+	const newAutopilotList = data;
+	console.log(newAutopilotList)
+
+	try {
+		let savedList = store.get('autopilotCampaignsList') ? store.get('autopilotCampaignsList') : []
+		console.log(savedList)
+		savedList.push(newAutopilotList)
+		store.set('autopilotCampaignsList', savedList);
+
+		console.log(store.get('autopilotCampaignsList') )
+	} catch(err) {
+		console.error(err)
+	}
+
+})
+
 
 
 // Saving Speed

@@ -148,9 +148,12 @@
   border: 2px solid #695DF5;
   box-shadow: 5px 4px 47px 14px rgba(145, 71, 241, 0.13);
   border-radius: 1rem;
-  opacity: 0.5;
 }
 
+.widgetAutopilot:hover {
+  transform: scale(1.02);
+
+}
 .widgetAutopilot p {
   font-family: 'Gilroy-Medium';
   font-size: 1.1rem;
