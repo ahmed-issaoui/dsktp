@@ -6,9 +6,11 @@ const {ipcRenderer, contextBridge} = require('electron');
 const WINDOW_API = {
     pptr: (campaignDetails) => ipcRenderer.invoke("get/puppeteer", campaignDetails),
 
-    saveUserData: (dataToSave) => ipcRenderer.invoke("save/data", dataToSave),
-    saveNewAutopilotlist: (autopilotList) => ipcRenderer.invoke("save/autopilotList", autopilotList),
     loadUserData: () => ipcRenderer.invoke("load/data"),
+    saveUserData: (dataToSave) => ipcRenderer.invoke("save/data", dataToSave),
+    
+    saveNewAutopilotlist: (autopilotList) => ipcRenderer.invoke("save/autopilotList", autopilotList),
+    deleteAutopilot: (autpilotReference) => ipcRenderer.invoke("save/deleteAutopilot", autopilotList),
     
     speedParams: (speed) => ipcRenderer.send("get/speedParams", speed),
     
