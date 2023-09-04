@@ -31,7 +31,7 @@ export default function useCheckStatus (user, deps="") {
             }
         }
         catch (err) {
-            console.error("Error in account status")
+            console.error("Error account status")
         }
             
     }

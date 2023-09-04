@@ -47,7 +47,8 @@
     "build:react-only": "react-scripts build",
     "build:electron-only": "electron-builder",
     "build:full": "react-scripts build && electron-builder --win ",
-    "deploy": "react-scripts build && electron-builder --win --publish always"
+    "deploy": "react-scripts build && electron-builder --win --publish always",
+    "deployonly": "electron-builder --win --publish always"
   },
   "build": {
     "appId": "com.superlazy.app",
@@ -72,12 +73,8 @@
     },
     "linux": {
       "target": "deb"
-    },
-    "publish": {
-      "provider": "github",
-      "owner": "ahmed-issaoui",
-      "repo": "dsktp"
     }
+
   },
   "eslintConfig": {
     "extends": [
