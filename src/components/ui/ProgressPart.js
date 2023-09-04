@@ -1,10 +1,10 @@
 import styles from './ProgressPart.module.css';
 import { useContext } from 'react';
-import { CampaignContext } from "../../App";
+import { GlobalContext } from "../../context/context";
 
 export default function ProgressPart() {
 
-    const {progressCount} = useContext(CampaignContext)
+  const {campaignDetails, setCampaignDetails, progressCount, setProgressCount, autopilotCampaigns, setAutopilotCampaigns, user, loading, error, isUserPremium, checkLoading} = useContext(GlobalContext)
 
     
 

@@ -4,7 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/firebaseClient";
 
 import { useEffect, useContext} from "react";
-import { CampaignContext } from "../../App";
+import { GlobalContext } from "../../context/context";
 import { app } from "../../firebase/firebaseClient";
 import { getFunctions, httpsCallable } from "firebase/functions";
 
@@ -12,7 +12,7 @@ import { getFunctions, httpsCallable } from "firebase/functions";
 const Parameters = () => {
   const [user, loading] = useAuthState(auth);
   
-  const {setProgressCount} = useContext(CampaignContext)
+  const {setProgressCount} = useContext(GlobalContext)
   useEffect(() => {
     setProgressCount(0)
   }, []);
@@ -75,7 +75,7 @@ const Parameters = () => {
 
         </div>
 
-        <Link to='/Dashboard'>
+        <Link to='/ChooseJobBoard'>
           <button form="form1" type="button" className={styles.primaryButton}>Back</button>
         </Link>
 

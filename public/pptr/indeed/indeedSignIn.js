@@ -8,7 +8,7 @@ const fs = require("fs/promises");
 const path = require("path");
 
 
-module.exports = indeedSignIn = () =>
+module.exports = indeedSignIn = (store) =>
   (async () => {
     // Using plugins
     puppeteer.use(hidden());
@@ -38,20 +38,19 @@ module.exports = indeedSignIn = () =>
 
     // Going to URL
     try {
-        await page.goto("https://www.indeed.com/?vjk=b40f4447c5cc20cc");
+        await page.goto("https://secure.indeed.com/auth");
         await sleep(10000);
         await page.waitForSelector("div");
-        await showNotification("Please login with your account", "Login with your account to apply");
     } 
     catch {
-        await showNotification("Oops.. Something happend", "Please check your internet connection");
+        showNotification("Oops.. Something happend", "Please check your internet connection");
         throw new Error('Couldnt Load the Page');
     }
 
 
     // Saving cookies 
     try {
-        await sleep(100000);
+        await sleep(60000);
         const cookies = await page.cookies();
 
         const stringifiedCookies = await JSON.stringify(cookies, null, 2)
@@ -64,12 +63,17 @@ module.exports = indeedSignIn = () =>
           try {
             const encryptedCookies = safeStorage.encryptString(stringifiedCookies);
             await fs.writeFile(indeedCookiesPath, encryptedCookies);
+            if (store)
+              {
+                store.set('indeedLastLogin', Date.now());
+              }
+
           } 
           catch (error) {console.error(error)}
         }  
         
         await sleep(4000);
-        await showNotification("Logged in Sucessfully, Restarting the App", "Please wait for a moment");
+        showNotification("Logged in Sucessfully, Restarting the App", "Please wait for a moment");
 
     }
     catch {

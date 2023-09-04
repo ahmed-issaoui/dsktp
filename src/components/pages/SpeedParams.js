@@ -1,13 +1,13 @@
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./SpeedParams.module.css";
 import { useContext, useEffect, useState} from "react";
-import { CampaignContext } from "../../App";
+import { GlobalContext } from "../../context/context";
 
 
 const SpeedParams = () => {
   let navigate = useNavigate();
 
-  const {campaignDetails, setCampaignDetails, setProgressCount} = useContext(CampaignContext)
+  const {campaignDetails, setCampaignDetails, setProgressCount} = useContext(GlobalContext)
   const [isSelectOpen, setIsSelectOpen] = useState(false)
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const SpeedParams = () => {
     <div className={styles.section} onClick={()=> {if(isSelectOpen){setIsSelectOpen(false)}}}>
 
       <div className={styles.textPart}>
-        <h1>Speed Parameters</h1>
+        <h1>Automation Speed</h1>
 
         <div className={styles.selectComponent}>
           

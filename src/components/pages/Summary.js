@@ -1,12 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Summary.module.css";
 import { useContext, useEffect} from "react";
-import { CampaignContext } from "../../App";
+import { GlobalContext } from "../../context/context";
 
 const Summary = () => {
   let navigate = useNavigate();
 
-  const {campaignDetails, setProgressCount} = useContext(CampaignContext)
+  const {campaignDetails, setCampaignDetails, progressCount, setProgressCount, autopilotCampaigns, setAutopilotCampaigns, user, loading, error, isUserPremium, checkLoading} = useContext(GlobalContext)
   
   useEffect(() => {
     setProgressCount(98)

@@ -1,0 +1,85 @@
+.section {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.section h1 {
+  margin-bottom: 3rem;
+}
+.sessions {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.platform {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+}
+
+.platform h3 {
+  margin: 0;
+  display: inline-block;
+  width: 8rem;
+}
+
+.buttonPart {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 2rem;
+}
+.button {
+  text-align: center;
+  width: 7rem;
+  height: 2.5rem;
+  border-radius: 3rem;
+  color: rgba(255, 255, 255, 0.781);
+  font-size: 1rem;
+  font-family: "Gilroy-Light";
+  box-shadow: 5px 4px 47px 14px rgb(145 71 241 / 13%);
+  cursor: pointer;
+  border: 1px solid #695DF5;
+  background-color: transparent;
+}
+
+.button:hover {
+  color: white;
+}
+
+
+.primaryButton {
+  margin-top: 3rem;
+  width: 8rem;
+  height: 3rem;
+  border: 2px solid #695DF5;
+  background: rgba(0, 0, 0, 0);
+  border-radius: 3rem;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 5px 4px 47px 14px rgb(145 71 241 / 13%);
+  cursor: pointer;
+}
+
+.primaryButton:hover {
+  border: 2px solid #695DF5;
+  background-color: #695DF5;
+  color: white;
+
+}

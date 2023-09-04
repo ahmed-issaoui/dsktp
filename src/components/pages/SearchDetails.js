@@ -1,18 +1,18 @@
 import { useNavigate, Link } from "react-router-dom";
-import { CampaignContext } from "../../App";
+import { GlobalContext } from "../../context/context";
 import { useContext, useState, useEffect} from "react";
 import styles from './SearchDetails.module.css'
 
 
 const SearchDetails = () => {
   let navigate = useNavigate();
-  const {campaignDetails, setCampaignDetails, setProgressCount} = useContext(CampaignContext)
+  const {campaignDetails, setCampaignDetails, setProgressCount} = useContext(GlobalContext)
   
   const [isMissingInput, setIsMissingInput] = useState(false)
   const [isSelectOpen, setIsSelectOpen] = useState(false)
 
   useEffect(() => {
-    setProgressCount(24)
+    setProgressCount(13)
   }, []);
 
   const handleEnter = (e) => {

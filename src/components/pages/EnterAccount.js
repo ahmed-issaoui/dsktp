@@ -1,33 +1,33 @@
 import styles from './EnterAccount.module.css';
 
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from '../../firebase/firebaseClient'
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import usePremiumStatus from '../../firebase/usePremiumStatus';
 import LoaderSpinner from '../ui/loaderSpinner';
-
+import { GlobalContext } from '../../context/context';
 
 function EnterAccount() {
+
+  const {campaignDetails, setCampaignDetails, progressCount, setProgressCount, autopilotCampaigns, setAutopilotCampaigns, user, loading, error, isUserPremium} = useContext(GlobalContext)
 
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorText, setErrorText] = useState(null);
-  const [user, loading, error] = useAuthState(auth);
-  const isUserPremium = usePremiumStatus(user)
+
   let navigate = useNavigate();
 
   
   
 
   useEffect(() => {
-    if (loading) {
-      return;
-    }
-    if (user) {navigate("/Dashboard")};
+
+    if (user && !loading && user.emailVerified && isUserPremium) {navigate("/ChooseJobBoard")};
+    if (user && !loading && !isUserPremium ) {navigate('/UpgradeAccount')}
+
     if (errorText) {alert(errorText)}
 
   }, [user, loading, errorText, error]);

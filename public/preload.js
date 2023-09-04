@@ -5,16 +5,15 @@ const {ipcRenderer, contextBridge} = require('electron');
 
 const WINDOW_API = {
     pptr: (campaignDetails) => ipcRenderer.invoke("get/puppeteer", campaignDetails),
-
+    speedParams: (speed) => ipcRenderer.send("get/speedParams", speed),
+    
+    
     loadUserData: () => ipcRenderer.invoke("load/data"),
     saveUserData: (dataToSave) => ipcRenderer.invoke("save/data", dataToSave),
     
-    saveNewAutopilotlist: (autopilotList) => ipcRenderer.invoke("save/autopilotList", autopilotList),
-    deleteAutopilot: (autpilotReference) => ipcRenderer.invoke("save/deleteAutopilot", autopilotList),
-    
-    speedParams: (speed) => ipcRenderer.send("get/speedParams", speed),
-    
-    logoutPpptr: (platform) => ipcRenderer.send("logout/pptr", platform),
+    getLoginStatus: () => ipcRenderer.invoke("get/loginStatus"),
+    logoutFromPlatform: (platform) => ipcRenderer.send("platform/logout", platform),
+    loginToPlatform: (platform) => ipcRenderer.send("platform/login", platform),
 
     registerAccount: () => ipcRenderer.send('open-register'),
     forgot: () => ipcRenderer.send('open-forgot'),
@@ -22,7 +21,6 @@ const WINDOW_API = {
     customerPortal: (url) => ipcRenderer.send('open-customerPortal',url),
     upgradeAccount: () => ipcRenderer.send('open-upgrade'),
 
-    // getConfig: () => ipcRenderer.invoke('get/config'),
 }
 
 

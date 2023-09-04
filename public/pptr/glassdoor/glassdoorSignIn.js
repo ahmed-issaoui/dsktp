@@ -7,7 +7,7 @@ const { Notification, safeStorage } = require("electron");
 const fs = require("fs/promises");
 const path = require("path");
 
-module.exports = glassdoorSignIn = () =>
+module.exports = glassdoorSignIn = (store) =>
   (async () => {
     // Using plugins
     puppeteer.use(hidden());
@@ -63,6 +63,11 @@ module.exports = glassdoorSignIn = () =>
         try {
           const encryptedCookies = safeStorage.encryptString(stringifiedCookies);
           await fs.writeFile(glassdoorCookiesPath, encryptedCookies);
+          if (store)
+              {
+                store.set('linkedinLastLogin', Date.now());
+              }
+
         } 
         catch (error) {console.error(error)}
       }  

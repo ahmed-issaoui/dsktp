@@ -2,7 +2,7 @@
 import { Routes, Route } from "react-router-dom";
 import styles from './App.module.css'
 import { useNavigate } from "react-router-dom";
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import BackgroundCircle from "./components/ui/backgroundCircle";
 
@@ -18,56 +18,18 @@ import NotFound from "./components/pages/NotFound";
 import EnterAccount from "./components/pages/EnterAccount";
 import UpgradeAccount from "./components/pages/UpgradeAccount";
 import NavBar from "./components/ui/navBar";
-import Dashboard from "./components/pages/Dashboard";
-import Autopilot from "./components/pages/Autopilot";
-import NewAutopilot from "./components/pages/NewAutopilot";
+
+import Context from "./context/context";
+import ManageSessions from "./components/pages/ManageSessions";
 
 
-
-
-export const CampaignContext = createContext(null)
 
 function App() {
 
   
   let navigate = useNavigate();
-  const [progressCount, setProgressCount] = useState(1)
-
-
-  const [campaignDetails, setCampaignDetails] = useState({
-    platform: '',
-    speed: 1,
-    jobTitle: '',
-    location: '',
-    remote: 'All',
-    name: '',
-    phone: '',
-    email: '',
-    resume: {
-      name: '',
-      size: null,
-      path: ''
-    },
-    coverLetter: '',
-    questions: {
-      allowedToWork: '',
-      visaSponsorship: '',
-      skills: '',
-      experience: '',
-      salary: '',
-      veteran: '',
-      startDate: '',
-      currentLocation: '',
-      ethnicity: ''
-    }
-  })
-
-  const [autopilotCampaigns, setAutopilotCampaigns] = useState([])
-
-
-
   return (
-    <CampaignContext.Provider value={{campaignDetails, setCampaignDetails, progressCount, setProgressCount, autopilotCampaigns, setAutopilotCampaigns }}>
+    <Context>
         <div className={styles.main}>
           <div className={styles.primaryCircle}>
             <BackgroundCircle />
@@ -77,16 +39,14 @@ function App() {
 
             <img draggable='false' src="./assets/images/logo-superlazy.svg" 
                 alt="logo superlazy" className={styles.imgLogo} 
-                onClick={()=> navigate("/Dashboard")}
+                onClick={()=> navigate("/ChooseJobBoard")}
             />
 
             <Routes>
               <Route path="/" element={<WelcomePage />} />
               <Route path="/EnterAccount" element={<EnterAccount />} />
-              <Route path="/Dashboard" element={ <Dashboard/>} />
 
-              <Route path="/Autopilot" element={ <Autopilot/>} />
-              <Route path="/NewAutopilot" element={ <NewAutopilot/>} />
+              <Route path="/ManageSessions" element={ <ManageSessions/>} />
 
               <Route path="/ChooseJobBoard" element={ <ChooseJobBoard/>} />
               <Route path="/SearchDetails" element={ <SearchDetails/>} />
@@ -110,7 +70,7 @@ function App() {
           </div>
 
         </div>
-    </CampaignContext.Provider>
+    </Context>
   );
 }
 

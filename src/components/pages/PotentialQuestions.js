@@ -1,12 +1,12 @@
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./PotentialQuestions.module.css";
-import { CampaignContext } from "../../App";
+import { GlobalContext } from "../../context/context";
 import { useContext, useEffect} from "react";
 
 
 const PotentialQuestions = () => {
   let navigate = useNavigate();
-  const {campaignDetails, setCampaignDetails, setProgressCount} = useContext(CampaignContext)
+  const {campaignDetails, setCampaignDetails, setProgressCount} = useContext(GlobalContext)
   
   useEffect(() => {
     setProgressCount(72)

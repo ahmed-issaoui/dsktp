@@ -1,12 +1,12 @@
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./CandidacyDetails.module.css";
 import { useContext, useState, useEffect, useRef} from "react";
-import { CampaignContext } from "../../App";
+import { GlobalContext } from "../../context/context";
 
 const CandidacyDetails = () => {
   let navigate = useNavigate();
 
-  const {campaignDetails, setCampaignDetails, progressCount, setProgressCount} = useContext(CampaignContext)
+  const {campaignDetails, setCampaignDetails, progressCount, setProgressCount, autopilotCampaigns, setAutopilotCampaigns, user, loading, error, isUserPremium, checkLoading} = useContext(GlobalContext)
 
   const [isMissingInput, setIsMissingInput] = useState(false)
 

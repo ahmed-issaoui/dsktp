@@ -9,7 +9,7 @@ const path = require("path");
 
 
 
-const linkedinSignIn = () =>
+const linkedinSignIn = (store) =>
   (async () => {
     // Using plugins
     puppeteer.use(hidden());
@@ -67,6 +67,11 @@ const linkedinSignIn = () =>
           try {
             const encryptedCookies = safeStorage.encryptString(stringifiedCookies);
             await fs.writeFile(linkedinCookiesPath, encryptedCookies);
+            if (store)
+              {
+                store.set('linkedinLastLogin', Date.now());
+              }
+
         
 
           } 

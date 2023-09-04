@@ -1,109 +1,25 @@
 import styles from "./ChooseJobBoard.module.css";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../firebase/firebaseClient";
 import { useEffect, useContext, useState} from "react";
-import { CampaignContext } from "../../App";
+import { GlobalContext } from "../../context/context";
 
 
 
 const ChooseJobBoard = () => {
   let navigate = useNavigate();
-  const [user, loading] = useAuthState(auth);
-  const {campaignDetails, setCampaignDetails, setProgressCount} = useContext(CampaignContext)
+  const {campaignDetails, setCampaignDetails, progressCount, setProgressCount, autopilotCampaigns, setAutopilotCampaigns, user, loading, error, isUserPremium, checkLoading} = useContext(GlobalContext)
   const [isSelectGlassdoorOpen, setIsSelectGlassdoorOpen] = useState(false)
   const [isSelectLinkedinOpen, setIsSelectLinkedinOpen] = useState(false)
   const [isSelectIndeedOpen, setIsSelectIndeedOpen] = useState(false)
 
   
   useEffect(() => {
-    setProgressCount(12)
+    setProgressCount(1)
   }, []);
 
   useEffect(() => {
     if (!user && !loading) {navigate('/EnterAccount')}
   }, [user, loading]);
-
-
-
-  const handleClickOption = (event, platform) => {
-    event.stopPropagation()
-    if (platform === "glassdoor") {
-      setIsSelectGlassdoorOpen(!isSelectGlassdoorOpen)
-      setIsSelectLinkedinOpen(false)
-      setIsSelectIndeedOpen(false)
-    }
-    if (platform === "linkedin") {
-      setIsSelectLinkedinOpen(!isSelectLinkedinOpen)
-      setIsSelectGlassdoorOpen(false)
-      setIsSelectIndeedOpen(false)
-    }
-    if (platform === "indeed") {
-      setIsSelectIndeedOpen(!isSelectIndeedOpen)
-      setIsSelectGlassdoorOpen(false)
-      setIsSelectLinkedinOpen(false)
-    }
-  }
-
-  const handleLogout = (event, platform) => {
-    event.stopPropagation()
-
-    if (platform === "glassdoor") {
-      window.api.logoutPpptr("glassdoor");
-      setIsSelectGlassdoorOpen(false)
-
-
-    }
-    if (platform === "linkedin") {
-      window.api.logoutPpptr("linkedin");
-      setIsSelectLinkedinOpen(false)
-
-
-    }
-    if (platform === "indeed") {
-      window.api.logoutPpptr("indeed");
-      setIsSelectIndeedOpen(false)
-
-
-    }
-    
-  }
-
-
-  const handleReport = (event, platform) => {
-    event.stopPropagation()
-
-    window.api.support();
-    if (platform === "glassdoor") {
-      setIsSelectGlassdoorOpen(false)
-
-    }
-    if (platform === "linkedin") {
-      setIsSelectLinkedinOpen(false)
-    }
-    if (platform === "indeed") {
-      setIsSelectIndeedOpen(false)
-    }
-  }
-  
-  useEffect(() => {
-    if (isSelectGlassdoorOpen) {
-      setTimeout(() => {
-        setIsSelectGlassdoorOpen(false)
-      }, 5000);
-    }
-    if (isSelectLinkedinOpen) {
-      setTimeout(() => {
-        setIsSelectLinkedinOpen(false)
-      }, 5000);
-    }
-    if (isSelectIndeedOpen) {
-      setTimeout(() => {
-        setIsSelectIndeedOpen(false)
-      }, 5000);
-    }
-
-  }, [isSelectGlassdoorOpen, isSelectLinkedinOpen, isSelectIndeedOpen]);  
 
 
 
@@ -126,59 +42,62 @@ const ChooseJobBoard = () => {
   return (
     <> 
 
+      {/* {user && 
+        <div className={styles.topNav}>
+              <p onClick={()=> { navigate('/SearchDetails')}}>Manage Sessions</p>
+              <p onClick={()=> { navigate('/Autopilot')}}>Autopilot</p>
+              <p onClick={()=> { navigate('/Dashboard')}}>History</p>
+        </div>
+      } */}
+
     {user &&
-        <div className={styles.section} onClick={()=> {
-          setIsSelectGlassdoorOpen(false)
-          setIsSelectIndeedOpen(false) 
-          setIsSelectLinkedinOpen(false) 
-        }}>
+        <div className={styles.section}>
           <h1 >Start a new campaign</h1>
+
           <div className={styles.platformsContainer}>
-            
-            <div className={styles.platform}
-              onClick={()=>alert("Coming soon in the upcoming patch!")}
-              style={{opacity: 0.5}}
-            >
-              <img className={styles.platformLogo} src="./assets/images/glassdoor_logo.png" alt="options" />
+              <img
+                draggable='false'
+                src="./assets/images/img-glassdoor.png"
+                alt="glassdoor"
+                className={styles.glassdoor}
+                onClick={()=> {
+                  setCampaignDetails({
+                    ...campaignDetails,
+                    platform:'glassdoor'
+                  })
+                  navigate('/SearchDetails')
+                }}
+              />
 
-              <img className={styles.optionImage} src="./assets/images/options.png" alt="options" onClick={(event)=>handleClickOption(event, "glassdoor")} />
-              <div className={styles.optionsContainer} style={{display: isSelectGlassdoorOpen ? '' : 'none' }}>
-                <div className={styles.option} onClick={(event)=> handleLogout(event, "glassdoor")}>Logout</div>
-                <div className={styles.option} onClick={(event)=> handleReport(event, "glassdoor")}>Report Issue</div>
-              </div>
+              <img
+                draggable='false'
+                src="./assets/images/img-linkedin.png"
+                alt="linkedin"
+                className={styles.linkedin}
+                onClick={()=> {
+                  setCampaignDetails({
+                    ...campaignDetails,
+                    platform:'linkedin'
+                  })
+                  navigate('/SearchDetails')
+                }}
+              />
 
-            </div>
+              <img
+                draggable='false'
+                src="./assets/images/img-indeed.png"
+                alt="indeed"
+                className={styles.indeed}
+                onClick={()=> {
+                  setCampaignDetails({
+                    ...campaignDetails,
+                    platform:'indeed'
+                  })
+                  navigate('/SearchDetails')
+                }}
+              />
 
-            <div className={styles.platform} 
-              onClick={()=> {
-                setCampaignDetails({
-                  ...campaignDetails,
-                  platform:'linkedin'
-                })
-                navigate('/SearchDetails')
-              }}
 
-            >
-              <img className={styles.platformLogo} src="./assets/images/linkedin_logo.png" alt="options" />
-              <img className={styles.optionImage} src="./assets/images/options.png" alt="options" onClick={(event)=>handleClickOption(event, "linkedin")} />
-              <div className={styles.optionsContainer} style={{display: isSelectLinkedinOpen ? '' : 'none' }}>
-                <div className={styles.option} onClick={(event)=> handleLogout(event, "linkedin")}>Logout</div>
-                <div className={styles.option} onClick={(event)=> handleReport(event, "linkedin")}>Report Issue</div>
-              </div>
-            </div>
-            
-            <div className={styles.platform}
-              onClick={()=>alert("Coming soon in the upcoming patch!")}
-              style={{opacity: 0.5}}
-            >
-              <img className={styles.platformLogo} src="./assets/images/indeed_logo.png" alt="options" />
-              <img className={styles.optionImage} src="./assets/images/options.png" alt="options"  onClick={(event)=>handleClickOption(event, "indeed")}/>
-              <div className={styles.optionsContainer} style={{display: isSelectIndeedOpen ? '' : 'none' }}>
-                <div className={styles.option} onClick={(event)=> handleLogout(event,"indeed")}>Logout</div>
-                <div className={styles.option} onClick={(event)=> handleReport(event, "indeed")}>Report Issue</div>
-              </div>
-            </div>
-            
           </div>
         </div>
       }
@@ -187,3 +106,4 @@ const ChooseJobBoard = () => {
 };
 
 export default ChooseJobBoard;
+

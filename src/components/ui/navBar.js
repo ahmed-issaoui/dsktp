@@ -2,25 +2,21 @@ import styles from './navBar.module.css';
 import { useAuthState } from "react-firebase-hooks/auth";
 import {auth, logout} from "../../firebase/firebaseClient"
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import usePremiumStatus from '../../firebase/usePremiumStatus';
+import { useContext, useEffect, useState } from "react";
 import ProgressPart from './ProgressPart';
+import { GlobalContext } from '../../context/context';
 
 
 function NavBar() {
   let navigate = useNavigate();
-  const [user, loading, error] = useAuthState(auth);
-  const isUserPremium = usePremiumStatus(user)
+
+  const {campaignDetails, setCampaignDetails, progressCount, setProgressCount, autopilotCampaigns, setAutopilotCampaigns, user, loading, error, isUserPremium, checkLoading} = useContext(GlobalContext)
 
   useEffect(() => {
-    if (loading) {
-      return;
-    } 
 
     if (!user && !loading) {navigate('/EnterAccount')}
-    if (user && !loading && !error && (!isUserPremium || !user.emailVerified)) {navigate('/UpgradeAccount')}
 
-  }, [user, loading, error, isUserPremium, navigate]);
+  }, [user, loading]);
 
 
   const handleRegister = () => {
@@ -58,7 +54,7 @@ function NavBar() {
         
           <div className={styles.navIcons}> 
             <img draggable='false' src="./assets/images/icon-profile.png" alt="profile icon" className={styles.navIcon} onClick={()=> navigate("/Parameters")}/>
-            <img draggable='false' src="./assets/images/icon-support.png" alt="profile icon" className={styles.navIcon} onClick={()=> navigate("/Parameters")}/>
+            <img draggable='false' src="./assets/images/icon-sessions.png" alt="sessions icon" className={styles.navIcon} onClick={()=> navigate("/ManageSessions")} />
             <img draggable='false' src="./assets/images/icon-notifications.png" alt="notifications icon" className={styles.navIcon}/>
           </div>
 

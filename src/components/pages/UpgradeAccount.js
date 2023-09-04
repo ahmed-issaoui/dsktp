@@ -1,24 +1,19 @@
 import styles from './UpgradeAccount.module.css'
 import { useEffect, useState,useContext } from "react";
 import { auth } from '../../firebase/firebaseClient'
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import usePremiumStatus from '../../firebase/usePremiumStatus';
 import LoaderSpinner from '../ui/loaderSpinner';
-import { CampaignContext } from "../../App";
 import { useSendEmailVerification } from 'react-firebase-hooks/auth';
+import { GlobalContext } from '../../context/context';
 
 const UpgradeAccount = () => {
 
-  const [user, loading] = useAuthState(auth);
-  const isUserPremium = usePremiumStatus(user)
-  const [premiumLoading, setPremiumLoading] = useState(true)
 
   const [sendEmailVerification, sending, errorSend] = useSendEmailVerification(auth)
 
   let navigate = useNavigate();
 
-  const {setProgressCount} = useContext(CampaignContext)
+  const {campaignDetails, setCampaignDetails, progressCount, setProgressCount, autopilotCampaigns, setAutopilotCampaigns, user, loading, error, isUserPremium, checkLoading} = useContext(GlobalContext)
 
   useEffect(() => {
     setProgressCount(0)
@@ -27,18 +22,13 @@ const UpgradeAccount = () => {
 
 
   useEffect(() => {
-    if (loading) {
-      return;
-    }
+
     if (!user && !loading) {navigate("/EnterAccount")};
+    if (user && isUserPremium && !checkLoading) {
+      navigate("/ChooseJobBoard") 
+    }
 
-    const manageLoader = setTimeout(() => {
-      setPremiumLoading(false)
-    }, 3000);
-
-    return () => clearTimeout(manageLoader);
-
-  }, [user, loading]);
+  }, [user, loading, isUserPremium, checkLoading]);
 
   const handleSendAgain = async () => {
     const success = await sendEmailVerification();
@@ -52,11 +42,9 @@ const UpgradeAccount = () => {
     window.api.upgradeAccount();
   }
 
-  if (isUserPremium) {
-    navigate("/Dashboard") 
-  }
+
   
-  if (premiumLoading) {
+  if (checkLoading) {
     return (
       <>
         <LoaderSpinner/>
@@ -67,7 +55,7 @@ const UpgradeAccount = () => {
   if (user && !user.emailVerified) {
     return (
     <>
-    {!isUserPremium && !premiumLoading &&
+    {!isUserPremium && !checkLoading &&
       <div className={styles.section}>
             <div className={styles.textPart}>
                   <div className={styles.titlePart}>
@@ -89,7 +77,7 @@ const UpgradeAccount = () => {
   }
   return (
     <>
-    {user && user.emailVerified &&!isUserPremium && !premiumLoading &&
+    {user && user.emailVerified && !checkLoading && !isUserPremium &&
       <div className={styles.section}>
             <h1>You need to upgrade your account</h1>
             <button className={styles.primaryButton} onClick={handleUpgrade}>Go to Website</button>
