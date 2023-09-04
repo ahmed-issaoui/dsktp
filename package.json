@@ -1,6 +1,6 @@
 {
   "name": "superlazy",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "productName": "Superlazy",
   "private": true,
   "main": "./public/electron.js",
@@ -47,8 +47,8 @@
     "build:react-only": "react-scripts build",
     "build:electron-only": "electron-builder",
     "build:full": "react-scripts build && electron-builder --win ",
-    "deploy": "react-scripts build && electron-builder --win --publish always",
-    "deployonly": "electron-builder --win --publish always"
+    "deploy": "set GH_TOKEN=<gh> && react-scripts build && electron-builder --win --publish always"
+
   },
   "build": {
     "appId": "com.superlazy.app",
