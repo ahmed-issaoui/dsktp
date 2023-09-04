@@ -112,7 +112,7 @@ autoUpdater.on("update-available", (_event, releaseNotes, releaseName) => {
 		buttons: ['Ok'],
 		title: 'Application Update',
 		message: process.platform === 'win32' ? releaseNotes : releaseName,
-		detail: 'A new version is being downloaded.'
+		detail: 'A new version is being downloaded. Please do not close the application until it is completed.'
 	}
 	dialog.showMessageBox(dialogOpts, (response) => {
 
@@ -132,6 +132,16 @@ autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) => {
 	})
 });
 
+ipcMain.on('app_version', (event) => {
+	event.sender.send('app_version', { version: app.getVersion() });
+  });
+
+
+ipcMain.handle("get/appVersion", async (event, data)=>{
+	let version = app.getVersion()
+	return version
+
+})
 
 
 // Persistent storage
@@ -232,6 +242,8 @@ const glassdoorCookiesPath = path.join(__dirname, './pptr/glassdoor/glassdoorCoo
 const indeedCookiesPath = path.join(__dirname, './pptr/indeed/indeedCookies.txt')
 
 // Login
+
+
 
 ipcMain.handle("get/loginStatus", async (event, data)=>{
 	let linkedinStatus

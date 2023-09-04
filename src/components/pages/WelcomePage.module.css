@@ -10,3 +10,10 @@
     user-select: none; /* Standard syntax */
   }
   
+  .section p {
+    position: absolute;
+    bottom: 5rem;
+    font-size: 1.4rem;
+    font-family: "Gilroy-Light";
+    opacity: 0.2;
+  }

@@ -7,15 +7,29 @@ import { useEffect, useContext} from "react";
 import { GlobalContext } from "../../context/context";
 import { app } from "../../firebase/firebaseClient";
 import { getFunctions, httpsCallable } from "firebase/functions";
-
+import { useState } from "react";
 
 const Parameters = () => {
   const [user, loading] = useAuthState(auth);
   
   const {setProgressCount} = useContext(GlobalContext)
+  const [appVersion, setAppVersion] = useState("")
+
+
   useEffect(() => {
     setProgressCount(0)
   }, []);
+
+  
+
+  useEffect(()=> {
+    const getAppVersion = async () => {
+
+      const version = await window.api.appVersion()
+      setAppVersion(version)
+    }
+    getAppVersion()
+  },[])
 
   const handleSupport = () => {
     window.api.support();
@@ -49,6 +63,13 @@ const Parameters = () => {
               <h3>Account Email</h3>
               <div className={styles.elementData}> 
                 <p>{user.email}</p>
+              </div>
+            </div>
+
+            <div className={styles.element}>
+              <h3>Version</h3>
+              <div className={styles.elementData}> 
+                <p>{appVersion}</p>
               </div>
             </div>
 

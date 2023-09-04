@@ -1,6 +1,6 @@
 {
   "name": "superlazy",
-  "version": "1.0.3",
+  "version": "1.0.1",
   "productName": "Superlazy",
   "private": true,
   "main": "./public/electron.js",

@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom"
 import styles from './WelcomePage.module.css'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 const WelcomePage = () => {
   let navigate = useNavigate();
-
+  
   useEffect(() => {
     const goNext = setTimeout(() => {
       navigate("/EnterAccount")

@@ -70,7 +70,7 @@ const ManageSessions = () => {
     {user && !loadingOperation &&
         <div className={styles.section} >
 
-              <h1 >Manage Sessions</h1>
+              <h1 >Sessions</h1>
               <div className={styles.sessions} >
 
                 <div className={styles.platform}>
