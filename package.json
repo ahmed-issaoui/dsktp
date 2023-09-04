@@ -1,6 +1,6 @@
 {
   "name": "superlazy",
-  "version": "0.9.4",
+  "version": "1.0.2",
   "productName": "Superlazy",
   "private": true,
   "main": "./public/electron.js",
@@ -9,6 +9,10 @@
     "email": "support@superlazyapp.atlassian.net",
     "name": "Superlazy",
     "url": "https://www.superlazy.co"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmed-issaoui/dsktp"
   },
   "description": "Apply to thousands of jobs in one click",
   "dependencies": {
@@ -42,8 +46,8 @@
     "start:electron": "electron .",
     "build:react-only": "react-scripts build",
     "build:electron-only": "electron-builder",
-    "build:full": "react-scripts build && electron-builder --mac --win --linux",
-    "build:publish": "react-scripts build && electron-builder --publish always"
+    "build:full": "react-scripts build && electron-builder --win ",
+    "deploy": "react-scripts build && electron-builder --win --publish always"
   },
   "build": {
     "appId": "com.superlazy.app",
@@ -71,8 +75,8 @@
     },
     "publish": {
       "provider": "github",
-      "owner": "Highscale-Tech",
-      "repo": "desktop"
+      "owner": "ahmed-issaoui",
+      "repo": "dsktp"
     }
   },
   "eslintConfig": {

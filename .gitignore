@@ -27,3 +27,5 @@ yarn-error.log*
 linkedinCookies.txt 
 glassdoorCookies.txt 
 indeedCookies.txt 
+
+electron-builder.yml
